@@ -250,16 +250,16 @@
                     <%for(let i=0; i< postnumber;i++){ %>
                     <div class="post col-9 ">
                         <div class="post-details">                            
-                            <h5 class="user-name"><a class="profile-link" href="/profilepage.html"><img class="profile-pic-small"src=<%= profilepic[i] %> ><%=post_username[i] %></a></h5>
+                            <h5 class="user-name"><a class="profile-link" id="profile-link" href="/profilepage/<%=encodeURIComponent(post_username[i])%>" ><img class="profile-pic-small"src=<%= profilepic[i] %> ><%=post_username[i] %></a></h5>
                         </div>
                         <img src=<%= imagesrc[i] %> class="img-fluid " alt="" >
                         <div class="post-options row">
                             <div class="col-3 like" 
                                 onclick="if (this.querySelector('img').src.endsWith('icons8-ok-hand-50.png')) {
-                                    this.querySelector('img').src = './images/icons8-ok-hand-50 (1).png';
+                                    this.querySelector('img').src = '/images/icons8-ok-hand-50 (1).png';
                                     this.querySelector('p').innerHTML = parseInt(this.querySelector('p').innerHTML)+1;}
                                     else {
-                                        this.querySelector('img').src = './images/icons8-ok-hand-50.png';  
+                                        this.querySelector('img').src = '/images/icons8-ok-hand-50.png';  
                                         this.querySelector('p').innerHTML = parseInt(this.querySelector('p').innerHTML)-1;
                                     }">
                                 <img src="/images/icons8-ok-hand-50.png"  >
@@ -280,7 +280,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
         <script src="https://kit.fontawesome.com/5e315e4af1.js" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
-        <script src="./js/homepage.js"></script>
+        <script src="/js/homepage.js"></script>
 
         <script>
             $.holdReady(true);

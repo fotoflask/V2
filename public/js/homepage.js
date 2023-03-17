@@ -27,3 +27,10 @@ console.log(elem.style.display);
 
 
 
+
+// $(document).ready(function () {
+//   $("#profile-link").click(function () {
+//     console.log('clicked');
+//      $.post("/profilepage?post_username="+encodeURIComponent(this.data-value));
+//   });
+// });
