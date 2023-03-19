@@ -21,3 +21,11 @@ function changeGradient(value) {
 	document.body.style.setProperty('--a', value+180 + 'deg');
   }
   
+
+  function checkemptyvalue() {
+	var username = document.forms["register"]["username"].value;
+	if (username == null || username == "") {
+	   alert("Please enter> the username. Can’t be blank or empty !!!");
+	   return false;
+	}
+ }

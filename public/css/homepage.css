@@ -241,9 +241,30 @@ body{
     /* border: 2px solid #a4bbe7; */
     border-radius: 1%;
     box-shadow: 5px 5px 10px 2px #a4bbe7;
-    margin: 0 15% 5% 15%;
-    padding: 1%;
+    margin: 5% auto;
+    padding: 3%;
     user-select: none;
+    overflow: hidden;
+  }
+
+  /* .image-box{
+    object-fit: cover;
+    overflow: clip;
+    max-height: 80vh;
+  } */
+
+  .imageHolder {
+    overflow: clip;
+    height: 100%;
+    max-height: 80vh;
+    display:flex;
+    align-items: center;
+  }
+  .imageItself {
+    height: auto;
+    width: 100%;
+    align-self: center;
+    
   }
 
   .post:hover{

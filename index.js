@@ -7,6 +7,7 @@ app.set('view engine', 'ejs');
 
 //For static things to be used
 app.use(express.static("public"));
+app.use(express.static("private"));
 app.use(bodyparser.urlencoded({extended: true}));
 
 app.listen(PORT, () => {
@@ -38,15 +39,53 @@ app.get("/signin-signup", (req,res)=>{
     res.status(200).render("signin-signup")
 })
 
+app.get("/", (req,res)=>{
+    res.status(200).render("signin-signup")
+})
+
 app.get("/homepage", (req,res)=>{
     res.status(200).render("homepage",{profilepic: profilepic,likes: likes, imagesrc : imagesrc, post_username: post_username,postnumber: postnumber})
 })
 
-app.post("/signin-signup", (req,res)=>{
+// app.post("/signin-signup", (req,res)=>{
+//     if(req.body.Email == email){
+//         if(req.body.password == pwd){
+//             res.redirect('/homepage')
+//         } 
+//         else{
+//             console.log('pwd not correct')
+//             res.redirect('/signin-signup')
+//         }
+//     }
+//     else{
+//         console.log('email not correct')
+//         console.log(req.body.Email)
+//     }
+    
+// })
+
+app.post("/signin-signup/signin", (req,res)=>{
     if(req.body.Email == email){
         if(req.body.password == pwd){
             res.redirect('/homepage')
+        } 
+        else{
+            console.log('pwd not correct')
+            res.redirect('/signin-signup')
         }
+    }
+    else{
+        console.log('email not correct')
+        console.log(req.body.Email)
+    }
+    
+})
+
+app.post("/signin-signup/signup", (req,res)=>{
+    if(req.body.Email == email){
+        if(req.body.password == pwd){
+            res.redirect('/homepage')
+        } 
         else{
             console.log('pwd not correct')
             res.redirect('/signin-signup')

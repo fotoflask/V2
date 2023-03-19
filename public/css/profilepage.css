@@ -210,7 +210,8 @@ body{
  .profile-details h5{
     font-family: 'Livvic', sans-serif;
     font-weight: 500;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
+    white-space: nowrap;
  }
  .profile-details h5 a{
    text-decoration: none;

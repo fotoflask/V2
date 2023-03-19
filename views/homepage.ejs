@@ -187,7 +187,7 @@
 
         <nav class="navbar navbar-expand-lg navbar-light">
 			<div class="container-fluid">
-			  <a class="navbar-brand" href="./homepage.html">FotoFlask</a>
+			  <a class="navbar-brand" href="/homepage" method="post">FotoFlask</a>
 
         <div class="button-container">
         <button class="navbar-toggler" id="notification-button" type="button" data-bs-toggle="collapse" aria-pressed="false" data-bs-target="#navbarSupportedContent2" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle notification" style="font-size: 30px;" onclick="myFunction()">
@@ -248,11 +248,14 @@
             <div class="col-lg-9 col-12 homepage-post">
 
                     <%for(let i=0; i< postnumber;i++){ %>
-                    <div class="post col-9 ">
+                    <div class="post col-11 ">
                         <div class="post-details">                            
                             <h5 class="user-name"><a class="profile-link" id="profile-link" href="/profilepage/<%=encodeURIComponent(post_username[i])%>" ><img class="profile-pic-small"src=<%= profilepic[i] %> ><%=post_username[i] %></a></h5>
                         </div>
-                        <img src=<%= imagesrc[i] %> class="img-fluid " alt="" >
+                        <div class="imageHolder">
+                          <img class="imageItself" src=<%= imagesrc[i] %> />
+                        </div>
+                        <!-- <div class="image-box"><img  class="img-fluid " alt="" ></div> -->
                         <div class="post-options row">
                             <div class="col-3 like" 
                                 onclick="if (this.querySelector('img').src.endsWith('icons8-ok-hand-50.png')) {
