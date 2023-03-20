@@ -33,6 +33,6 @@ function changeGradient(value) {
 
  function resetform(){
 	document.getElementById("f1").reset();
-	document.getElementById("f2").reset();
-	document.getElementById("f3").reset();
+	document.getElementsByClassName("f2").reset();
+	document.getElementsByClassName("f3").reset();
  }

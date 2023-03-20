@@ -236,7 +236,7 @@ form {
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
-	padding: 0 50px;
+	padding: 5% 5%;
 	height: 100%;
 	text-align: center;
 }
@@ -403,6 +403,7 @@ nav{
 }
 
 .carousel-item{
+	padding: 5% 5%;
 	height: 100%;
 }
 
@@ -437,6 +438,19 @@ nav{
 	width:20vw;
 	min-width: 100px;
 	max-width: 150px;
+}
+
+/* .desktop .carousel-item {
+	padding-top: 40%;
+} */
+
+.f2{
+	padding: 30% 0;
+}
+
+
+.f3{
+	padding: 20% 0;
 }
 
 .desktop .carousel-item span button{

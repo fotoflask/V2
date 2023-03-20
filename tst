@@ -29,17 +29,14 @@
 					<div class="carousel-inner">
 						<div class="carousel-item active">							
 								<!-- <form id="f2" action="#"> -->
-								<div class="f2">
 									<h1>Create Account</h1>
 									<input type="email" placeholder="Email" name="email"/>
 									<input type="password" placeholder="Password" name = "password"/>
 									<button data-bs-target="#container3" data-bs-slide="next"> Next </button>								
-								</div>
 								<!-- </form>            						 -->
 
 						</div>
 						<div class="carousel-item">
-							<div class="f3" >
 								<!-- <form id="f3" action="/signin-signup/signup" method="post"> -->
 									<h1>Enter Your Credentials</h1>
 									<input type="text" placeholder="User name" name="username"/>
@@ -50,10 +47,9 @@
 										<input type="date" placeholder="Date of Birth" id="dob" name="dateofbirth"/>
 									</span>
 									<span>
-										<button  data-bs-target="#container3" data-bs-slide="prev" > Back </button>
+										<button  data-bs-target="#container3" data-bs-slide="prev" onclick="changeGradient(90);"> Back </button>
 										<button data-bs-target="f3" type="submit">Sign Up</button>
-									</span>		
-							</div>							  
+									</span>									  
 								<!-- </form> -->
 						</div>
 					</div>
@@ -74,7 +70,7 @@
 					<div class="overlay-panel overlay-left">
 						<h1>Have an Account?</h1>
 						<p>Use your existing account credentials to connect with us!</p>
-						<button class="ghost" data-bs-target="#container3" data-bs-slide-to="0" id="signIn" onclick="changeGradient(270);resetform();$('#container3').carousel(0);">Sign In</button>
+						<button class="ghost" id="signIn" onclick="changeGradient(270);resetform();$('#container3').carousel(0);">Sign In</button>
 					</div>
 					<div class="overlay-panel overlay-right">
 						<h1>New Here?</h1>
