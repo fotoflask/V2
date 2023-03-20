@@ -81,7 +81,7 @@
             <div class="col-lg-9 col-md-12 col-sm-12 row profile-details">
                 <h3 class="col-lg-12 col-12 profile-name"><%= user_name %></h3>
                 <div class="col-12">
-                    <h5 class="col-lg-6 col-md-12 col-12 user-name"><a class="profile-link" href="/profilepage"><%= user_id%></a></h5>
+                    <h5 class="col-lg-6 col-md-12 col-12 user-name"><a class="profile-link"  href="/profilepage/<%=encodeURIComponent(user_id)%>"><%= user_id%></a></h5>
                     <div class="col-lg-6 col-md-12 col-12 follow-button"><button type="button" class="btn btn-lg btn-outline-info waves-effect">Follow</button></div>
                 </div>
                 <div class="col-lg-6 col-6 followers-posts">

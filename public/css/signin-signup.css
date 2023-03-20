@@ -114,6 +114,15 @@
 		z-index: 5;
 		animation: show 0.6s;
 	}
+
+	/* .container .overlay-container{
+		border-radius: 40% 0 0 40%;
+	}
+
+	.right-panel-active .overlay-container{
+		border-radius: 0 40% 40% 0;
+	}	 */
+
 	.overlay-container {
 		position: absolute;
 		top: 0;
@@ -121,7 +130,7 @@
 		width: 50%;
 		height: 100%;
 		overflow: hidden;
-		transition: transform 0.6s ease-in-out;
+		transition: transform 0.6s ease-in-out, border-radius 0.6s linear;
 		z-index: 10; 
 	}
   } 
@@ -335,6 +344,7 @@ nav{
 
 .navbar{
     padding:0 0 0;
+	height: 10vh;
     width:100%;
 	border-radius: 0 0 15px 15px;
 	align-items: center;
@@ -343,6 +353,7 @@ nav{
  .navbar-brand{
   font-family: 'Livvic', sans-serif;
   font-weight: 700;
+  height: inherit;
     font-size: 2.5rem;
 	padding: 1%;
  }
@@ -432,7 +443,7 @@ nav{
 	margin: 3% 1%;
 	width: 90px;
 	text-align: center;
-	padding: 5% 5%;	
+	padding: 3% 5%;	
 }
 
 .desktop .carousel-item span label{

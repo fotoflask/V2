@@ -1,5 +1,14 @@
 const express = require("express")
 const bodyparser = require("body-parser")
+const sqlite3 = require('sqlite3').verbose()
+
+
+let sql
+
+const db = new sqlite3.Database('private/Database/fotoflask.db',sqlite3.OPEN_READWRITE, (err)=>{
+    if(err) return console.error(err.message);
+});
+
 
 const app = express()
 const PORT = 3000
@@ -18,10 +27,10 @@ const email = "poojyanth@gmail.com"
 const pwd = "poojyanth"
 
 
-const profilepic = ["/images/IMG_20221113_222958_639.png","/images/IMG_20221113_222958_639.png","/images/IMG_20221113_222958_639.png","/images/IMG_20221113_222958_639.png","/images/IMG_20221113_222958_639.png","/images/IMG_20221113_222958_639.png",]
-const coverphoto = ["/images/basketball_court-2.png","/images/basketball_court-2.png","/images/basketball_court-2.png","/images/basketball_court-2.png","/images/basketball_court-2.png","/images/basketball_court-2.png"]
+const profilepic = ["/images/ProfilePhotos/poojyanth.png","/images/ProfilePhotos/poojyanth.png","/images/ProfilePhotos/poojyanth.png","/images/profilephotos/poojyanth.png","/images/profilephotos/poojyanth.png","/images/profilephotos/poojyanth.png"]
+const coverphoto = ["/images/coverphotos/basketball_court-2.png","/images/coverphotos/basketball_court-2.png","/images/coverphotos/basketball_court-2.png","/images/coverphotos/basketball_court-2.png","/images/coverphotos/basketball_court-2.png","/images/coverphotos/basketball_court-2.png"]
 const postnumber = [6]
-const imagesrc= ["/images/anther.png","/images/basketball_court-2.png","/images/IMG20221231094849-1@0.5x.png","/images/orangeflower.png","/images/spider-1.jpg","/images/pinkflower_new-1-signed.png"]
+const imagesrc= ["/images/postimages/anther.png","/images/postimages/basketball_court-2.png","/images/postimages/IMG20221231094849-1@0.5x.png","/images/postimages/orangeflower.png","/images/postimages/spider-1.jpg","/images/postimages/pinkflower_new-1-signed.png"]
 const post_username = ["Poojyanth Reddy","Poojvth Reddy","Poojvth Reddy","Poojyanth Reddy","Poojyanth Reddy","Poojyanth Reddy"]
 const user_id = ["poojyanth_reddy","poojyanth_reddy","poojyanth_reddy","poojyanth_reddy","poojyanth_reddy","poojyanth_reddy","poojyanth_reddy",]
 const likes = [300,250,230,500,100,532]
@@ -65,36 +74,55 @@ app.get("/homepage", (req,res)=>{
 // })
 
 app.post("/signin-signup/signin", (req,res)=>{
-    if(req.body.Email == email){
-        if(req.body.password == pwd){
-            res.redirect('/homepage')
-        } 
-        else{
-            console.log('pwd not correct')
-            res.redirect('/signin-signup')
-        }
-    }
-    else{
-        console.log('email not correct')
-        console.log(req.body.Email)
-    }
+    // if(req.body.Email == email){
+    //     if(req.body.password == pwd){
+    //         res.redirect('/homepage')
+    //     } 
+    //     else{
+    //         console.log('pwd not correct')
+    //         res.redirect('/signin-signup')
+    //     }
+    // }
+    // else{
+    //     console.log('email not correct')
+    //     console.log(req.body.Email)
+    // }
+    console.log(req.body.Email+" AAAA "+req.body.password)
+    // console.log(checkpassword(req.body.Email,req.body.password))
+    checkpassword(req.body.Email,req.body.password, (result) => {
+        console.log(result)
+    if(result ==1)
+        res.redirect('/homepage')
+    else {
+        console.log("wrong input")
+        res.redirect('/signin-signup')
+    }})
+    
     
 })
 
 app.post("/signin-signup/signup", (req,res)=>{
-    if(req.body.Email == email){
-        if(req.body.password == pwd){
-            res.redirect('/homepage')
-        } 
-        else{
-            console.log('pwd not correct')
+    // if(req.body.Email == email){
+    //     if(req.body.password == pwd){
+    //         res.redirect('/homepage')
+    //     } 
+    //     else{
+    //         console.log('pwd not correct')
+    //         res.redirect('/signin-signup')
+    //     }
+    // }
+    // else{
+    //     console.log('email not correct')
+    //     console.log(req.body.Email)
+    // }
+    // console.log(req.body.Email+" AAAA "+req.body.password)
+    adduseraccount(req.body.username,req.body.email,req.body.password,req.body.mobilenumber,req.body.dateofbirth, (result)=>{
+        console.log("A"+result)
+        if(result==1){
             res.redirect('/signin-signup')
         }
-    }
-    else{
-        console.log('email not correct')
-        console.log(req.body.Email)
-    }
+    })
+
     
 })
 
@@ -139,3 +167,52 @@ app.post("/profilepage", (req, res) => {
     }
     res.render('profilepage',{profilepic: profilepic_res,likes: like_res, user_id: user_id_res, imagesrc: imagesrc_res})
  })
+
+
+//  let username = "poojyanth"
+//  let password = "poojyanth"
+//  checkpassword(username,password);
+
+function checkpassword(username,password,callback){
+    console.log("HELLO")
+ sql = `select * from user_password where username = ? LIMIT 1`;
+ db.get(sql,[username], (err,rows)=> {
+    console.log(rows)
+    if (rows && rows.password === password) {
+        callback(1) ; // return 1 if password matches
+      } 
+      else {
+        callback(0); // return 0 if password doesn't match
+      }
+    })}
+
+    let last = 'C013'
+
+function adduseraccount(username,email,password,mobilenumber,DOB, callback){
+    console.log(username,email,password,mobilenumber,DOB)
+    sql = `insert into user_password values(?,?,?)`
+    
+    db.run(sql,[last,username,password], (err)=>{
+        if(err) {console.error(err.message); callback(0);}
+        last = this.lastID;
+    });
+    sql = `insert into user_details values(?,?,?,?,?,?,?)`
+    db.run(sql,[last,username,email,mobilenumber,DOB,"",""],(err)=>{
+        if(err) {
+            console.error(err.message);
+            callback(0);
+        }
+        callback(1);
+    })
+
+
+}
+    
+    
+    //  console.log(rows.password)
+    //  console.log(rows.find(row => row.id === 1).password)
+//  db.close((err) => {
+//     if (err) {
+//       return console.error(err.message);
+//     }
+//   });

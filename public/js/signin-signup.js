@@ -29,3 +29,10 @@ function changeGradient(value) {
 	   return false;
 	}
  }
+
+
+ function resetform(){
+	document.getElementById("f1").reset();
+	document.getElementById("f2").reset();
+	document.getElementById("f3").reset();
+ }

@@ -22,43 +22,44 @@
 		</nav>
 
 		<hr style="width:100%;">
-
-		  <div class="container desktop" id="container">
-			  <div class="form-container sign-up-container">			
+		<div class="container desktop" id="container">
+			<div class="form-container sign-up-container">			
+				  <form id="f3" action="/signin-signup/signup" method="post">
 				<div id="container3" class="carousel slide" data-bs-interval="false">
 					<div class="carousel-inner">
 						<div class="carousel-item active">							
-							  <form action="#">
-								<h1>Create Account</h1>
-								<input type="email" placeholder="Email" />
-								<input type="password" placeholder="Password" />
-								<button data-bs-target="#container3" data-bs-slide="next"> Next </button>								
-							  </form>            						
+								<!-- <form id="f2" action="#"> -->
+									<h1>Create Account</h1>
+									<input type="email" placeholder="Email" name="email"/>
+									<input type="password" placeholder="Password" name = "password"/>
+									<button data-bs-target="#container3" data-bs-slide="next"> Next </button>								
+								<!-- </form>            						 -->
 
 						</div>
 						<div class="carousel-item">
-								<form action="/signin-signup/signup" method="post">
+								<!-- <form id="f3" action="/signin-signup/signup" method="post"> -->
 									<h1>Enter Your Credentials</h1>
-									<input type="text" placeholder="User name" name="user-name"/>
-									<input type="text" placeholder="User Id" name="user-id"/>
-									<input type="text" placeholder="Mobile Nummber" name="mobile-number" />
+									<input type="text" placeholder="User name" name="username"/>
+									<!-- <input type="text" placeholder="User Id" name="user-id"/> -->
+									<input type="text" placeholder="Mobile Nummber" name="mobilenumber" />
 									<span class="dob">
 										<label for="dob">Date of Birth</label>
-										<input type="date" placeholder="Date of Birth" id="dob" name="date-of-birth"/>
+										<input type="date" placeholder="Date of Birth" id="dob" name="dateofbirth"/>
 									</span>
 									<span>
 										<button  data-bs-target="#container3" data-bs-slide="prev" onclick="changeGradient(90);"> Back </button>
-										<button type="submit">Sign Up</button>
+										<button data-bs-target="f3" type="submit">Sign Up</button>
 									</span>									  
-								</form>
+								<!-- </form> -->
 						</div>
 					</div>
+				</form>
 				</div>
 			</div>
 			<div class="form-container sign-in-container">
-				<form action="/signin-signup/signin" method="post">
+				<form id="f1" action="/signin-signup/signin" method="post">
 					<h1>Sign in</h1>
-					<input type="email" placeholder="Email" name="Email"/>
+					<input type="text" placeholder="Email" name="Email"/>
 					<input type="password" placeholder="Password" name="password"/>
 					<a href="#">Forgot your password?</a>
 					<button>Sign In</button>
@@ -69,12 +70,12 @@
 					<div class="overlay-panel overlay-left">
 						<h1>Have an Account?</h1>
 						<p>Use your existing account credentials to connect with us!</p>
-						<button class="ghost" id="signIn" onclick="changeGradient(270);">Sign In</button>
+						<button class="ghost" id="signIn" onclick="changeGradient(270);resetform();$('#container3').carousel(0);">Sign In</button>
 					</div>
 					<div class="overlay-panel overlay-right">
 						<h1>New Here?</h1>
 						<p>Create an account and start journey your with us</p>
-						<button class="ghost" id="signUp" onclick="changeGradient(90);">Sign Up</button>
+						<button class="ghost" id="signUp" onclick="changeGradient(90);resetform();">Sign Up</button>
 					</div>
 				</div>
 			</div>
@@ -87,7 +88,7 @@
 				<div class="form-box sign-in-box">
 					<form action="/signin-signup/signin" method="post">
 					<h1>Sign in</h1>
-						<input type="email" placeholder="Email" name="Email"/>
+						<input type="text" placeholder="Email" name="Email"/>
 						<input type="password" placeholder="Password" name="password"/>
 						<div style="width: 100%; text-align: right; padding: 2%;"><a href="#">Forgot your password?</a></div>
 						<button type="submit">Sign In</button>
@@ -110,12 +111,12 @@
 				  <div class="form-box sign-up-box b2">
 					  <form action="/signin-signup/signup" method="post">
 						  <h1>Enter Your Credentials</h1>
-						  <input type="text" placeholder="User name" name="user-name"/>
-						  <input type="text" placeholder="User Id" name="user-id"/>
-						  <input type="text" placeholder="Mobile Nummber" name="mobile-number" />
+						  <input type="text" placeholder="User name" name="username"/>
+						  <!-- <input type="text" placeholder="User Id" name="user-id"/> -->
+						  <input type="text" placeholder="Mobile Nummber" name="mobilenumber" />
 						  <span class="dob">
 							  <label for="dob">Date of Birth</label>
-							  <input type="date" placeholder="Date of Birth" id="dob" name="date-of-birth"/>
+							  <input type="date" placeholder="Date of Birth" id="dob" name="dateofbirth"/>
 						  </span>
 						  <span>
 							  <button  data-bs-target="#container2" data-bs-slide="prev" onclick="changeGradient(90);"> Back </button>
