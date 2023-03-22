@@ -85,28 +85,29 @@ app.get('/contact/:username',(req,res)=>{
     res.render("contact",{profilepic: profilepic_res, user_id: user_id_res, postnumber: postnumber_res,user_name:post_username_received})
 })
 
-app.get('/postpage/:username',(req,res)=>{
+app.get('/postpage/:logusername',(req,res)=>{
     const post_username_received = req.params.username
+    const logusername = req.params.logusername
+    const postimage = req.params.postimage
     console.log("K"+post_username_received+"B")
     console.log("H")    
-    let postnumber_res = 0;
-    let imagesrc_res = []    ;
-    let like_res =[]
     let profilepic_res
+    let like
+    let comment
     let coverphoto_res
     let accountfound = 0
     for(let i = 0; i < post_username.length; i++){
         if(post_username[i] == post_username_received)
-        {postnumber_res = postnumber_res + 1
+        {    if(imagesrc == imagesrc[i])
+                {
         profilepic_res = profilepic[i]
-        coverphoto_res = coverphoto[i]
         user_id_res = user_id[i]
-        imagesrc_res.push(imagesrc[i])
-        like_res.push(likes[i])
+        like = (likes[i])
+        comment = comments[i]
         accountfound = 1}
-    }
-    if(accountfound==1)
-    res.render("contact",{profilepic: profilepic_res, user_id: user_id_res, postnumber: postnumber_res,user_name:post_username_received})
+    }}
+    
+    res.render("postpage",{log_username:logusername,result : 1})
 })
 
 app.get('/settingspage/:username', (req,res)=>{

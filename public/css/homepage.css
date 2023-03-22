@@ -50,61 +50,10 @@ body{
 
 /* NAVBAR */
 
-@media (width>991px){
-  #navbarSupportedContent2  {
-    visibility: hidden;
-    display: none;
-  }
-}
-
-#navbarSupportedContent2 .collapse:not(.show){
-  
-  visibility: hidden;
-}
-
-#navbarSupportedContent2 .collapse .show {
-  
-  visibility: visible;
-}
-
-.button-container{
-  width: 100px;
-  display: flex;
-  flex-wrap: inherit;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.button-container button{
-  margin: 0 1px 0 1px;
-  padding: 1%;
-}
-
-
-.navbar{
-    background-color: #DBE2EF;
-    padding:0 0 0;
-    width:100%;
- }
- 
- .navbar-brand{
-  font-family: 'Livvic', sans-serif;
-  font-weight: 700;
-    font-size: 2.5rem;
- }
- 
- .nav-item{
-    padding: 0 1px;;
- }
- 
- .nav-link{
-    font-size:1.2rem;
-    font-family: "Montserrat";
-    font-weight: light;
- }
- 
 
  /* Home Page */
+
+
 
  .homepage-post{
     background-color: #DBE2EF;

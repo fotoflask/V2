@@ -30,9 +30,10 @@
                     <div class="post col-11 ">
                         <div class="post-details">                            
                             <h5 class="user-name"><a class="profile-link" id="profile-link" href="/profilepage/<%=encodeURIComponent(post_username[i])%>" ><img class="profile-pic-small"src=<%= profilepic[i] %> ><%=post_username[i] %></a></h5>
+                            <div class="postpage">...</div>
                         </div>
                         <div class="imageHolder">
-                          <img class="imageItself" src=<%= imagesrc[i] %> />
+                          <a href="/postpage/<%= log_username %>"><img class="imageItself" src=<%= imagesrc[i] %> /></a>
                         </div>
                         <!-- <div class="image-box"><img  class="img-fluid " alt="" ></div> -->
                         <div class="post-options row">
