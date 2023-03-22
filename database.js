@@ -7,7 +7,10 @@ const db = new sqlite3.Database('private/Database/fotoflask.db',sqlite3.OPEN_REA
     if(err) return console.error(err.message);
 });
 
-sql = `create table if not exists user_details(user_id primary key, username, email, mobilenumber, DOB date, profile_src, cover_src)`;
+// db.run(`DROP TABLE if exists user_details`);
+// db.run(`DROP TABLE if exists user_password`);
+
+sql = `create table if not exists user_details(user_id INTEGER primary key AUTOINCREMENT, username, email, mobilenumber, DOB date, profile_src, cover_src)`;
 db.run(sql, (err)=>{
     if(err) return console.error("A"+err.message);
 })
@@ -27,10 +30,13 @@ sql = `select * from user_details order by user_id`
 //     })
 // })
 
-sql = `create table if not exists user_password(user_id primary key, username, password)`;
-// db.run(sql, (err)=>{
-//     if(err) return console.error("C"+err.message);
-// });
+sql = `create table if not exists user_password(user_id INTEGER primary key AUTOINCREMENT, username, password)`;
+db.run(sql, (err)=>{
+    if(err) return console.error("C"+err.message);
+});
+
+
+sql = `create table if not exists `
 
 sql = `insert into user_password values(?,?,?)`
 // db.run(sql,["C001","poojyanth","poojyanth"])
@@ -41,14 +47,22 @@ sql = `insert into user_password values(?,?,?)`
 // db.run(sql,["C006","ppu","ppp"])
 
 
-sql = `select * from user_password`
+
+sql = `select * from user_details`
 db.all(sql, (err,rows)=>{
-    if(err) return console.error("D"+error.message);
+    if(err) return console.error("D"+err.message);
     rows.forEach((row) => {
         console.log(row);
     })
 })
 
+sql = `select * from user_password`
+db.all(sql, (err,rows)=>{
+    if(err) return console.error("D"+err.message);
+    rows.forEach((row) => {
+        console.log(row);
+    })
+})
 
 sql = `select * from user_password where username = ?`
 // db.all(sql,["ppu"], (err,rows)=> {
@@ -84,8 +98,21 @@ sql = `select * from user_password where username = ?`
 // console.log(xyz)
 
 
+//DELETE ALL ITEMS
+// sql =  `DELETE FROM user_password`
+// db.run(sql,(err)=>{
+//     if(err)console.error(err.message)
+// })
+// sql = `DELETE from user_details`
+// db.run(sql,(err)=>{
+//     if(err)console.error(err.message)
+// })
 
 
+// sql = `insert into user_password(username,password) values("Poojyanth Reddy","poojyanth")`
+// db.run(sql,(err)=>{
+//     if(err) console.error(err.message)
+// })
 
 
 

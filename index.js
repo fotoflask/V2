@@ -31,8 +31,8 @@ const profilepic = ["/images/ProfilePhotos/poojyanth.png","/images/ProfilePhotos
 const coverphoto = ["/images/coverphotos/basketball_court-2.png","/images/coverphotos/basketball_court-2.png","/images/coverphotos/basketball_court-2.png","/images/coverphotos/basketball_court-2.png","/images/coverphotos/basketball_court-2.png","/images/coverphotos/basketball_court-2.png"]
 const postnumber = [6]
 const imagesrc= ["/images/postimages/anther.png","/images/postimages/basketball_court-2.png","/images/postimages/IMG20221231094849-1@0.5x.png","/images/postimages/orangeflower.png","/images/postimages/spider-1.jpg","/images/postimages/pinkflower_new-1-signed.png"]
-const post_username = ["Poojyanth Reddy","Poojvth Reddy","Poojvth Reddy","Poojyanth Reddy","Poojyanth Reddy","Poojyanth Reddy"]
-const user_id = ["poojyanth_reddy","poojyanth_reddy","poojyanth_reddy","poojyanth_reddy","poojyanth_reddy","poojyanth_reddy","poojyanth_reddy",]
+const post_username = ["Poojyanth Reddy","Poojvth Reddy","Poojvth Reddy","Poojyanth Reddy","abhiram145","Poojyanth Reddy"]
+const user_id = ["poojyanth_reddy","poojyanth_reddy","poojyanth_reddy","poojyanth_reddy","abhiram145","poojyanth_reddy","poojyanth_reddy",]
 const likes = [300,250,230,500,100,532]
 const comments = [30,20,23,50,10,53]
 
@@ -53,90 +53,24 @@ app.get("/", (req,res)=>{
 })
 
 app.get("/homepage", (req,res)=>{
-    res.status(200).render("homepage",{profilepic: profilepic,likes: likes, imagesrc : imagesrc, post_username: post_username,postnumber: postnumber})
+    console.log(req.query.username+"BBBB")
+    
+        if(req.query.result == 1)
+        res.status(200).render("homepage",{profilepic: profilepic,likes: likes, imagesrc : imagesrc, post_username: post_username,postnumber: postnumber,log_username: req.query.username,result: req.query.result})
+        else 
+        res.redirect('signin-signup')
 })
 
-// app.post("/signin-signup", (req,res)=>{
-//     if(req.body.Email == email){
-//         if(req.body.password == pwd){
-//             res.redirect('/homepage')
-//         } 
-//         else{
-//             console.log('pwd not correct')
-//             res.redirect('/signin-signup')
-//         }
-//     }
-//     else{
-//         console.log('email not correct')
-//         console.log(req.body.Email)
-//     }
-    
-// })
-
-app.post("/signin-signup/signin", (req,res)=>{
-    // if(req.body.Email == email){
-    //     if(req.body.password == pwd){
-    //         res.redirect('/homepage')
-    //     } 
-    //     else{
-    //         console.log('pwd not correct')
-    //         res.redirect('/signin-signup')
-    //     }
-    // }
-    // else{
-    //     console.log('email not correct')
-    //     console.log(req.body.Email)
-    // }
-    console.log(req.body.Email+" AAAA "+req.body.password)
-    // console.log(checkpassword(req.body.Email,req.body.password))
-    checkpassword(req.body.Email,req.body.password, (result) => {
-        console.log(result)
-    if(result ==1)
-        res.redirect('/homepage')
-    else {
-        console.log("wrong input")
-        res.redirect('/signin-signup')
-    }})
-    
-    
-})
-
-app.post("/signin-signup/signup", (req,res)=>{
-    // if(req.body.Email == email){
-    //     if(req.body.password == pwd){
-    //         res.redirect('/homepage')
-    //     } 
-    //     else{
-    //         console.log('pwd not correct')
-    //         res.redirect('/signin-signup')
-    //     }
-    // }
-    // else{
-    //     console.log('email not correct')
-    //     console.log(req.body.Email)
-    // }
-    // console.log(req.body.Email+" AAAA "+req.body.password)
-    adduseraccount(req.body.username,req.body.email,req.body.password,req.body.mobilenumber,req.body.dateofbirth, (result)=>{
-        console.log("A"+result)
-        if(result==1){
-            res.redirect('/signin-signup')
-        }
-    })
-
-    
-})
-
-app.get("/profilepage/:post_username", (req, res) => {
-    const post_username_received = req.params.post_username
+app.get('/contact/:username',(req,res)=>{
+    const post_username_received = req.params.username
     console.log("K"+post_username_received+"B")
-    console.log("H")
-    
-    
+    console.log("H")    
     let postnumber_res = 0;
     let imagesrc_res = []    ;
     let like_res =[]
     let profilepic_res
     let coverphoto_res
+    let accountfound = 0
     for(let i = 0; i < post_username.length; i++){
         if(post_username[i] == post_username_received)
         {postnumber_res = postnumber_res + 1
@@ -144,14 +78,119 @@ app.get("/profilepage/:post_username", (req, res) => {
         coverphoto_res = coverphoto[i]
         user_id_res = user_id[i]
         imagesrc_res.push(imagesrc[i])
-        like_res.push(likes[i]) }
+        like_res.push(likes[i])
+        accountfound = 1}
     }
+    if(accountfound==1)
+    res.render("contact",{profilepic: profilepic_res, user_id: user_id_res, postnumber: postnumber_res,user_name:post_username_received})
+})
+
+app.get('/postpage/:username',(req,res)=>{
+    const post_username_received = req.params.username
+    console.log("K"+post_username_received+"B")
+    console.log("H")    
+    let postnumber_res = 0;
+    let imagesrc_res = []    ;
+    let like_res =[]
+    let profilepic_res
+    let coverphoto_res
+    let accountfound = 0
+    for(let i = 0; i < post_username.length; i++){
+        if(post_username[i] == post_username_received)
+        {postnumber_res = postnumber_res + 1
+        profilepic_res = profilepic[i]
+        coverphoto_res = coverphoto[i]
+        user_id_res = user_id[i]
+        imagesrc_res.push(imagesrc[i])
+        like_res.push(likes[i])
+        accountfound = 1}
+    }
+    if(accountfound==1)
+    res.render("contact",{profilepic: profilepic_res, user_id: user_id_res, postnumber: postnumber_res,user_name:post_username_received})
+})
+
+app.get('/settingspage/:username', (req,res)=>{
+    const post_username_received = req.params.username
+    console.log("K"+post_username_received+"B")
+    console.log("H")    
+    let postnumber_res = 0;
+    let imagesrc_res = []    ;
+    let like_res =[]
+    let profilepic_res
+    let coverphoto_res
+    let accountfound = 0
+    for(let i = 0; i < post_username.length; i++){
+        if(post_username[i] == post_username_received)
+        {postnumber_res = postnumber_res + 1
+        profilepic_res = profilepic[i]
+        coverphoto_res = coverphoto[i]
+        user_id_res = user_id[i]
+        imagesrc_res.push(imagesrc[i])
+        like_res.push(likes[i])
+        accountfound = 1}
+    }
+    if(accountfound==1)
+    res.render("settingspage",{profilepic: profilepic_res, user_id: user_id_res, postnumber: postnumber_res,user_name:post_username_received})
+    else res.redirect("/homepage?username=" + req.body.log_username + "&result=" + 1);
+})
+
+app.post("/signin-signup/signin", (req,res)=>{
+    console.log(req.body.username+" AAAA "+req.body.password)
+    checkpassword(req.body.username,req.body.password, (result) => {
+        console.log("B"+result)
+    if(result ==1)
+    //res.status(200).render("homepage",{profilepic: profilepic,likes: likes, imagesrc : imagesrc, post_username: post_username,postnumber: postnumber,log_username: req.body.username,result: result})
+    res.redirect("/homepage?username=" + req.body.username + "&result=" + result);
+    //,{profilepic: profilepic,likes: likes, imagesrc : imagesrc, post_username: post_username,postnumber: postnumber,log_username: req.body.Email,log_password : req.body.password})
+    else {
+        console.log("wrong input")
+        res.redirect('/')
+    }})
+    
+    
+})
+
+app.post("/signin-signup/signup", (req,res)=>{
+    adduseraccount(req.body.username,req.body.email,req.body.password,req.body.mobilenumber,req.body.dateofbirth, (result)=>{
+        console.log("Aqweqw"+result)
+        if(result==1){
+            res.redirect('/signin-signup')
+        }
+        else {
+            console.log("signup failed")
+        }
+    })
+    
+})
+
+app.get("/profilepage/:post_username", (req, res) => {
+    const post_username_received = req.params.post_username
+    console.log("K"+post_username_received+"B")
+    console.log("H")    
+    let postnumber_res = 0;
+    let imagesrc_res = []    ;
+    let like_res =[]
+    let profilepic_res
+    let coverphoto_res
+    let accountfound = 0
+    for(let i = 0; i < post_username.length; i++){
+        if(post_username[i] == post_username_received)
+        {postnumber_res = postnumber_res + 1
+        profilepic_res = profilepic[i]
+        coverphoto_res = coverphoto[i]
+        user_id_res = user_id[i]
+        imagesrc_res.push(imagesrc[i])
+        like_res.push(likes[i])
+        accountfound = 1}
+    }
+    if(accountfound==1)
     res.render("profilepage",{profilepic: profilepic_res,coverphoto: coverphoto_res,likes: like_res, user_id: user_id_res, imagesrc: imagesrc_res, postnumber: postnumber_res,comments:comments, user_name:post_username_received})
+    else res.redirect("/homepage?username=" + req.body.log_username + "&result=" + 1);
  })
 
 //Add specific path for the url
 app.post("/profilepage", (req, res) => {
-    console.log("H")
+    console.log("A")
     const post_username_received = req.query.post_username
     let postnumber_res = []
     let imagesrc_res = []    
@@ -186,27 +225,28 @@ function checkpassword(username,password,callback){
       }
     })}
 
-    let last = 'C014'
 
 function adduseraccount(username,email,password,mobilenumber,DOB, callback){
     console.log(username,email,password,mobilenumber,DOB)
-    sql = `insert into user_password values(?,?,?)`
-    
-    db.run(sql,[last,username,password], (err)=>{
-        if(err) {console.error(err.message); callback(0);}
-        last = this.lastID;
-    });
-    sql = `insert into user_details values(?,?,?,?,?,?,?)`
-    db.run(sql,[last,username,email,mobilenumber,DOB,"",""],(err)=>{
+    sql = `insert into user_password(username,password) values(?,?)`
+    db.run(sql,[username,password],(err)=>{
         if(err) {
             console.error(err.message);
             callback(0);
         }
-        callback(1);
     })
-
-
+    sql = `insert into user_details(username, email, mobilenumber, DOB, profile_src, cover_src) values(?,?,?,?,?,?)`
+    db.run(sql,[username,email,mobilenumber,DOB,"",""],(err)=>{
+        if(err) {
+            console.error(err.message);
+            callback(0);
+        }
+    })
+    callback(1);
+    
 }
+
+
     
     
     //  console.log(rows.password)

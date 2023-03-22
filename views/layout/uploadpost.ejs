@@ -1,0 +1,36 @@
+<form class="fpopup" action="homepage/newpost" id="f4">
+       
+    <img class="profilepic" src="<%= profilepic  %>" onerror="console.log('TY');this.src='/images/otherassets/camera-solid.svg'; style='object-fit:scale-down;'">
+    <h5 class="profilename"><%= profilename%></h5>
+
+    <div class="fcontainer">
+       <div class="fwrapper" onclick="defaultBtnActive()">
+                <div class="fimage">
+                   <img src="" alt="" onerror="style='visibility:hidden;'" onload="this.style.visibility='visible'">
+                  </div>
+                  <div class="content">
+                     <div class="icon">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                     </div>
+                     <div class="text">
+                        Select a picture
+                   </div>
+                </div>
+                <div id="cancel-btn">
+                   <i class="fas fa-times"></i>
+                </div>
+                <div class="file-name">
+                   
+               </div>
+            </div>
+            <br>
+            <!-- <button onclick="defaultBtnActive()" id="custom-btn">+</button> -->
+            <input id="default-btn" type="file" hidden>
+            
+         </div>
+         Caption:
+         <textarea id="fcaption" placeholder="Enter the caption for the picture"></textarea>
+         <button type="submit" class="fpost">POST</button>
+         <a class="close-btn">CANCEL</a>
+         
+         </form> 

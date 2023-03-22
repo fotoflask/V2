@@ -1,0 +1,38 @@
+
+<nav class="navb">
+    <input type="checkbox" id="check">
+    <label for="check" class="checkbtn">
+        <i class="fa-solid fa-bars fa-xs" onmouseover="this.classList.add('fa-sm')" onmouseout="this.classList.remove('fa-sm')"></i>
+    </label>
+    <label class="logo">
+      <div class="spinner-wrapper">
+        <svg width="35vw" height="100px">			   
+         <text x="5%" y="35%"  text-anchor="start"  >
+          FotoFlask
+         </text>
+         </svg>
+          </div>
+        </label>
+        <ul>
+          <li><a href="/settingspage/<%=encodeURIComponent(username) %>">SETTINGS</a></li>
+          <li><a href="/contact/<%=encodeURIComponent(username) %>">ABOUT US</a></li>
+          <li><a href="#">LOG OUT</a></li>
+        </ul>
+        <a id="profilepagelink"href="/profilepage/<%=encodeURIComponent(username)%>"><i class="fa-regular fa-user fa-sm"></i></a>
+        <a id = "open-fpopup"><i class="fa-solid fa-plus fa-sm"></i></a>
+
+   
+</nav>
+
+
+
+<script>
+    const navbar = document.querySelector('.navb');
+    const checkbox = document.querySelector('#check');
+
+    window.addEventListener('click', function(e) {
+    if (!navbar.contains(e.target)) {
+        checkbox.checked = false;
+    }
+    });
+</script>
