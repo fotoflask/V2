@@ -2,22 +2,22 @@
 <nav class="navb">
     <input type="checkbox" id="check">
     <label for="check" class="checkbtn">
-        <i class="fa-solid fa-bars fa-xs" onmouseover="this.classList.add('fa-sm')" onmouseout="this.classList.remove('fa-sm')"></i>
+        <i  id="checkbutton-bars" class="fa-solid fa-bars fa-xs" ></i>
     </label>
     <label class="logo">
       <div class="spinner-wrapper">
         <svg width="35vw" height="100px">			   
-         <text x="5%" y="35%"  text-anchor="start"  >
-          FotoFlask
+         <text x="5%" y="35%"  text-anchor="start" >
+          <a href="/homepage" class="logo-homepage-link">FotoFlask</a>
          </text>
          </svg>
           </div>
-        </label>
-        <ul>
-          <li><a href="/settingspage/<%=encodeURIComponent(username) %>">SETTINGS</a></li>
-          <li><a href="/contact/<%=encodeURIComponent(username) %>">ABOUT US</a></li>
-          <li><a href="#">LOG OUT</a></li>
-        </ul>
+    </label>
+    <ul class="page-links">
+      <li><a href="/settingspage/<%=encodeURIComponent(username) %>">SETTINGS</a></li>
+      <li><a href="/contact/<%=encodeURIComponent(username) %>">ABOUT US</a></li>
+      <li><a href="/">LOG OUT</a></li>
+    </ul>
         <a id="profilepagelink"href="/profilepage/<%=encodeURIComponent(username)%>"><i class="fa-regular fa-user fa-sm"></i></a>
         <a id = "open-fpopup"><i class="fa-solid fa-plus fa-sm"></i></a>
 
@@ -35,4 +35,16 @@
         checkbox.checked = false;
     }
     });
+
+    const checkbuttonbars = document.getElementById('checkbutton-bars')
+
+    checkbuttonbars.addEventListener('mouseover', ()=>{
+      checkbuttonbars.classList.add('fa-sm');
+    })
+
+    checkbuttonbars.addEventListener('mouseout', ()=>{
+      checkbuttonbars.classList.remove('fa-sm');
+    })
+
+
 </script>
