@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+    <head>
+     <title>Fotoflask</title>
+     <link rel="stylesheet" href="css/homepage_s.css">
+     <script src="https://kit.fontawesome.com/8a4cc92fd7.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+
+        <nav>
+            <div class="navleft">
+                <img src="/images_homep/logo.png" class="logo">
+            </div>
+            <div class="navright">
+                <div class="searchbox">
+                    <img src="/images_homep/search.png">
+                    <input type="text" placeholder="Seach">
+                </div>
+
+                <div>
+                    <a href="/createpost">  <i class="fa-solid fa-plus" style="color: #85a3d6;"></i></a>
+                </div>
+
+                <ul>
+                    <li><img src="/images_homep/notification.png" ></li>
+                    <li><img src="/images_homep/inbox.png" ></li>
+                    
+                </ul>
+
+                <div class="usericon online">
+                    <img src="/images_homep/profile-pic.png">
+                </div>
+
+            </div>
+        </nav>
+
+        <div class="container">
+
+            <!--Left Side Bar-->
+
+            <div class="leftsidebar">
+
+                <div class="implinks">
+                    <a href="#"><img src="/images_homep/icons8-home-24.png" class="im1">Home</a>
+                    <a href="#"><img src="/images_homep/web-search-engine.png" class="im2">AboutUs</a>
+                    
+                    <a href="#"><img src="/images_homep/search1.png" class="im3">Explore</a>
+                    <a href="#"><img src="/images_homep/friends.png" class="im4">Friends</a>
+                    <a href="#"><img src="/images_homep/people.png" class="im5">Group</a>
+
+                </div>
+
+            </div>
+
+            <!--Main Content-->
+
+
+            <div class="maincontent">
+
+                <div class="writepostcontainer">
+
+                    <div class="userprofile">
+                        <img src="/images/ProfilePhotos/<%= doc4.dprofilepic%>">
+                        <div>
+                            <p><b><%= doc4.dusername%></b></p>
+                            <small>Public</small>
+                        </div>
+                    </div>
+
+
+                    <div class="postinputcontainer">
+                        <textarea rows ="3" placeholder="What's on your mind?"></textarea>
+                        <div class="addpostlinks">
+                            <a href="#"><img src="/images_homep/photo.png">Photo</a>
+                            <a href="#"><img src="/images_homep/feeling.png">Feeling</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Each post copy paste below-->
+
+                <% doc2.forEach(post=>{ %>
+                    <div class="postcontainer">
+ 
+                        <div class="postrow">
+                            <div class="userprofile">
+                                <img src="/images/ProfilePhotos/<%= post.dprofilepic %>">
+                                <div>
+                                    <p><b><%= post.dusername%></b></p>
+                                    <small>Public</small>
+                                </div>
+                            </div>
+                        </div>                                            
+                        <img src="/images/PostImages/<%= post.Picture %>" class="postimage">
+                        <p class="posttext"><%= post.Description_of_post%> <br><br>
+                            <% post.Tag.forEach(tag=>{ %>
+                                <a href="<%= tag %>"><%=tag%></a>
+                            <% }) %>
+                            
+                        </p>                    
+                        <div class="postrow">
+                            <div class="activityicons">
+                                <form action="/home" method="post">
+                                    <input type="hidden" name="likeduser" value="<%= doc4.dusername %>">
+                                    <div><button type="submit" name="like" value="<%= post._id%>"><img src="/images_homep/like-blue.png"><%= post.likes_number%></button></div>                            
+                                    <div><a href="#" ><img src="/images_homep/comments.png"><%= post.comments_number %></a></div>
+                                    <div><a href="#" ><img src="/images_homep/share.png"><%= post.Shares %></a></div>
+                                </form>
+                            </div>                        
+                        </div>
+                    </div>
+                <% }) %>         
+
+
+
+            </div>
+
+            <!--Right Side Bar-->
+            <div class="rightsidebar">                
+                <div class="sidebartitle">
+                    <h4>Events</h4>
+                    <a href="#">See All</a>
+                </div>
+                <div class="events-container style-1">
+                    <div class="events">
+                        <div class="leftevent">
+                            <h3>19</h3>
+                            <span><b>August</b></span>
+
+                        </div>
+                        <div class="rightevent">
+                            <h4>National Photography Day</h4>
+                            <a href="https://www.daysoftheyear.com/days/photography-day/">More Info</a>
+
+                        </div>
+
+                    </div>
+
+                    <div class="events">
+                        <div class="leftevent">
+                            <h3>05</h3>
+                            <span>October</span>
+                        </div>
+                        <div class="rightevent">
+                            <h4>Photography Contest 2023</h4>
+                            <a href="#">More Info</a>
+                        </div>
+
+                    </div>
+                    <div class="events">
+                        <div class="leftevent">
+                            <h3>29</h3>
+                            <span><b>April</b></span>
+
+                        </div>
+                        <div class="rightevent">
+                            <h4>International Photography Day</h4>
+                            <a href="https://www.daysoftheyear.com/days/photography-day/">More Info</a>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="sidebartitle">
+                    <h4>Advertisements</h4>
+                    <a href="#">Close</a>
+                </div>
+                <img src="/images_homep/advertisement.png" class="sidebarads">
+
+
+                <div class="sidebartitle">
+                    <h4>Chat</h4>
+                    <a href="#">Hide Chat</a>
+                </div>
+
+                <div class="online-profiles style-1">
+                    <div class="onlinelist">
+
+                        <div class="online">
+                            <img src="/images_homep/member-1.png">
+                        </div>
+                        <p>Sravan</p>
+                    </div>
+
+                    <div class="onlinelist">
+
+                        <div class="online">
+                            <img src="/images_homep/member-2.png">
+                        </div>
+                        <p>Poojyanth</p>
+                    </div>
+
+                    <div class="onlinelist">
+
+                        <div class="online">
+                            <img src="/images_homep/member-3.png">
+                        </div>
+                        <p>Abhiram</p>
+                    </div>
+                    <div class="onlinelist">
+
+                        <div class="online">
+                            <img src="/images_homep/member-3.png">
+                        </div>
+                        <p>Sai Pavan</p>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </body>
+</html>

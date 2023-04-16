@@ -1,65 +1,244 @@
-const express = require("express")
+const express = require('express')
+const multer = require("multer")
+const mongoose = require('mongoose')
 const bodyparser = require("body-parser")
-const sqlite3 = require('sqlite3').verbose()
-
-
-let sql
-
-const db = new sqlite3.Database('private/Database/fotoflask.db',sqlite3.OPEN_READWRITE, (err)=>{
-    if(err) return console.error(err.message);
-});
-
+const path = require('path')
+const url = 'mongodb://0.0.0.0/Fotoflask'
 
 const app = express()
-const PORT = 3000
 app.set('view engine', 'ejs');
-
-//For static things to be used
-app.use(express.static("public"));
+app.use(express.static("public")); 
 app.use(express.static("private"));
 app.use(bodyparser.urlencoded({extended: true}));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-app.listen(PORT, () => {
-    console.log(`Server Running at ${PORT}`)
-})
-
-const email = "poojyanth@gmail.com"
-const pwd = "poojyanth"
-
-
-const profilepic = ["/images/ProfilePhotos/poojyanth.png","/images/ProfilePhotos/poojyanth.png","/images/ProfilePhotos/poojyanth.png","/images/profilephotos/poojyanth.png","/images/profilephotos/poojyanth.png","/images/profilephotos/poojyanth.png"]
+const profilepic = ["/images/ProfilePhotos/poojyanth.png","/images/ProfilePhotos/poojyanth.png","/images/ProfilePhotos/pavan.png","/images/profilephotos/poojyanth.png","/images/profilephotos/abhi.jpg","/images/profilephotos/sravan.png"]
 const coverphoto = ["/images/coverphotos/basketball_court-2.png","/images/coverphotos/basketball_court-2.png","/images/coverphotos/basketball_court-2.png","/images/coverphotos/basketball_court-2.png","/images/coverphotos/basketball_court-2.png","/images/coverphotos/basketball_court-2.png"]
 const postnumber = [6]
 const imagesrc= ["/images/postimages/anther.png","/images/postimages/basketball_court-2.png","/images/postimages/IMG20221231094849-1@0.5x.png","/images/postimages/orangeflower.png","/images/postimages/spider-1.jpg","/images/postimages/pinkflower_new-1-signed.png"]
-const post_username = ["Poojyanth Reddy","Poojvth Reddy","Poojvth Reddy","Poojyanth Reddy","abhiram145","Poojyanth Reddy"]
-const user_id = ["poojyanth_reddy","poojyanth_reddy","poojyanth_reddy","poojyanth_reddy","abhiram145","poojyanth_reddy","poojyanth_reddy",]
+const post_username = ["Poojyanth Reddy","Poojvth Reddy","pavan","Poojyanth Reddy","abhiram145","sravan"]
+const user_id = ["poojyanth_reddy","poojyanth_reddy","saipavan","poojyanth_reddy","abhiram145","sravan"]
 const likes = [300,250,230,500,100,532]
 const comments = [30,20,23,50,10,53]
 
+mongoose.connect(url)
+const con = mongoose.connection
 
-//Basic Send request and response, send html element 
-// app.get("/", (req,res)=>{
-//     res.status(200).send("<h2>What the fuck</h2>")
-// })
+con.on('open', () => {
+    console.log('connected...')
+})
 
 
-//Send a ejs file (static) as response
+app.listen(4000, () => {
+    console.log('Server started')
+})
+
+let myschema =  new mongoose.Schema({
+
+    // Date_of_upload : Date(),
+    duserId : Number,    
+    dusername : String,
+    dprofilepic : String,
+    postid : Number,
+    Date : Date,
+    Picture:{
+        type:String,
+    },
+    Description_of_post : String,
+    Tag : [String],
+    likes_number : Number,
+    likes : [String],
+    comments : [String],
+    comments_number : Number,
+    Shares : Number
+});
+
+
+let mymodel = mongoose.model('table',myschema);
+
+let storage = multer.diskStorage({
+
+    destination:'./private/images/postimages',
+     filename:(req,file,cb)=>{
+        cb(null,Date.now()+file.originalname)
+     }
+
+})
+
+
+let upload =multer({
+    storage:storage,
+    fileFilter:(req,file,cb)=>{
+
+        if(
+ 
+            file.mimetype == 'image/jpeg' ||
+            file.mimetype == 'image/jpg' ||
+            file.mimetype == 'image/png' ||
+            file.mimetype == 'image/gif'
+
+        ){
+               cb(null,true);
+        }else{
+
+            cb(null,false);
+            cb(new Error('ONLY IMAGES ARE ALLOWED TO BE UPLOADED'));
+
+
+        }
+
+    }
+})
+
+
+
+
+
+
 app.get("/signin-signup", (req,res)=>{
-    res.status(200).render("signin-signup")
+    con.collection('session').findOne({dipaddress : req.socket.remoteAddress})
+        .then(doc3=>{
+            if(doc3){
+                res.redirect("home")
+            }
+            else
+            res.status(200).render("signin-signup")
+        })
 })
 
 app.get("/", (req,res)=>{
-    res.status(200).render("signin-signup")
+    con.collection('session').findOne({dipaddress : req.socket.remoteAddress})
+        .then(doc3=>{
+            if(doc3){
+                res.redirect("home")
+            }
+            else
+            res.status(200).render("signin-signup")
+        })
 })
 
 app.get("/homepage", (req,res)=>{
-    console.log(req.query.username+"BBBB")
-    
+        console.log(req.query.username+"BBBB")    
         if(req.query.result == 1)
         res.status(200).render("homepage",{profilepic: profilepic,likes: likes, imagesrc : imagesrc, post_username: post_username,postnumber: postnumber,log_username: req.query.username,result: req.query.result})
         else 
         res.redirect('signin-signup')
 })
+
+app.get("/home", (req,res)=>{
+    let doc4
+    con.collection('session').findOne({dipaddress : req.socket.remoteAddress})
+        .then(doc3=>{
+            if(doc3){
+                con.collection('UserDetails').findOne({duserId : doc3.duserId}).then(result=>{
+                    doc4 = result
+                    console.log("homehere") 
+                    console.log(doc4)
+                    mymodel.find({})
+                    .sort({ Date: -1 })
+                    .then(doc2=>{
+                        console.log("inside") 
+                        console.log(doc2) 
+                        if(doc2)
+                        {
+                            console.log("insd") 
+                            res.render("homepage_s",{userId : doc3.duserId,doc2,doc4})
+                        } 
+                        
+                        else
+                        res.render("homepage_s",{userId : doc3.duserId})
+                    })
+                })
+            }
+            else{
+                res.redirect("/")
+            }
+        }) 
+    
+})
+
+app.post("/home", (req,res)=>{
+    console.log(req.body.like)
+    mymodel.findById(req.body.like)
+    .then((res1)=>{  
+        if(res1 && res1.likes.includes(req.body.likeduser)){
+            mymodel.findOneAndUpdate(  
+                {_id : req.body.like}  ,
+                { $inc: { likes_number: -1 },
+                $pull: { likes: req.body.likeduser } }, // Increment like count by 1
+                { new: true } // Return the updated document
+            )
+            .then(function(updatedPicture) {
+            // Send response with updated picture data
+            res.redirect("/home")
+            })
+            .catch(function(error) {
+            // Handle error and send response
+            res.status(500).json({ error: error.message });
+            });
+        }
+        else {
+            mymodel.findOneAndUpdate(  
+                {_id : req.body.like}  ,
+                { $inc: { likes_number: +1 },
+                $push: { likes: req.body.likeduser } }, // Increment like count by 1
+                { new: true } // Return the updated document
+            )
+            .then(function(updatedPicture) {
+            // Send response with updated picture data
+            res.redirect("/home")
+            })
+            .catch(function(error) {
+            // Handle error and send response
+            res.status(500).json({ error: error.message });
+            });
+        }
+    })
+        
+  
+})
+
+app.get("/createpost", (req,res)=>{
+    console.log("createPost")
+    res.render("create_post")
+})
+ 
+app.post('/singlepost',upload.single('single_input'),(req,res)=>{
+    // req.file
+    let doc5
+    console.log("HH")
+    con.collection('session').findOne({dipaddress : req.socket.remoteAddress})
+        .then(doc3=>{
+            con.collection('UserDetails').findOne({duserId : doc3.duserId}).then(result=>{
+                doc5 = result
+                console.log(doc5)
+                mymodel.create({
+                    duserId : doc3.duserId,
+                    dusername : doc3.dusername,
+                    dprofilepic : doc5.dprofilepic,
+                    Date : new Date(),
+                    Picture  :  req.file.filename, 
+                    Description_of_post  : req.body.description,
+                    Tag : req.body.tag.split(" "),
+                    likes_number : 0,
+                    comments_number : 0,
+                    Shares : 0,                
+                   })
+                    .then((x)=>{ 
+    
+                    res.redirect("/home")
+                    
+                    })
+                    .catch((y)=>{
+                    console.log(y)
+                    })})
+            
+        })
+    
+    //res.send(req.file.filename);
+})
+
 
 app.get('/contact/:username',(req,res)=>{
     const post_username_received = req.params.username
@@ -126,7 +305,7 @@ app.get('/settingspage/:username', (req,res)=>{
         profilepic_res = profilepic[i]
         coverphoto_res = coverphoto[i]
         user_id_res = user_id[i]
-        imagesrc_res.push(imagesrc[i])
+        imagesrc_res.push(imagesrc[i]) 
         like_res.push(likes[i])
         accountfound = 1}
     }
@@ -136,19 +315,23 @@ app.get('/settingspage/:username', (req,res)=>{
 })
 
 app.post("/signin-signup/signin", (req,res)=>{
+    console.log(req.socket.remoteAddress)
     console.log(req.body.username+" AAAA "+req.body.password)
-    checkpassword(req.body.username,req.body.password, (result) => {
-        console.log("B"+result)
-    if(result ==1)
+    checkpassword(req.socket.remoteAddress,req.body.username,req.body.password, (result) => {
+        console.log("Bl"+result)
+    if(result ==1){
     //res.status(200).render("homepage",{profilepic: profilepic,likes: likes, imagesrc : imagesrc, post_username: post_username,postnumber: postnumber,log_username: req.body.username,result: result})
-    res.redirect("/homepage?username=" + req.body.username + "&result=" + result);
+        console.log("done here")
+        // res.redirect("/homepage?username=" + req.body.username + "&result=" + result);
+        res.redirect("/home")
+    }
     //,{profilepic: profilepic,likes: likes, imagesrc : imagesrc, post_username: post_username,postnumber: postnumber,log_username: req.body.Email,log_password : req.body.password})
-    else {
-        console.log("wrong input")
+    else { 
+        console.log("wrong--input")
         res.redirect('/')
-    }})
+    }}) 
     
-    
+      
 })
 
 app.post("/signin-signup/signup", (req,res)=>{
@@ -158,6 +341,7 @@ app.post("/signin-signup/signup", (req,res)=>{
             res.redirect('/signin-signup')
         }
         else {
+            res.redirect('/signin-signup')
             console.log("signup failed")
         }
     })
@@ -209,41 +393,89 @@ app.post("/profilepage", (req, res) => {
  })
 
 
-//  let username = "poojyanth"
-//  let password = "poojyanth"
-//  checkpassword(username,password);
-
-function checkpassword(username,password,callback){
+function checkpassword(ipaddress,username,password,callback){
     console.log("HELLO")
- sql = `select * from user_password where username = ? LIMIT 1`;
- db.get(sql,[username], (err,rows)=> {
-    console.log(rows)
-    if (rows && rows.password === password) {
-        callback(1) ; // return 1 if password matches
-      } 
-      else {
-        callback(0); // return 0 if password doesn't match
-      }
-    })}
+    con.collection('UserIDpwd')
+        .findOne({dusername: username})
+        .then(doc =>{
+            console.log(doc);
+            if(doc.dpassword === password){
+                nsession = {
+                    dipaddress : ipaddress,
+                    duserId : doc.duserId,
+                    dusername : username,                    
+                };
+                con.collection('session')
+                    .insertOne(nsession)        
+                    .catch((err)=>{
+                    console.error(err);
+                callback(0);
+            })
+                callback(1);
+            }               
+            
+            else callback(0)
+        })
+        .catch((err)=>{
+            console.error(err);
+            callback(0);
+        })        
+ }
+ 
 
 
 function adduseraccount(username,email,password,mobilenumber,DOB, callback){
-    console.log(username,email,password,mobilenumber,DOB)
-    sql = `insert into user_password(username,password) values(?,?)`
-    db.run(sql,[username,password],(err)=>{
-        if(err) {
-            console.error(err.message);
-            callback(0);
+    let lastuserID = 0;
+    con.collection("UserIDpwd").findOne({dusername : username}).then(doc =>{
+        if(doc) callback(0);
+        else{
+            con.collection("UserIDpwd")
+                .findOne({}, {sort: {duserId: -1}})
+                .then( doc => {
+                lastuserID = doc ? doc.duserId : 0;
+                console.log(doc)
+                lastuserID +=1;
+                console.log(lastuserID)
+                console.log(username,email,password,mobilenumber,DOB)
+            
+                newUserpwd = {
+                duserId : lastuserID,
+                dusername : username,
+                dpassword : password
+                };
+                newUserDetails = {
+                duserId : lastuserID,
+                dusername : username, 
+                demail : email,
+                dmobilenumber : mobilenumber,
+                dDOB : DOB,
+                dprofilepic : "",
+                dcoverphoto : ""
+            };
+            
+            
+            con.collection('UserIDpwd')
+                .insertOne(newUserpwd)                
+                .then(()=>{
+                    con.collection('UserDetails')
+                    .insertOne(newUserDetails)        
+                    .catch((err)=>{
+                        console.error(err);
+                        callback(0);
+                    })
+                })
+                .then(()=>{
+                    callback(1);
+                })
+                .catch((err)=>{
+                    console.error(err);
+                    callback(0);
+                })
+                
+                })
         }
     })
-    sql = `insert into user_details(username, email, mobilenumber, DOB, profile_src, cover_src) values(?,?,?,?,?,?)`
-    db.run(sql,[username,email,mobilenumber,DOB,"",""],(err)=>{
-        if(err) {
-            console.error(err.message);
-            callback(0);
-        }
-    })
-    callback(1);
+    //callback(1);
     
 }
 
