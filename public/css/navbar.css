@@ -2,16 +2,15 @@
 .navb{
     -webkit-tap-highlight-color: transparent;
     user-select: none;
-    position:sticky;
-    top:0px;
-    z-index: 5;
-    margin: 0 1vw;
-    background-color: rgba(255,255,255,0.7);
+    position: sticky;
+    top:-8px;
+    z-index: 2;    
+    background-color: #DBE2EF;
     box-shadow: 0px 15px 35px rgba(255,255,255,0.05);
     border-radius: 0 0 10px 10px;
     height:10vh;
     min-height: 50px;
-    width: 94vw;
+    width: 98vw;
     backdrop-filter:blur(10px);
     border :1px solid rgba(255,255,255,0.25);
     border-top : 1px solid rgba(255,255,255,0.5);
@@ -20,7 +19,7 @@
   }
   
   .navb label.logo{
-    /* color: rgb(253, 253, 253); */
+    /* color: #f9f9f9; */
     position: absolute;
     width: auto;
     height: 10vh;
@@ -29,6 +28,13 @@
     /* padding-left: 3%; */
     font-weight: 700;
     font-family: 'Livvic', sans-serif;
+  }
+
+  .navbarhr{
+    width: 94vw;
+    border-color: hsl(212, 64%, 19%, 0.5);
+    border-width: 1px;
+    border-top: none;
   }
 
   
@@ -52,8 +58,11 @@
   #profilepagelink{
     float: right;
     width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 40px;
-    margin: 2vh 1vw;
+    margin: 0vh 1vw;
     border-radius: 50%;
   }
 
@@ -68,10 +77,9 @@
     margin: 2.5vh 1vw;
   }
   .navb ul li{
-    display: inline-block;    
-    /* margin: 0 1%; */
-    font-family: 'Livvic', sans-serif;
-    font-weight: 550;
+    display: flex;  
+    flex-direction: row;  
+
     
   }
   .navb ul li a{
@@ -111,9 +119,18 @@
   .navb #check{
     display: none;
   }
+  @media(min-width :952px){
+    .navb ul{
+      display: flex;
+      flex-direction: row;
+    }
+  }
   @media (max-width: 952px){
-    .navb{
-      /* box-shadow: 10px 0px 10px #a4bbe7; */
+    /* .navb{
+      box-shadow: 10px 0px 10px #a4bbe7; 
+    } */
+    .navb ul{
+      flex-direction: column;
     }
     .navb ul li{
       display: block;
@@ -212,9 +229,6 @@
     animation: textAnimate 10s infinite alternate;
     }
 
-    svg text .logo-homepage-link:hover{
-
-    }
   
     @media (max-width:700px) {
     svg text{   
@@ -241,4 +255,121 @@
       fill: hsla(213, 47%, 47%,90%)
     }
     
+    }
+
+
+    .dropdown {
+      float: right;
+      margin: 2vh 1vw;
+      z-index: 1000;
+      overflow: hidden;
+    }
+    
+    /* Dropdown button */
+    .dropdown .dropbtn {
+      
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 50%;
+      height: 40px;
+      width: 40px;
+      border: none;
+      outline: none;
+      color: #112D4E;
+      background-color: inherit;
+      font-family: inherit; /* Important for vertical align on mobile phones */
+      margin: 0; /* Important for vertical align on mobile phones */
+    }
+    
+    /* Add a red background color to navbar links on hover */
+    .navb a:hover, .dropdown:hover .dropbtn {
+      transition: .5s;
+      background-color: #f39d34;
+    }
+    
+    /* Dropdown content (hidden by default) */
+    .dropdown-content {
+      margin: 0px;
+      border-radius: 2px;
+      left: auto;
+      right: 0;
+      display: none; 
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+    }
+    
+    /* Links inside the dropdown */
+    .dropdown-content .dropdown-links {
+      float: none;
+      color: #112D4E;
+      padding: 12px 16px;
+      text-decoration: none;
+      width: 100%;
+      font-size: 17px;
+      display: block;
+      text-align: left;
+      border: none;
+      background-color: inherit;
+    }
+
+
+    
+    /* Add a grey background color to dropdown links on hover */
+    .dropdown-content .dropdown-links:hover {
+      transition: .5s;
+      background-color: #f39d34;
+    }
+    
+    /* Show the dropdown menu on hover */
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+
+    .searchinput {
+      float: right;
+      height: 6vh;
+      border: none;
+      
+      font-size: inherit;
+    }
+    
+    /* When the screen is less than 600px wide, stack the links and the search field vertically instead of horizontally */
+    @media screen and (max-width: 952px) {
+        .searchinput {
+        float: none;
+        display: block;
+        text-align: left;
+        width: 100%;
+        margin: 0;
+        padding: 14px;
+      }
+      .searchinput {
+        border: 1px solid #ccc;
+      }
+    }
+
+
+
+    #myBtn {
+      display: none; /* Hidden by default */
+      position: fixed; /* Fixed/sticky position */
+      bottom: 20px; /* Place the button at the bottom of the page */
+      right: 30px; /* Place the button 30px from the right */
+      z-index: 99; /* Make sure it does not overlap */
+      border: none; /* Remove borders */
+      outline: none; /* Remove outline */
+      background-color: red; /* Set a background color */
+      color: white; /* Text color */
+      cursor: pointer; /* Add a mouse pointer on hover */
+      padding: 15px; /* Some padding */
+      border-radius: 10px; /* Rounded corners */
+      font-size: 18px; /* Increase font size */
+    }
+    
+    #myBtn:hover {
+      background-color: #555; /* Add a dark-grey background on hover */
     }

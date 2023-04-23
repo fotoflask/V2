@@ -6,7 +6,6 @@
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 		<link rel="stylesheet" href="/css/postpage.css">
         <link rel="stylesheet" href="/css/navbar.css">
-      <link rel="stylesheet" href="/css/popup.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,44 +14,59 @@
     <body>
         
 
-        <%- include("layout/navbar",{username:log_username,result : result}) %>
-      <%- include("layout/uploadpost",{profilename:log_username,profilepic: ""}) %>
-
-        <hr>
+        <%- include("layout/loadinganimation2") %> 
+        <%- include("layout/navbar",{user_logged}) %>
 
         <div class="media-section">
             <div class="post-section">
                     <div class="post">
-                        <img class="img-fluid " src="/images/postimages/anther.png">
+                        <img class="img-fluid " src="/images/PostImages/<%= postdata.Picture %>">
                     </div>
             </div>
             <div class="vertical-line"></div>
             <div class="post-details">
                 <div class="user-details">
-                    <div class="user-profile-picture"><a class="profile-link" href="/profilepage.html"><img class="profile-pic-small"src="/images/ProfilePhotos/poojyanth.png"></a></div>
-                    <div class="user-name"><a class="profile-link" href="/profilepage.html">Poojyanth Reddy</a></div>
+                    <div class="user-profile-picture"><a class="profile-link" href="/profilepage/<%=encodeURIComponent(postuserdata.dusername)%>"><img class="profile-pic-small"src="/images/ProfilePhotos/<%= postdata.dprofilepic %>" onerror="this.onerror=null; this.src='/images/OtherAssets/pngwing.com (2).png'; style='object-fit:scale-down;'"></a></div>
+                    <div class="user-name"><a class="profile-link" href="/profilepage/<%=encodeURIComponent(postuserdata.dusername)%>"><%= postuserdata.dprofilename%></a></div>
                 </div>
                 <hr>
                 <div class="comments-section">
-                    <p>Comments</p>
+                    <div class="comment-heading">Comments</div>
+                    <hr>
+                    <div class="usercomments">
+                        <% (postdata.comments).forEach(comment=>{ %>
+                            <p><span class="comment-profile-time"><a maxlength="20" class="profile-link" href="/profilepage/<%=encodeURIComponent(comment[0])%>"><b><%= comment[0] %></b></a>&ensp;<small><%= comment[2].split(" ").length > 4 ? `${comment[2].split(" ")[1]} ${comment[2].split(" ")[2]} ${comment[2].split(" ")[4].slice(0, 5)}` : `${comment[2].split(" ")[1]} ${comment[2].split(" ")[2]}`%> </small></span>
+                                <br><span style="padding-left: 3%; padding-top: 0;"><%= comment[1] %></span>
+                            </p>
+                        <% }) %>
+                    </div>
+                    <div class="postcomment">
+                        <img class="profile-pic-small"src="/images/ProfilePhotos/<%= user_logged.dprofilepic %>" onerror="this.onerror=null; this.src='/images/OtherAssets/pngwing.com (2).png'; style='object-fit:scale-down;'">
+                        <form id="commentform" class="commentform" action="/postpage/comment" method="post" onsubmit="if(this.comment.value == '' || this.comment.value == null) return false;">
+                            <input name="commentpostid" type="hidden" value="<%= postdata._id%>">
+                            <input name="currentuser" value="<%=user_logged.dusername%>" type="hidden">
+                            <input class="commentinput" name="comment" type="textarea" value="" placeholder="Add a Comment..">
+                            <button type="submit" class="commentpostbtn">Post</button>
+                        </form>
+                    </div>
                 </div>
-                <hr>
-                <div class="post-options row">
-                    <div class="col-3 like"
-                    onclick="if (this.querySelector('img').src.endsWith('icons8-ok-hand-50.png')) {
-                        this.querySelector('img').src = './images/otherassets/icons8-ok-hand-50 (1).png';
-                        this.querySelector('p').innerHTML = parseInt(this.querySelector('p').innerHTML)+1;}
-                        else {
-                            this.querySelector('img').src = './images/otherassets/icons8-ok-hand-50.png';  
-                            this.querySelector('p').innerHTML = parseInt(this.querySelector('p').innerHTML)-1;
-                        }">
-                        <img src="/images/otherassets/icons8-ok-hand-50.png">
-                        <p>562</p>
-                    </div>
-                    <div class="col-3 comment">
-                        <img src="/images/otherassets/icons8-comments-50.png"> 
-                        <p>70</p>       
-                    </div>
+                <hr class="posthr">
+                <div class="postrow">
+                    <div class="activityicons">
+                        <div>
+                            <form class="likeform" action="/postpage/like" method="post">
+                            <input type="hidden" name="postid" value="<%= postdata._id %>">
+                            <input type="hidden" name="likeduser" value="<%= postuserdata.dusername %>">
+                            <div><button class="postactions likebtn" type="submit" name="like" value="<%= postdata._id%>"><img height="20vh" width="20vh" src="/images/otherassets/icons8-ok-hand-50 (1).png"></button><%= postdata.likes_number%></div>                                                                
+                            </form>
+                        </div>
+                        <div>
+                            <button class="postactions commentbtn" ><img height="20vh" width="20vh" src="/images/otherassets/comment-solid.svg"></button><%= postdata.comments_number %>
+                        </div>
+                        <div>
+                            <button class="postactions sharebtn" ><img height="20vh" width="20vh" src="/images/otherassets/share-from-square-solid.svg"></button><%= postdata.Shares %>
+                        </div>
+                    </div>                        
                 </div>
             </div>
 

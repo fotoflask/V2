@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+    <head>
+     <title>Fotoflask</title>
+     <link rel="stylesheet" href="/css/postpayment.css">
+     <link rel="stylesheet" href="/css/navbar.css">
+     <link rel="stylesheet" href="/css/loadinganimation1.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Livvic:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,900&display=swap" rel="stylesheet">
+    </head>
+    <body>        
+        <%- include("layout/loadinganimation2") %> 
+        <%- include("layout/navbar",{user_logged}) %>
+
+        <div id="media-section" class="media-section">
+            <div class="post-section">
+                <div class="post">
+                    <img class="img-fluid " src="/images/PostImages/<%= postdata.Picture %>">
+                </div>
+            </div>
+            <div class="vertical-line"></div>
+
+            <div class="post-details">
+                <form class="form">
+                    <h2 style="text-align: center;">Payment Details</h2>
+                    <div class="inputBox">
+                        <span class="label-form1">Owner By</span>
+                        <input form="postpaymentform" name="ownerusername" type="hidden" value="Poojyanth" maxlength="16"  maxlength="16" class="paymentforminput" required>
+                        <textarea disabled style="resize: none;">Poojyanth</textarea>
+                    </div>
+
+                    <div class="inputBox">
+                        <span class="label-form1">Post Name</span>
+                        <input id="postname"form="postpaymentform" type="hidden" value="<%= postdata.Picture %>" name="postname" maxlength="16" class="paymentforminput" required>
+                        <textarea name="picturename"disabled style="resize: none;"><%= postdata.Picture %></textarea>
+                    </div>
+                    <div class="inputBox">
+                        <span class="label-form1">Price</span>
+                        <input form="postpaymentform" type="hidden" value="Poojyanth"  name="price" maxlength="16" class="paymentforminput" required>
+                        <textarea disabled style="resize: none;">Poojyanth</textarea>
+                    </div>
+                    <div class="inputBox">
+                        <span class="label-form1">Paid By</span>
+                        <input form="postpaymentform" for="postpaymentform" type="hidden" value="Poojyanth" name="paidusername" class="paymentforminput" required>
+                        <textarea disabled style="resize: none;">Poojyanth</textarea>
+                    </div>
+                    <button  id="open-popup" class="submit-btn">BUY NOW</button>
+                </form>
+            </div>
+            <div class="popup">
+                <div class="form_box">
+                <form id="postpaymentform" class="form" action="/buypost" method="post">
+                    <div class="inputBox">
+                        <span>card number</span>
+                        <input required type="text" name="cardnumber" maxlength="16" class="paymentforminput">
+                    </div>
+                    <div class="inputBox">
+                        <span>card holder</span>
+                        <input required type="text" name="cardholdername" class="card-holder-input">
+                    </div>
+    
+                    <div class="flexbox">
+                        <div class="inputBox">
+                            <span>Month</span>
+                            <select required name="month" id="" class="month-input">
+                                <option value="month" selected disabled>month</option>
+                                <option value="01">01</option>
+                                <option value="02">02</option>
+                                <option value="03">03</option>
+                                <option value="04">04</option>
+                                <option value="05">05</option>
+                                <option value="06">06</option>
+                                <option value="07">07</option>
+                                <option value="08">08</option>
+                                <option value="09">09</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                            </select>
+                        </div>
+                        <div class="inputBox">
+                            <span>Year</span>
+                            <select required name="year" id="" class="year-input">
+                                <option value="year" selected disabled>year</option>
+                                <option value="2021">2021</option>
+                                <option value="2022">2022</option>
+                                <option value="2023">2023</option>
+                                <option value="2024">2024</option>
+                                <option value="2025">2025</option>
+                                <option value="2026">2026</option>
+                                <option value="2027">2027</option>
+                                <option value="2028">2028</option>
+                                <option value="2029">2029</option>
+                                <option value="2030">2030</option>
+                            </select>
+                        </div>
+                        <div class="cvv_box">
+                    <div class="inputBox">
+                            <span>cvv</span>
+                            <input required type="text" name="cvvnumber"maxlength="3" class="cvv-input">
+                    </div>
+    
+                        </div>
+                    </div>
+                    <div class="buttonss">
+                        <button class="submit-btn" id="cancel-btn">Cancel</button>
+                        <button id="paymentsubmitbtn"type="submit" class="submit-btn">Submit</button>
+                    </div>
+                </form> 
+            </div>
+            </div>
+        </div>  
+
+
+        
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/5e315e4af1.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+<script src="/js/postpayment.js"></script>
+
+<script>
+    $.holdReady(true);
+setTimeout(function () {
+
+    // Setting a variable until
+    // document.ready is called
+    const myVar = "GFG";
+    $.holdReady(false);
+}, 2000);
+ $(document).ready(()=> {
+    //Preloader
+    preloaderFadeOutTime = 500;
+    function hidePreloader() {
+    var preloader = $('.cube-wrapper');
+    preloader.fadeOut(preloaderFadeOutTime);
+    }
+    hidePreloader();
+    });
+  </script>
+
+</body>
+</html>

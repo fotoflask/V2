@@ -8,25 +8,69 @@
       <div class="spinner-wrapper">
         <svg width="35vw" height="100px">			   
          <text x="5%" y="35%"  text-anchor="start" >
-          <a href="/homepage" class="logo-homepage-link">FotoFlask</a>
+          <a href="/home" class="logo-homepage-link">FotoFlask</a>
          </text>
          </svg>
           </div>
     </label>
-    <ul class="page-links">
-      <li><a href="/settingspage/<%=encodeURIComponent(username) %>">SETTINGS</a></li>
-      <li><a href="/contact/<%=encodeURIComponent(username) %>">ABOUT US</a></li>
-      <li><a href="/">LOG OUT</a></li>
-    </ul>
-        <a id="profilepagelink"href="/profilepage/<%=encodeURIComponent(username)%>"><i class="fa-regular fa-user fa-sm"></i></a>
-        <a id = "open-fpopup"><i class="fa-solid fa-plus fa-sm"></i></a>
+    
+    <div class="dropdown" onmouseover="document.body.getElementsByClassName('dropbtn').classList.add('fa-rotate-180');" onmouseout="this.classList.remove('fa-rotate-180');">
+      <button class="dropbtn" ><i class="fa-sharp fa-solid fa-angle-down"></i>
+      </button>
+      <div class="dropdown-content">
+        <a class="dropdown-links" href="/settingspage">SETTINGS</a>
+        <a class="dropdown-links" href="/contact">ABOUT US</a>
+        <form  method="post" action="/logout"><button class="dropdown-links" type="submit">Log Out</button></a></form>
+      </div>
+    </div>
+    
+    <a id = "open-fpopup" href="/createpost"><i class="fa-solid fa-plus fa-sm"></i></a>
+    
+    <ul>
+      <!-- <li><input id="searchinput" class="searchinput" name="searchinput" type="text" placeholder="Search.." ></li> -->
+      <li>
+        <form id="searchinput" action="/search" method="post">
+          <input name="searchinput" type="text" name="query" id="query" placeholder="Search..." />
+          <button type="submit">Search</button>
+        </form>
+      </li>
+      <li><a id="profilepagelink"href="/profilepage/<%=encodeURIComponent(user_logged.dusername)%>"><i class="fa-regular fa-user fa-sm"></i></a></li>
+      </ul>
 
    
 </nav>
 
+<script>
+ 
 
+// Execute a function when the user releases a key on the keyboard
+input.addEventListener("keyup", function(event) {
+  var input = document.getElementById("searchinput");
+  let url="/home/search"+(input.value);
+  console.log(input.value)
+  console.log(url)
+  // Number 13 is the "Enter" key on the keyboard
+  if (event.keyCode === 13) {
+    // Cancel the default action, if needed
+    event.preventDefault();
+    // Trigger the button element with a click
+    var input = document.getElementById("searchinput");
+  let url="/home/search"+(input.value);
+  console.log(input)
+  console.log(url)
+    console.log("Entered")
+    fetch(url, {
+      method: "GET" // default, so we can ignore
+    })
+  }
+});
+
+<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+
+</script>
 
 <script src="/js/navbar.js">
     
 
 </script>
+<hr class="navbarhr">

@@ -1,0 +1,240 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap');
+
+.card-container{
+    margin:auto ;
+    display: none;
+}
+
+.left{
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
+    border: 2px solid wheat;
+    width: 600px;
+    height: 600px;
+}
+.imagee{
+    position: absolute;
+    z-index: 100;
+    left:200px;
+    top:117px;
+}
+
+.buttonss{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.frame_image{
+    width:847px;
+    height:600px;
+}
+.main_image{
+    width:463px;
+    height: 453px;;
+
+}
+
+*{
+    margin:0px;
+    padding:0px;
+    box-sizing: border-box;
+}
+#open-popup{
+    background: linear-gradient(135deg,#3a8ffe 0%,#9658fe 100%);
+    font-weight: 600;
+    padding:10px;
+    color:white;
+    font-weight: 500;
+    border:1px solid rgb(114, 113, 113);
+    border-radius: 30px;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-size: 18px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.media-section{
+    background-color: #f1f1f1;
+    border-radius: 2%;
+    box-shadow: 5px 5px 10px 2px #a4bbe7;
+}
+.popup{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    transform: translate(-50%,-50%);
+    padding:4px;
+    width:60%;
+    height:60%;
+    position: absolute;
+    top:-100%;
+    left:50%;
+    background-color:#fff;
+    border:1px solid black;
+    box-shadow: #999;
+    border-radius: 15px;
+    box-shadow:0px 2px 5px 5px rgba(0,0,0,0.1);
+    z-index:1000;
+}
+.media-section{
+    transition:filter 0ms ease-in-out 300ms;
+}
+
+.popup .close-btn{
+    position:absolute;
+    background-color: crimson;
+    color: #f3f3f3;
+    border: 13px solid black;
+    padding:10px;
+    bottom:17px;
+    right:99px;
+    border-radius:11px;
+    border:none;
+    cursor:pointer;
+}
+
+.media-section.active-popup{
+    overflow:hidden;
+}
+.media-section.active-popup {
+    transition:filter 0ms ease-in-out 0ms;
+
+}
+
+.media-section.active-popup .popup{
+    top:50%;
+    opacity:1;
+    margin-top:0px;
+    transition: top 10ms ease-in-out 300ms,
+                opacity 300ms ease-in-out,
+                margin-top 300ms ease-in-out;
+} 
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap');
+
+*{
+    font-family: 'Livvic', sans-serif;
+}
+
+form .flexbox{
+    display: flex;
+    gap:15px;
+}
+
+ form .flexbox .inputBox{
+    flex:1 1 20px;
+}
+.form{
+    background: #fff;
+    border-radius: 5px;
+    padding: 0 2%;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.form .submit-btn{
+    width: 48%;
+    background:linear-gradient(45deg, blueviolet, deeppink);
+    margin-top: 20px;
+    padding: 10px;
+    font-size: 20px;
+    color:#fff;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: .2s linear;
+}
+
+.form .submit-btn:hover{
+    letter-spacing: 2px;
+    opacity: .8;
+}
+
+.buttonss{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+@media(max-width:991px){
+    .vertical-line{
+        display: none;
+    }
+    .post-section{
+        width: 100%;
+    }
+    .post-details{
+        width: 100%;
+    }
+    .media-section{
+        flex-direction: column;
+        display: block;
+    }
+
+
+ }
+ @media(min-width:991px)
+ {
+    .post-details{
+      width:30%;
+    }
+    .media-section{
+      height: 90vh;
+      display: flex;
+      flex-direction: row;
+    }
+    .post-section{
+      width:70%;
+    }
+ }
+
+
+ .post-section{
+    user-select: none;
+    margin: 1% 2%;
+    display: flex;
+    padding: 1%;
+    width: 70vw;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+  }
+
+ 
+  .post{
+    /* border: 2px solid #a4bbe7; */
+    /* border-radius: 1%;
+    box-shadow: 5px 5px 10px 2px #a4bbe7; */
+    
+    /* padding: 1%; */
+    width: inherit;
+    display: flex;
+    user-select: none;   
+    max-height: 88vh;
+    object-fit: contain;
+  }
+  .post img{
+    
+    border-radius: 10px;
+    width: inherit;
+    object-fit: contain;
+  }
+
+  .post-details hr{
+    margin: 1% 1%;
+  }
+
+  .paymentforminput{
+    border: none;
+    background-color: inherit;
+  }
+
+  .label-form1{
+    display: inline-block;
+    width: 40%;
+  }

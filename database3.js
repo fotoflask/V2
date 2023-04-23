@@ -46,9 +46,18 @@ con.on('open', () => {
 //   });
 let doc4
 
-con.collection('UserDetails').findOne({duserId : 1}).then(result=>{
-  doc4 = result
-  console.log(doc4.dprofilepic)})
+// con.collection('UserDetails').findOne({duserId : 1}).then(result=>{
+//   doc4 = result
+//   console.log(doc4.dprofilepic)})
+
+let userid_delete = 0;
+
+
+  con.collection("UserDetails").deleteMany({duserId : userid_delete}).then(()=>{console.log("deleted"+userid_delete)})
+  con.collection("UserIDpwd").deleteMany({duserId : userid_delete})
+  con.collection("session").deleteMany({duserId : userid_delete})
+  con.collection("tables").deleteMany({duserId : userid_delete})
+
 
  
 

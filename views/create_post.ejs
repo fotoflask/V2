@@ -168,7 +168,7 @@ label{
 
 
        
-            <form method="post" action="/singlepost" enctype="multipart/form-data">
+            <form id="createpostform" method="post" action="/singlepost" enctype="multipart/form-data">
 
 
               <div class="profilepic ">
@@ -211,7 +211,7 @@ label{
             <br>
 
             <div class="smit">
-              <button type="submit" class="submit_button">POST</button>
+              <button id="postbutton" type="submit" class="submit_button" onsubmit="submitcheck">POST</button>
             </div>
             
 
@@ -229,10 +229,31 @@ label{
 
       let profilePic = document.getElementById("profile-pic");
       let inputFile = document.getElementById("inputt");
+      let createpostform = document.getElementById("createpostform");
+      let postbutton = document.getElementById("postbutton");
 
       inputFile.onchange = function(){
         profilePic.src=URL.createObjectURL(inputFile.files[0]);
       }
+
+      function submit(event) {
+        console.log('submitwed')
+        // Check if the file input is empty
+        if (inputt.files.length == 0) {
+          // If empty, prevent form submission and disable submit button
+          event.preventDefault();
+          postbutton.disabled = true;
+        }
+      };
+      inputt.addEventListener('change', () => {
+        console.log("Chnaef")
+        // Enable submit button if file input is not empty
+        if (imageInput.files.length > 0) {
+          postbutton.disabled = false;
+        } else {
+          postbutton.disabled = true;
+        }
+      });
     </script>
 
 

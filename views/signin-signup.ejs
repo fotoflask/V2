@@ -31,6 +31,7 @@
 								<!-- <form id="f2" action="#"> -->
 								<div class="f2">
 									<h1>Create Account</h1>
+									<input type="text" placeholder="Profile name" name="profilename"/>
 									<input type="text" placeholder="User name" name="username"/>
 									<span id="error" style="color: red"></span>
 									<input type="password" placeholder="Password" name = "password"/>
@@ -65,7 +66,7 @@
 			</div>
 			<div class="form-container sign-in-container">
 				<form id="f1" action="/signin-signup/signin" method="post">
-					<h1>Sign in</h1>
+					<h1>Sign in</h1>		
 					<input type="text" placeholder="Username" name="username"/>
 					<input type="password" placeholder="Password" name="password"/>
 					<a href="#">Forgot your password?</a>
@@ -107,8 +108,9 @@
 				<div class="form-box sign-up-box b1">
 				  <form action="#">
 					<h1>Create Account</h1>
-					<input type="text" placeholder="User name" name="username"/>
-					<input type="password" placeholder="Password" name="password"/>
+					<input form="mobile-signin-form" type="text" placeholder="Profile name" name="profilename"/>
+					<input form="mobile-signin-form" type="text" placeholder="User name" name="username"/>
+					<input form="mobile-signin-form" type="password" placeholder="Password" name="password"/>
 					<button data-bs-target="#container2" data-bs-slide="next" name="nextbutton"> Next </button>
 					<p>Already have an account?<a data-bs-target="#container2" data-bs-slide="prev" id="signIn2" href="#" onclick="changeGradient(270);" ><bold> Sign In</bold></a></p>                          
 				</form>            
@@ -116,10 +118,10 @@
 		</div>
 		<div class="carousel-item">
 			<div class="form-box sign-up-box b2">
-				<form action="/signin-signup/signup" method="post">
+				<form id="mobile-signin-form" action="/signin-signup/signup" method="post">
 					<h1>Enter Your Credentials</h1>
 					<!-- <input type="text" placeholder="User Id" name="user-id"/> -->
-							<input type="email" placeholder="Email" name="Email"/>
+							<input type="email" placeholder="Email" name="email"/>
 						  <input type="text" placeholder="Mobile Nummber" name="mobilenumber" />
 						  <span class="dob">
 							  <label for="dob">Date of Birth</label>

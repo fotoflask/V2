@@ -1,0 +1,42 @@
+1. Problem in Signup page on mobile (Carousel-form problem)
+2. 
+
+
+
+To DO:
+
+1. settings page
+2. Follow system - profile page, Home page  **
+3. chats page 
+4. payments page                            CSS
+5. explore page - with search               ** 
+6. followers page, search global accounts   **
+7. admin page                               **
+8. add event page                           **
+9. download through payments                done
+10. notifications                           **
+11. password encryption                     **
+12. theme change                            **
+13. navbar                                  **
+14. about Fotoflask
+15. landing page
+16. developers
+17. Contact us
+18. Create post page
+19. premium account
+
+
+
+
+Admin Page
+
+1. No of Users
+2. No of posts
+3. Total likes
+4. Total Comments
+5. Total Shares
+6. Active Users
+7. User Activity Graph
+8. Recent Posts
+9. Recent Account Login
+10. Recent Account Registrations

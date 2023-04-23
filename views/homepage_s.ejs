@@ -3,53 +3,39 @@
     <head>
      <title>Fotoflask</title>
      <link rel="stylesheet" href="css/homepage_s.css">
-     <script src="https://kit.fontawesome.com/8a4cc92fd7.js" crossorigin="anonymous"></script>
+     <link rel="stylesheet" href="/css/navbar.css">
+     <link rel="stylesheet" href="/css/loadinganimation1.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Livvic:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,900&display=swap" rel="stylesheet">
     </head>
     <body>
 
-        <nav>
-            <div class="navleft">
-                <img src="/images_homep/logo.png" class="logo">
-            </div>
-            <div class="navright">
-                <div class="searchbox">
-                    <img src="/images_homep/search.png">
-                    <input type="text" placeholder="Seach">
-                </div>
+        
+        <%- include("layout/loadinganimation2") %> 
+        <%- include("layout/navbar",{user_logged}) %>
+        
 
-                <div>
-                    <a href="/createpost">  <i class="fa-solid fa-plus" style="color: #85a3d6;"></i></a>
-                </div>
-
-                <ul>
-                    <li><img src="/images_homep/notification.png" ></li>
-                    <li><img src="/images_homep/inbox.png" ></li>
-                    
-                </ul>
-
-                <div class="usericon online">
-                    <img src="/images_homep/profile-pic.png">
-                </div>
-
-            </div>
-        </nav>
-
-        <div class="container">
+        <div class="ccontainer">
 
             <!--Left Side Bar-->
 
-            <div class="leftsidebar">
-
+            <div class="leftsidebar style-1">
+                
+                <div class="implinks otherlinks">
+                    <a href="#" class="page-link-icon" alt="Home"><i class="fa-solid fa-house"></i></a>                                       
+                    <a href="/profilepage/<%=encodeURIComponent(user_logged.dusername)%>" class="page-link-icon" alt="Profile"><img  src="/images/ProfilePhotos/<%= user_logged.dprofilepic %>" onerror="this.onerror=null; this.src='/images/OtherAssets/pngwing.com (2).png'; style='object-fit:scale-down;'"></a>                                       
+                </div>
                 <div class="implinks">
-                    <a href="#"><img src="/images_homep/icons8-home-24.png" class="im1">Home</a>
-                    <a href="#"><img src="/images_homep/web-search-engine.png" class="im2">AboutUs</a>
-                    
-                    <a href="#"><img src="/images_homep/search1.png" class="im3">Explore</a>
-                    <a href="#"><img src="/images_homep/friends.png" class="im4">Friends</a>
-                    <a href="#"><img src="/images_homep/people.png" class="im5">Group</a>
+                    <a href="#" class="page-link-icon" alt="Home"><img src="/images/OtherAssets/house-solid.svg"></a>                                       
+                    <a href="#" class="page-link-icon" alt="Explore"><i class="fa-solid fa-globe"></i></a>
+                    <a href="#" class="page-link-icon"alt="Search"><img src="/images/OtherAssets/magnifying-glass-solid.svg"></i></a>
+                    <a href="#" class="page-link-icon" alt="Friends"><i class="fa-solid fa-user-group"></i></a>
+                    <a href="#" class="page-link-icon"alt="Events"><i class="fa-solid fa-calendar-days"></i></a>
 
                 </div>
-
             </div>
 
             <!--Main Content-->
@@ -57,25 +43,7 @@
 
             <div class="maincontent">
 
-                <div class="writepostcontainer">
-
-                    <div class="userprofile">
-                        <img src="/images/ProfilePhotos/<%= doc4.dprofilepic%>">
-                        <div>
-                            <p><b><%= doc4.dusername%></b></p>
-                            <small>Public</small>
-                        </div>
-                    </div>
-
-
-                    <div class="postinputcontainer">
-                        <textarea rows ="3" placeholder="What's on your mind?"></textarea>
-                        <div class="addpostlinks">
-                            <a href="#"><img src="/images_homep/photo.png">Photo</a>
-                            <a href="#"><img src="/images_homep/feeling.png">Feeling</a>
-                        </div>
-                    </div>
-                </div>
+                
 
                 <!--Each post copy paste below-->
 
@@ -84,29 +52,50 @@
  
                         <div class="postrow">
                             <div class="userprofile">
-                                <img src="/images/ProfilePhotos/<%= post.dprofilepic %>">
+                                <img src="/images/ProfilePhotos/<%= post.dprofilepic %>" onerror="this.onerror=null; this.src='/images/OtherAssets/pngwing.com (2).png'; style='object-fit:scale-down;'">
                                 <div>
-                                    <p><b><%= post.dusername%></b></p>
+                                    <p><a class="homepage-profile-link" href="/profilepage/<%=encodeURIComponent(post.dusername)%>"><b><%= post.dprofilename%></b></a></p>
                                     <small>Public</small>
                                 </div>
                             </div>
+                            <div class="postdropdown" >
+                                <button class="postdropdownbtn" ><i class="fa-solid fa-ellipsis-vertical"></i></i>
+                                </button>
+                                <div class="postdropdown-content">
+                                    <a class="postdropdown-links" href="/postpage/<%= post._id%>">Go to Post</a>
+                                    <a class="postdropdown-links" href="/postpage/<%= post._id%>">Share Post</a>
+                                </div>
+                            </div>                    
                         </div>                                            
                         <img src="/images/PostImages/<%= post.Picture %>" class="postimage">
-                        <p class="posttext"><%= post.Description_of_post%> <br><br>
-                            <% post.Tag.forEach(tag=>{ %>
-                                <a href="<%= tag %>"><%=tag%></a>
-                            <% }) %>
+                        <div class="posttext" >
+                            <div>
+                                
                             
-                        </p>                    
+                                <p class="max-chars" ><a class="homepage-profile-link" href="/profilepage/<%=encodeURIComponent(post.dusername)%>">
+                                    <b><%= post.dprofilename%></b>
+                                    </a>&emsp;<%= post.Description_of_post%></p>
+                            </div>
+                        </div>
+                        <div class="tabvisiblebtn">
+                            <button type="checkbox" value=0 class="tabvisiblebtn-b" onclick="console.log(this.value);showtag(this);">show tags</button>
+                            <div class="posttags">Tags: &ensp;
+                                <% post.Tag.forEach(tag=>{ %>
+                                    <form method="post" action="/search"><button type="submit" class="tagbutton" name="searchinput" href="#" value="<%= tag %>">#<%=tag%></button></form>
+                                <% }) %>                    
+                            </div> 
+                        </div>
+                                           
                         <div class="postrow">
                             <div class="activityicons">
                                 <form action="/home" method="post">
                                     <input type="hidden" name="likeduser" value="<%= doc4.dusername %>">
-                                    <div><button type="submit" name="like" value="<%= post._id%>"><img src="/images_homep/like-blue.png"><%= post.likes_number%></button></div>                            
-                                    <div><a href="#" ><img src="/images_homep/comments.png"><%= post.comments_number %></a></div>
-                                    <div><a href="#" ><img src="/images_homep/share.png"><%= post.Shares %></a></div>
+                                    <div><button class="postactions likebtn" type="submit" name="like" value="<%= post._id%>"><img height="20vh" width="20vh" src="/images/otherassets/icons8-ok-hand-50 (1).png"></button><%= post.likes_number%></div>                                                                
                                 </form>
-                            </div>                        
+                                    <div><a href="/postpage/<%= post._id%>"><button class="postactions commentbtn" ><img height="20vh" width="20vh" src="/images/otherassets/comment-solid.svg"></button></a><%= post.comments_number %></div>
+                                    <div><button class="postactions sharebtn" ><img height="20vh" width="20vh" src="/images/otherassets/share-from-square-solid.svg"></button><%= post.Shares %></div>
+                                </div>                        
+                                <div><a href="/buypost/<%=encodeURIComponent(post._id)%>"><button class="postactions downloadbtn"><img height="20vh" width="20vh" src="/images/otherassets/download-solid.svg"></button></a></div>
                         </div>
                     </div>
                 <% }) %>         
@@ -116,7 +105,19 @@
             </div>
 
             <!--Right Side Bar-->
-            <div class="rightsidebar">                
+            <div class="rightsidebar style-1">   
+
+                <div class="advertisements">
+                    <div class="sidebartitle">
+                        <h4>Sponsored</h4>
+                        
+                    </div>
+                    <div class="add-image">
+                        <img src="/images/otherassets/Fotoflask.gif" class="sidebarads">
+                        
+                    </div>
+                </div>
+
                 <div class="sidebartitle">
                     <h4>Events</h4>
                     <a href="#">See All</a>
@@ -162,11 +163,7 @@
                     </div>
                 </div>
 
-                <div class="sidebartitle">
-                    <h4>Advertisements</h4>
-                    <a href="#">Close</a>
-                </div>
-                <img src="/images_homep/advertisement.png" class="sidebarads">
+                
 
 
                 <div class="sidebartitle">
@@ -211,6 +208,31 @@
 
 
         </div>
+
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+        <script src="https://kit.fontawesome.com/5e315e4af1.js" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+        <script src="/js/homepage.js"></script>
+        <script>
+            $.holdReady(true);
+        setTimeout(function () {
+  
+            // Setting a variable until
+            // document.ready is called
+            const myVar = "GFG";
+            $.holdReady(false);
+        }, 2000);
+         $(document).ready(()=> {
+            //Preloader
+            preloaderFadeOutTime = 500;
+            function hidePreloader() {
+            var preloader = $('.cube-wrapper');
+            preloader.fadeOut(preloaderFadeOutTime);
+            }
+            hidePreloader();
+            });
+          </script>
 
     </body>
 </html>
