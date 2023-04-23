@@ -1,0 +1,29 @@
+<div class="leftsidebar style-1">
+                
+    <div class="implinks otherlinks">
+        <a href="/home" class="page-link-icon" alt="Home"><img src="/images/OtherAssets/house-solid.svg"></a>                                       
+        <a href="/profilepage/<%=encodeURIComponent(user_logged.dusername)%>" class="page-link-icon" alt="Profile"><img  src="/images/ProfilePhotos/<%= user_logged.dprofilepic %>" onerror="this.onerror=null; this.src='/images/OtherAssets/pngwing.com (2).png'; style='object-fit:scale-down;'"></a>                                       
+    </div>
+    <div class="implinks">
+        <a href="/explore" class="page-link-icon" alt="Explore"><i class="fa-solid fa-globe"></i></a>
+        <a href="/explore" class="searchlink"class="page-link-icon"alt="Search"><img src="/images/OtherAssets/magnifying-glass-solid.svg"></i></a>
+        <a href="/friends" class="page-link-icon" alt="Friends"><i class="fa-solid fa-user-group"></i></a>
+        <a href="#" class="page-link-icon"alt="Events"><i class="fa-solid fa-calendar-days"></i></a>
+        <a href="#" class="page-link-icon" alt="Theme"><img src="/images/OtherAssets/droplet-solid.svg"></a>                                       
+
+    </div>
+    <div class="implinks">
+                                               
+    </div>
+</div>
+<script>
+ const search = document.querySelector('.search')
+ const searchlink = document.querySelector('.searchlink')
+const btn = document.querySelector('.btn')
+const input = document.querySelector('.input')
+
+searchlink.addEventListener('click', () => {
+    search.classList.toggle('active')
+    input.focus()
+})
+</script>

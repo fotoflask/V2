@@ -1,0 +1,556 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Admin Dashboard</title>
+    <meta name="description" content="">
+     <link rel="stylesheet" href="css/navbar.css">
+     <link rel="stylesheet" href="css/loadinganimation1.css">
+     <link rel="stylesheet" href="css/leftsidebar.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Livvic:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/leftsidebar.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- favicon
+		============================================ -->
+    <link rel="shortcut icon" type="image/x-icon" href="css/innercss/img/favicon.ico">
+    <!-- Google Fonts
+		============================================ -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
+    <!-- Bootstrap CSS
+		============================================ -->
+    <link rel="stylesheet" href="/css/innercss/css/bootstrap.min.css">
+    <!-- font awesome CSS
+		============================================ -->
+    <link rel="stylesheet" href="/css/innercss/css/font-awesome.min.css">
+    <!-- owl.carousel CSS
+		============================================ -->
+    <link rel="stylesheet" href="/css/innercss/css/owl.carousel.css">
+    <link rel="stylesheet" href="/css/innercss/css/owl.theme.css">
+    <link rel="stylesheet" href="/css/innercss/css/owl.transitions.css">
+    <!-- meanmenu CSS
+		============================================ -->
+    <link rel="stylesheet" href="/css/innercss/css/meanmenu/meanmenu.min.css">
+    <!-- animate CSS
+		============================================ -->
+    <link rel="stylesheet" href="/css/innercss/css/animate.css">
+    <!-- normalize CSS
+		============================================ -->
+    <link rel="stylesheet" href="/css/innercss/css/normalize.css">
+    <!-- mCustomScrollbar CSS
+		============================================ -->
+    <link rel="stylesheet" href="/css/innercss/css/scrollbar/jquery.mCustomScrollbar.min.css">
+    <!-- Notika icon CSS
+		============================================ -->
+    <link rel="stylesheet" href="/css/innercss/css/notika-custom-icon.css">
+    <!-- wave CSS
+		============================================ -->
+    <link rel="stylesheet" href="/css/innercss/css/wave/waves.min.css">
+    <link rel="stylesheet" href="/css/innercss/css/wave/button.css">
+    <!-- main CSS
+		============================================ -->
+    <link rel="stylesheet" href="/css/innercss/css/main.css">
+    <!-- style CSS
+		============================================ -->
+    <link rel="stylesheet" href="/css/innercss/style.css">
+    <!-- responsive CSS
+		============================================ -->
+    <link rel="stylesheet" href="/css/innercss/css/responsive.css">
+    <!-- modernizr JS
+		============================================ -->
+    <script src="/css/innercss/js/vendor/modernizr-2.8.3.min.js"></script>
+</head>
+
+<body>
+    <%- include("layout/loadinganimation2") %> 
+        <%- include("layout/navbar",{user_logged}) %>
+    <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <!-- Start Header Top Area -->
+    <!-- <div class="header-top-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                    <div class="logo-area">
+                        <a href="#"><img src="img/logo/logo.png" alt="" /></a>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                    <div class="header-top-menu">
+                        <ul class="nav navbar-nav notika-top-nav">
+                            <li class="nav-item dropdown">
+                                <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span><i class="notika-icon notika-search"></i></span></a>
+                                <div role="menu" class="dropdown-menu search-dd animated flipInX">
+                                    <div class="search-input">
+                                        <i class="notika-icon notika-left-arrow"></i>
+                                        <input type="text" />
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span><i class="notika-icon notika-mail"></i></span></a>
+                                <div role="menu" class="dropdown-menu message-dd animated zoomIn">
+                                    <div class="hd-mg-tt">
+                                        <h2>Messages</h2>
+                                    </div>
+                                    <div class="hd-message-info">
+                                        <a href="#">
+                                            <div class="hd-message-sn">
+                                                <div class="hd-message-img">
+                                                    <img src="img/post/1.jpg" alt="" />
+                                                </div>
+                                                <div class="hd-mg-ctn">
+                                                    <h3>David Belle</h3>
+                                                    <p>Cum sociis natoque penatibus et magnis dis parturient montes</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a href="#">
+                                            <div class="hd-message-sn">
+                                                <div class="hd-message-img">
+                                                    <img src="img/post/2.jpg" alt="" />
+                                                </div>
+                                                <div class="hd-mg-ctn">
+                                                    <h3>Jonathan Morris</h3>
+                                                    <p>Cum sociis natoque penatibus et magnis dis parturient montes</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a href="#">
+                                            <div class="hd-message-sn">
+                                                <div class="hd-message-img">
+                                                    <img src="img/post/4.jpg" alt="" />
+                                                </div>
+                                                <div class="hd-mg-ctn">
+                                                    <h3>Fredric Mitchell</h3>
+                                                    <p>Cum sociis natoque penatibus et magnis dis parturient montes</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a href="#">
+                                            <div class="hd-message-sn">
+                                                <div class="hd-message-img">
+                                                    <img src="img/post/1.jpg" alt="" />
+                                                </div>
+                                                <div class="hd-mg-ctn">
+                                                    <h3>David Belle</h3>
+                                                    <p>Cum sociis natoque penatibus et magnis dis parturient montes</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a href="#">
+                                            <div class="hd-message-sn">
+                                                <div class="hd-message-img">
+                                                    <img src="img/post/2.jpg" alt="" />
+                                                </div>
+                                                <div class="hd-mg-ctn">
+                                                    <h3>Glenn Jecobs</h3>
+                                                    <p>Cum sociis natoque penatibus et magnis dis parturient montes</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="hd-mg-va">
+                                        <a href="#">View All</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="nav-item nc-al"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span><i class="notika-icon notika-alarm"></i></span><div class="spinner4 spinner-4"></div><div class="ntd-ctn"><span>3</span></div></a>
+                                <div role="menu" class="dropdown-menu message-dd notification-dd animated zoomIn">
+                                    <div class="hd-mg-tt">
+                                        <h2>Notification</h2>
+                                    </div>
+                                    <div class="hd-message-info">
+                                        <a href="#">
+                                            <div class="hd-message-sn">
+                                                <div class="hd-message-img">
+                                                    <img src="img/post/1.jpg" alt="" />
+                                                </div>
+                                                <div class="hd-mg-ctn">
+                                                    <h3>David Belle</h3>
+                                                    <p>Cum sociis natoque penatibus et magnis dis parturient montes</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a href="#">
+                                            <div class="hd-message-sn">
+                                                <div class="hd-message-img">
+                                                    <img src="img/post/2.jpg" alt="" />
+                                                </div>
+                                                <div class="hd-mg-ctn">
+                                                    <h3>Jonathan Morris</h3>
+                                                    <p>Cum sociis natoque penatibus et magnis dis parturient montes</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a href="#">
+                                            <div class="hd-message-sn">
+                                                <div class="hd-message-img">
+                                                    <img src="img/post/4.jpg" alt="" />
+                                                </div>
+                                                <div class="hd-mg-ctn">
+                                                    <h3>Fredric Mitchell</h3>
+                                                    <p>Cum sociis natoque penatibus et magnis dis parturient montes</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a href="#">
+                                            <div class="hd-message-sn">
+                                                <div class="hd-message-img">
+                                                    <img src="img/post/1.jpg" alt="" />
+                                                </div>
+                                                <div class="hd-mg-ctn">
+                                                    <h3>David Belle</h3>
+                                                    <p>Cum sociis natoque penatibus et magnis dis parturient montes</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a href="#">
+                                            <div class="hd-message-sn">
+                                                <div class="hd-message-img">
+                                                    <img src="img/post/2.jpg" alt="" />
+                                                </div>
+                                                <div class="hd-mg-ctn">
+                                                    <h3>Glenn Jecobs</h3>
+                                                    <p>Cum sociis natoque penatibus et magnis dis parturient montes</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="hd-mg-va">
+                                        <a href="#">View All</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span><i class="notika-icon notika-menus"></i></span><div class="spinner4 spinner-4"></div><div class="ntd-ctn"><span>2</span></div></a>
+                                <div role="menu" class="dropdown-menu message-dd task-dd animated zoomIn">
+                                    <div class="hd-mg-tt">
+                                        <h2>Tasks</h2>
+                                    </div>
+                                    <div class="hd-message-info hd-task-info">
+                                        <div class="skill">
+                                            <div class="progress">
+                                                <div class="lead-content">
+                                                    <p>HTML5 Validation Report</p>
+                                                </div>
+                                                <div class="progress-bar wow fadeInLeft" data-progress="95%" style="width: 95%;" data-wow-duration="1.5s" data-wow-delay="1.2s"> <span>95%</span>
+                                                </div>
+                                            </div>
+                                            <div class="progress">
+                                                <div class="lead-content">
+                                                    <p>Google Chrome Extension</p>
+                                                </div>
+                                                <div class="progress-bar wow fadeInLeft" data-progress="85%" style="width: 85%;" data-wow-duration="1.5s" data-wow-delay="1.2s"><span>85%</span> </div>
+                                            </div>
+                                            <div class="progress">
+                                                <div class="lead-content">
+                                                    <p>Social Internet Projects</p>
+                                                </div>
+                                                <div class="progress-bar wow fadeInLeft" data-progress="75%" style="width: 75%;" data-wow-duration="1.5s" data-wow-delay="1.2s"><span>75%</span> </div>
+                                            </div>
+                                            <div class="progress">
+                                                <div class="lead-content">
+                                                    <p>Bootstrap Admin</p>
+                                                </div>
+                                                <div class="progress-bar wow fadeInLeft" data-progress="93%" style="width: 65%;" data-wow-duration="1.5s" data-wow-delay="1.2s"><span>65%</span> </div>
+                                            </div>
+                                            <div class="progress progress-bt">
+                                                <div class="lead-content">
+                                                    <p>Youtube App</p>
+                                                </div>
+                                                <div class="progress-bar wow fadeInLeft" data-progress="55%" style="width: 55%;" data-wow-duration="1.5s" data-wow-delay="1.2s"><span>55%</span> </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="hd-mg-va">
+                                        <a href="#">View All</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span><i class="notika-icon notika-chat"></i></span></a>
+                                <div role="menu" class="dropdown-menu message-dd chat-dd animated zoomIn">
+                                    <div class="hd-mg-tt">
+                                        <h2>Chat</h2>
+                                    </div>
+                                    <div class="search-people">
+                                        <i class="notika-icon notika-left-arrow"></i>
+                                        <input type="text" placeholder="Search People" />
+                                    </div>
+                                    <div class="hd-message-info">
+                                        <a href="#">
+                                            <div class="hd-message-sn">
+                                                <div class="hd-message-img chat-img">
+                                                    <img src="img/post/1.jpg" alt="" />
+                                                    <div class="chat-avaible"><i class="notika-icon notika-dot"></i></div>
+                                                </div>
+                                                <div class="hd-mg-ctn">
+                                                    <h3>David Belle</h3>
+                                                    <p>Available</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a href="#">
+                                            <div class="hd-message-sn">
+                                                <div class="hd-message-img chat-img">
+                                                    <img src="img/post/2.jpg" alt="" />
+                                                </div>
+                                                <div class="hd-mg-ctn">
+                                                    <h3>Jonathan Morris</h3>
+                                                    <p>Last seen 3 hours ago</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a href="#">
+                                            <div class="hd-message-sn">
+                                                <div class="hd-message-img chat-img">
+                                                    <img src="img/post/4.jpg" alt="" />
+                                                </div>
+                                                <div class="hd-mg-ctn">
+                                                    <h3>Fredric Mitchell</h3>
+                                                    <p>Last seen 2 minutes ago</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a href="#">
+                                            <div class="hd-message-sn">
+                                                <div class="hd-message-img chat-img">
+                                                    <img src="img/post/1.jpg" alt="" />
+                                                    <div class="chat-avaible"><i class="notika-icon notika-dot"></i></div>
+                                                </div>
+                                                <div class="hd-mg-ctn">
+                                                    <h3>David Belle</h3>
+                                                    <p>Available</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a href="#">
+                                            <div class="hd-message-sn">
+                                                <div class="hd-message-img chat-img">
+                                                    <img src="img/post/2.jpg" alt="" />
+                                                    <div class="chat-avaible"><i class="notika-icon notika-dot"></i></div>
+                                                </div>
+                                                <div class="hd-mg-ctn">
+                                                    <h3>Glenn Jecobs</h3>
+                                                    <p>Available</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="hd-mg-va">
+                                        <a href="#">View All</a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <!-- End Header Top Area -->
+    <!-- Mobile Menu start -->
+    <!-- <div class="mobile-menu-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="mobile-menu">
+                        <nav id="dropdown">
+                            <ul class="mobile-menu-nav">
+                                <li><a data-toggle="collapse" data-target="#Charts" href="#">Home</a>
+                                    <ul class="collapse dropdown-header-top">
+                                        <li><a href="/admin">Dashboard One</a></li>
+                                        <li><a href="/admin/accounts">Dashboard Two</a></li>
+                                        <li><a href="/admin/posts">Dashboard Three</a></li>
+                                        
+                                    </ul>
+                                </li>
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <!-- Mobile Menu end -->
+    <!-- Main Menu area start-->
+    <div class="main-menu-area mg-tb-40">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                   
+                    <div class="tab-content custom-menu-content">
+                        <div id="Home" class="tab-pane in active notika-tab-menu-bg animated flipInX">
+                            <ul class="notika-main-menu-dropdown">
+                                <li><a href="/admin">Website Stats</a></li>
+                                        <li><a href="/admin/accounts">Account Stats</a></li>
+                                        <li><a href="/admin/posts">Post Stats</a></li>
+                                
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Main Menu area End-->
+    <!-- Start Status area -->
+    <div class="notika-status-area">
+        <%- include("layout/leftsidebar") %>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30">
+                        <div class="website-traffic-ctn">
+                            <h2><span class="counter"><%=users_count%></span></h2>
+                            <p>Total Users</p>
+                        </div>
+                        <!-- <div class="sparkline-bar-stats1">9,4,8,6,5,6,4,8,3,5,9,5</div> -->
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30">
+                        <div class="website-traffic-ctn">
+                            <h2><span class="counter"><%= posts_count %></span>k</h2>
+                            <p>Total Posts</p>
+                        </div>
+                        <!-- <div class="sparkline-bar-stats2">1,4,8,3,5,6,4,8,3,3,9,5</div> -->
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30 dk-res-mg-t-30">
+                        <div class="website-traffic-ctn">
+                            <h2><span class="counter"><%=likes_count%></span></h2>
+                            <p>Total Likes</p>
+                        </div>
+                        <!-- <div class="sparkline-bar-stats3">4,2,8,2,5,6,3,8,3,5,9,5</div> -->
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30 dk-res-mg-t-30">
+                        <div class="website-traffic-ctn">
+                            <h2><span class="counter">20</span></h2>
+                            <p>Average User Growth</p>
+                        </div>
+                        <div class="sparkline-bar-stats4">2,4,8,4,5,7,4,7,3,5,7,5</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- End Realtime sts area-->
+    <!-- Start Footer area-->
+    <div class="footer-copyright-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="footer-copy-right">
+                        <p>Copyright © 2023 
+. All rights reserved. Fotoflask</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Footer area-->
+    <!-- jquery
+		============================================ -->
+    <script src="/css/innercss/js/vendor/jquery-1.12.4.min.js"></script>
+    <!-- bootstrap JS
+		============================================ -->
+    <script src="/css/innercss/js/bootstrap.min.js"></script>
+    <!-- wow JS
+		============================================ -->
+    <script src="/css/innercss/js/wow.min.js"></script>
+    <!-- price-slider JS
+		============================================ -->
+    <script src="/css/innercss/js/jquery-price-slider.js"></script>
+    <!-- owl.carousel JS
+		============================================ -->
+    <script src="/css/innercss/js/owl.carousel.min.js"></script>
+    <!-- scrollUp JS
+		============================================ -->
+    <script src="/css/innercss/js/jquery.scrollUp.min.js"></script>
+    <!-- meanmenu JS
+		============================================ -->
+    <script src="/css/innercss/js/meanmenu/jquery.meanmenu.js"></script>
+    <!-- counterup JS
+		============================================ -->
+    <script src="/css/innercss/js/counterup/jquery.counterup.min.js"></script>
+    <script src="/css/innercss/js/counterup/waypoints.min.js"></script>
+    <script src="/css/innercss/js/counterup/counterup-active.js"></script>
+    <!-- mCustomScrollbar JS
+		============================================ -->
+    <script src="/css/innercss/js/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+    <!-- sparkline JS
+		============================================ -->
+    <script src="/css/innercss/js/sparkline/jquery.sparkline.min.js"></script>
+    <script src="/css/innercss/js/sparkline/sparkline-active.js"></script>
+    <!-- flot JS
+		============================================ -->
+    <script src="/css/innercss/js/flot/jquery.flot.js"></script>
+    <script src="/css/innercss/js/flot/jquery.flot.resize.js"></script>
+    <script src="/css/innercss/js/flot/flot-active.js"></script>
+    <!-- knob JS
+		============================================ -->
+    <script src="/css/innercss/js/knob/jquery.knob.js"></script>
+    <script src="/css/innercss/js/knob/jquery.appear.js"></script>
+    <script src="/css/innercss/js/knob/knob-active.js"></script>
+    <!--  wave JS
+		============================================ -->
+    <script src="/css/innercss/js/wave/waves.min.js"></script>
+    <script src="/css/innercss/js/wave/wave-active.js"></script>
+    <!-- icheck JS
+		============================================ -->
+    <script src="/css/innercss/js/icheck/icheck.min.js"></script>
+    <script src="/css/innercss/js/icheck/icheck-active.js"></script>
+    <!--  Chat JS
+		============================================ -->
+    <script src="/css/innercss/js/chat/jquery.chat.js"></script>
+    <!--  todo JS
+		============================================ -->
+    <script src="/css/innercss/js/todo/jquery.todo.js"></script>
+    <!-- plugins JS
+		============================================ -->
+    <script src="/css/innercss/js/plugins.js"></script>
+    <!-- main JS
+		============================================ -->
+    <script src="/css/innercss/js/main.js"></script>
+	<!-- tawk chat JS
+		============================================ -->
+    <script src="/css/innercss/js/tawk-chat.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+        <script src="https://kit.fontawesome.com/5e315e4af1.js" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+  
+    <script>
+        $.holdReady(true);
+    setTimeout(function () {
+
+        // Setting a variable until
+        // document.ready is called
+        const myVar = "GFG";
+        $.holdReady(false);
+    }, 2000);
+     $(document).ready(()=> {
+        //Preloader
+        preloaderFadeOutTime = 500;
+        function hidePreloader() {
+        var preloader = $('.cube-wrapper');
+        preloader.fadeOut(preloaderFadeOutTime);
+        }
+        hidePreloader();
+        });
+      </script>
+</body>
+
+</html>

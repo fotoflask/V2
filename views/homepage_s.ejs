@@ -5,6 +5,7 @@
      <link rel="stylesheet" href="css/homepage_s.css">
      <link rel="stylesheet" href="/css/navbar.css">
      <link rel="stylesheet" href="/css/loadinganimation1.css">
+     <link rel="stylesheet" href="/css/leftsidebar.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,36 +18,23 @@
         <%- include("layout/loadinganimation2") %> 
         <%- include("layout/navbar",{user_logged}) %>
         
+        <%- include("layout/bottomnavbar") %>
 
         <div class="ccontainer">
 
             <!--Left Side Bar-->
 
-            <div class="leftsidebar style-1">
-                
-                <div class="implinks otherlinks">
-                    <a href="#" class="page-link-icon" alt="Home"><i class="fa-solid fa-house"></i></a>                                       
-                    <a href="/profilepage/<%=encodeURIComponent(user_logged.dusername)%>" class="page-link-icon" alt="Profile"><img  src="/images/ProfilePhotos/<%= user_logged.dprofilepic %>" onerror="this.onerror=null; this.src='/images/OtherAssets/pngwing.com (2).png'; style='object-fit:scale-down;'"></a>                                       
-                </div>
-                <div class="implinks">
-                    <a href="#" class="page-link-icon" alt="Home"><img src="/images/OtherAssets/house-solid.svg"></a>                                       
-                    <a href="#" class="page-link-icon" alt="Explore"><i class="fa-solid fa-globe"></i></a>
-                    <a href="#" class="page-link-icon"alt="Search"><img src="/images/OtherAssets/magnifying-glass-solid.svg"></i></a>
-                    <a href="#" class="page-link-icon" alt="Friends"><i class="fa-solid fa-user-group"></i></a>
-                    <a href="#" class="page-link-icon"alt="Events"><i class="fa-solid fa-calendar-days"></i></a>
-
-                </div>
-            </div>
+            <%- include("layout/leftsidebar") %>
 
             <!--Main Content-->
 
-
+            
             <div class="maincontent">
 
                 
 
                 <!--Each post copy paste below-->
-
+                <% if(doc2.length > 0) {%>
                 <% doc2.forEach(post=>{ %>
                     <div class="postcontainer">
  
@@ -64,6 +52,9 @@
                                 <div class="postdropdown-content">
                                     <a class="postdropdown-links" href="/postpage/<%= post._id%>">Go to Post</a>
                                     <a class="postdropdown-links" href="/postpage/<%= post._id%>">Share Post</a>
+                                    <% if(post.dusername == user_logged.dusername){ %>
+                                        <a class="postdropdown-links" href="/home/remove/<%= post._id%>">Remove Post</a>    
+                                    <% } %>
                                 </div>
                             </div>                    
                         </div>                                            
@@ -90,7 +81,13 @@
                             <div class="activityicons">
                                 <form action="/home" method="post">
                                     <input type="hidden" name="likeduser" value="<%= doc4.dusername %>">
-                                    <div><button class="postactions likebtn" type="submit" name="like" value="<%= post._id%>"><img height="20vh" width="20vh" src="/images/otherassets/icons8-ok-hand-50 (1).png"></button><%= post.likes_number%></div>                                                                
+                                    <div><button class="postactions likebtn" type="submit" name="like" value="<%= post._id%>">
+                                        <% if(post.likes.includes(user_logged.dusername)) {%>
+                                            <img height="20vh" width="20vh" src="/images/otherassets/icons8-ok-hand-50 (1).png">
+                                            <% }else{ %>
+                                            <img height="20vh" width="20vh" src="/images/otherassets/icons8-ok-hand-50.png">
+                                            <% } %>
+                                    </button><%= post.likes_number%></div>                                                                
                                 </form>
                                     <div><a href="/postpage/<%= post._id%>"><button class="postactions commentbtn" ><img height="20vh" width="20vh" src="/images/otherassets/comment-solid.svg"></button></a><%= post.comments_number %></div>
                                     <div><button class="postactions sharebtn" ><img height="20vh" width="20vh" src="/images/otherassets/share-from-square-solid.svg"></button><%= post.Shares %></div>
@@ -98,7 +95,20 @@
                                 <div><a href="/buypost/<%=encodeURIComponent(post._id)%>"><button class="postactions downloadbtn"><img height="20vh" width="20vh" src="/images/otherassets/download-solid.svg"></button></a></div>
                         </div>
                     </div>
-                <% }) %>         
+                <% }) %>   
+                <% }else{ %>
+                    <div class="no-following">
+                        
+                            <div style="text-align: center;">
+                                <p >No posts to show</p>
+                                <p>Follow Someone to View Their Posts</p>
+                            </div>
+                            <div style="display: flex; justify-content: center;">
+                                <a href="/explore"><button class="followbtn" >Explore  <i class="fa-solid fa-globe"></i></button></a>
+                            </div>
+                        
+                    </div>
+                <% } %>
 
 
 
@@ -125,7 +135,7 @@
                 <div class="events-container style-1">
                     <div class="events">
                         <div class="leftevent">
-                            <h3>19</h3>
+                            <h3 class="eventdate">19</h3>
                             <span><b>August</b></span>
 
                         </div>
@@ -139,8 +149,8 @@
 
                     <div class="events">
                         <div class="leftevent">
-                            <h3>05</h3>
-                            <span>October</span>
+                            <h3 class="eventdate">05</h3>
+                            <span><b>October</b></span>
                         </div>
                         <div class="rightevent">
                             <h4>Photography Contest 2023</h4>
@@ -150,12 +160,12 @@
                     </div>
                     <div class="events">
                         <div class="leftevent">
-                            <h3>29</h3>
+                            <h3 class="eventdate">29</h3>
                             <span><b>April</b></span>
 
                         </div>
                         <div class="rightevent">
-                            <h4>International Photography Day</h4>
+                            <h3>International Photography Day</h4>
                             <a href="https://www.daysoftheyear.com/days/photography-day/">More Info</a>
 
                         </div>
@@ -175,7 +185,7 @@
                     <div class="onlinelist">
 
                         <div class="online">
-                            <img src="/images_homep/member-1.png">
+                            <img src="/images/ProfilePhotos/sravan.png">
                         </div>
                         <p>Sravan</p>
                     </div>
@@ -183,7 +193,7 @@
                     <div class="onlinelist">
 
                         <div class="online">
-                            <img src="/images_homep/member-2.png">
+                            <img src="/images/ProfilePhotos/poojyanth.png">
                         </div>
                         <p>Poojyanth</p>
                     </div>
@@ -191,14 +201,14 @@
                     <div class="onlinelist">
 
                         <div class="online">
-                            <img src="/images_homep/member-3.png">
+                            <img src="/images/ProfilePhotos/abhi.jpg">
                         </div>
                         <p>Abhiram</p>
                     </div>
                     <div class="onlinelist">
 
                         <div class="online">
-                            <img src="/images_homep/member-3.png">
+                            <img src="/images/ProfilePhotos/pavan.png">
                         </div>
                         <p>Sai Pavan</p>
                     </div>

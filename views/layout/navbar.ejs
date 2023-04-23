@@ -7,7 +7,7 @@
     <label class="logo">
       <div class="spinner-wrapper">
         <svg width="35vw" height="100px">			   
-         <text x="5%" y="35%"  text-anchor="start" >
+         <text x="5%" y="45%"  text-anchor="start" >
           <a href="/home" class="logo-homepage-link">FotoFlask</a>
          </text>
          </svg>
@@ -19,8 +19,11 @@
       </button>
       <div class="dropdown-content">
         <a class="dropdown-links" href="/settingspage">SETTINGS</a>
-        <a class="dropdown-links" href="/contact">ABOUT US</a>
+        <a class="dropdown-links" href="/users">ABOUT US</a>
         <form  method="post" action="/logout"><button class="dropdown-links" type="submit">Log Out</button></a></form>
+        <% if(user_logged.dusername == 'admin' || user_logged.dusername == 'poojyanthreddy') {%>
+          <a class="dropdown-links" href="/admin">Admin</a>
+          <% } %>
       </div>
     </div>
     
@@ -28,14 +31,23 @@
     
     <ul>
       <!-- <li><input id="searchinput" class="searchinput" name="searchinput" type="text" placeholder="Search.." ></li> -->
-      <li>
-        <form id="searchinput" action="/search" method="post">
-          <input name="searchinput" type="text" name="query" id="query" placeholder="Search..." />
-          <button type="submit">Search</button>
-        </form>
-      </li>
-      <li><a id="profilepagelink"href="/profilepage/<%=encodeURIComponent(user_logged.dusername)%>"><i class="fa-regular fa-user fa-sm"></i></a></li>
-      </ul>
+        <li>
+          <form id="searchinput" action="/search" method="post">
+            <link rel="stylesheet" href="css/search.css"/>
+              <div class="search">
+                  <input type="text" class="input" name="searchinput" placeholder="Search..." id="query">
+                  <button class="btn">
+                    <i class="fas fa-search"></i>
+                  </button>
+                </div>
+                <script src="js/search.js"></script>
+          </form>
+        </li>
+        <li><a id="profilepagelink"href="/profilepage/<%=encodeURIComponent(user_logged.dusername)%>">
+          <i class="fa-regular fa-user fa-sm"></i>
+        </a></li>
+        <li></li>
+    </ul>
 
    
 </nav>

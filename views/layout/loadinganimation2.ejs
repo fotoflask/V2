@@ -170,3 +170,23 @@
         <div class="square16 square"></div>
     </div>
     </div>
+
+    <script>
+        $.holdReady(true);
+    setTimeout(function () {
+
+        // Setting a variable until
+        // document.ready is called
+        const myVar = "GFG";
+        $.holdReady(false);
+    }, 2000);
+     $(document).ready(()=> {
+        //Preloader
+        preloaderFadeOutTime = 500;
+        function hidePreloader() {
+        var preloader = $('.cube-wrapper');
+        preloader.fadeOut(preloaderFadeOutTime);
+        }
+        hidePreloader();
+        });
+      </script>

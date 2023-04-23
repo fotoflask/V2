@@ -6,6 +6,7 @@
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 		<link rel="stylesheet" href="/css/postpage.css">
         <link rel="stylesheet" href="/css/navbar.css">
+        <link rel="stylesheet" href="/css/leftsidebar.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,8 +17,9 @@
 
         <%- include("layout/loadinganimation2") %> 
         <%- include("layout/navbar",{user_logged}) %>
-
+        <%- include("layout/bottomnavbar") %>
         <div class="media-section">
+            <%- include("layout/leftsidebar") %>
             <div class="post-section">
                     <div class="post">
                         <img class="img-fluid " src="/images/PostImages/<%= postdata.Picture %>">
@@ -26,19 +28,45 @@
             <div class="vertical-line"></div>
             <div class="post-details">
                 <div class="user-details">
-                    <div class="user-profile-picture"><a class="profile-link" href="/profilepage/<%=encodeURIComponent(postuserdata.dusername)%>"><img class="profile-pic-small"src="/images/ProfilePhotos/<%= postdata.dprofilepic %>" onerror="this.onerror=null; this.src='/images/OtherAssets/pngwing.com (2).png'; style='object-fit:scale-down;'"></a></div>
-                    <div class="user-name"><a class="profile-link" href="/profilepage/<%=encodeURIComponent(postuserdata.dusername)%>"><%= postuserdata.dprofilename%></a></div>
+                    <div class="username-pic">
+                        <div class="user-profile-picture"><a class="profile-link" href="/profilepage/<%=encodeURIComponent(postuserdata.dusername)%>"><img class="profile-pic-small"src="/images/ProfilePhotos/<%= postdata.dprofilepic %>" onerror="this.onerror=null; this.src='/images/OtherAssets/pngwing.com (2).png'; style='object-fit:scale-down;'"></a></div>
+                        <div class="user-name"><a class="profile-link" href="/profilepage/<%=encodeURIComponent(postuserdata.dusername)%>"><%= postuserdata.dprofilename%></a></div>
+                    </div>
+                    <div style="float: right;"><%- include("layout/follow",{doc4:postuserdata}) %></div>
                 </div>
                 <hr>
-                <div class="comments-section">
-                    <div class="comment-heading">Comments</div>
-                    <hr>
-                    <div class="usercomments">
-                        <% (postdata.comments).forEach(comment=>{ %>
-                            <p><span class="comment-profile-time"><a maxlength="20" class="profile-link" href="/profilepage/<%=encodeURIComponent(comment[0])%>"><b><%= comment[0] %></b></a>&ensp;<small><%= comment[2].split(" ").length > 4 ? `${comment[2].split(" ")[1]} ${comment[2].split(" ")[2]} ${comment[2].split(" ")[4].slice(0, 5)}` : `${comment[2].split(" ")[1]} ${comment[2].split(" ")[2]}`%> </small></span>
-                                <br><span style="padding-left: 3%; padding-top: 0;"><%= comment[1] %></span>
-                            </p>
-                        <% }) %>
+                <div class="comments-section style-1">
+                    <div class="desc-comments style-1">
+                        <p class="max-chars" ><%= postdata.Description_of_post%></p>
+                        <div class="tabvisiblebtn">
+                            <button type="checkbox" value=0 class="tabvisiblebtn-b" onclick="console.log(this.value);showtag(this);">show tags</button>
+                            <div class="posttags">Tags: &ensp;
+                                <% postdata.Tag.forEach(tag=>{ %>
+                                    <form method="post" action="/search"><button type="submit" class="tagbutton" name="searchinput" href="#" value="<%= tag %>">#<%=tag%></button></form>
+                                <% }) %>                    
+                            </div> 
+                        </div>
+                            <hr>
+                        <div class="comment-heading">Comments</div>
+                        
+                        <div class="usercomments style-1">
+                            <% if(postdata.comments.length > 0){ %>
+                            <% (postdata.comments).forEach(comment=>{ %>
+                                <p><span class="comment-profile-time"><a maxlength="20" class="profile-link" href="/profilepage/<%=encodeURIComponent(comment[0])%>"><b><%= comment[0] %></b></a>&ensp;<small><%= comment[2].split(" ").length > 4 ? `${comment[2].split(" ")[1]} ${comment[2].split(" ")[2]} ${comment[2].split(" ")[4].slice(0, 5)}` : `${comment[2].split(" ")[1]} ${comment[2].split(" ")[2]}`%> </small></span>
+                                    <br><span style="padding-left: 3%; padding-top: 0;"><%= comment[1] %></span>
+                                </p>
+                            <% }) %>
+                            <% }else{ %>
+                                <div style="display: flex; user-select: none;
+                                align-items: center;
+                                height: inherit;
+                                flex-direction: column;
+                                justify-content: center;color:#808080;">
+                                    <p><span>No Comments Yet</span></p>
+                                    <p><span>Be the First one To Comment</span></p>
+                                </div>
+                            <% } %>
+                        </div>
                     </div>
                     <div class="postcomment">
                         <img class="profile-pic-small"src="/images/ProfilePhotos/<%= user_logged.dprofilepic %>" onerror="this.onerror=null; this.src='/images/OtherAssets/pngwing.com (2).png'; style='object-fit:scale-down;'">
@@ -56,8 +84,14 @@
                         <div>
                             <form class="likeform" action="/postpage/like" method="post">
                             <input type="hidden" name="postid" value="<%= postdata._id %>">
-                            <input type="hidden" name="likeduser" value="<%= postuserdata.dusername %>">
-                            <div><button class="postactions likebtn" type="submit" name="like" value="<%= postdata._id%>"><img height="20vh" width="20vh" src="/images/otherassets/icons8-ok-hand-50 (1).png"></button><%= postdata.likes_number%></div>                                                                
+                            <input type="hidden" name="likeduser" value="<%= user_logged.dusername %>">
+                            <div><button class="postactions likebtn" type="submit" name="like" value="<%= postdata._id%>">
+                                <% if(postdata.likes.includes(user_logged.dusername)) {%>
+                                <img height="20vh" width="20vh" src="/images/otherassets/icons8-ok-hand-50 (1).png">
+                                <% }else{ %>
+                                <img height="20vh" width="20vh" src="/images/otherassets/icons8-ok-hand-50.png">
+                                <% } %>
+                            </button><%= postdata.likes_number%></div>                                                                
                             </form>
                         </div>
                         <div>
@@ -90,6 +124,17 @@
             }
             hidePreloader();
             }),10000);
+          </script>
+          <script>
+            
+            function showtag(tagbtn){
+            if(tagbtn.value == 0){
+                tagbtn.style.display = "none";
+                tagbtn.nextElementSibling.style.display = 'flex';
+            }
+            else
+            tagbtn.innerHTML = "Show Tags";
+            }
           </script>
     </body>
 </html>

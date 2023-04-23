@@ -236,24 +236,24 @@ label{
         profilePic.src=URL.createObjectURL(inputFile.files[0]);
       }
 
-      function submit(event) {
-        console.log('submitwed')
-        // Check if the file input is empty
-        if (inputt.files.length == 0) {
-          // If empty, prevent form submission and disable submit button
-          event.preventDefault();
-          postbutton.disabled = true;
-        }
-      };
-      inputt.addEventListener('change', () => {
-        console.log("Chnaef")
-        // Enable submit button if file input is not empty
-        if (imageInput.files.length > 0) {
-          postbutton.disabled = false;
-        } else {
-          postbutton.disabled = true;
-        }
-      });
+      // function submit(event) {
+      //   console.log('submitwed')
+      //   // Check if the file input is empty
+      //   if (inputt.files.length == 0) {
+      //     // If empty, prevent form submission and disable submit button
+      //     event.preventDefault();
+      //     postbutton.disabled = true;
+      //   }
+      // };
+      // inputt.addEventListener('change', () => {
+      //   console.log("Chnaef")
+      //   // Enable submit button if file input is not empty
+      //   if (imageInput.files.length > 0) {
+      //     postbutton.disabled = false;
+      //   } else {
+      //     postbutton.disabled = true;
+      //   }
+      // });
     </script>
 
 

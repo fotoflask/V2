@@ -1,0 +1,10 @@
+<link rel="stylesheet" href="/css/bottomnavbar.css">
+<div class="bottomnavbar">
+    <div class="implinks bottom">
+        <a href="/home" class="page-link-icon" alt="Home"><img src="/images/OtherAssets/house-solid.svg"></a>                                       
+        <a href="/explore" class="page-link-icon" alt="Explore"><i class="fa-solid fa-globe"></i></a>
+        <a href="/friends" class="page-link-icon" alt="Friends"><i class="fa-solid fa-user-group"></i></a>
+        <a href="#" class="page-link-icon"alt="Events"><i class="fa-solid fa-calendar-days"></i></a>
+        <a href="/profilepage/<%=encodeURIComponent(user_logged.dusername)%>" class="page-link-icon" alt="Profile"><img  src="/images/ProfilePhotos/<%= user_logged.dprofilepic %>" onerror="this.onerror=null; this.src='/images/OtherAssets/pngwing.com (2).png'; style='object-fit:scale-down;'"></a>                                       
+    </div>
+</div>

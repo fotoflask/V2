@@ -1,0 +1,209 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Admin Dashboard</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- favicon
+		============================================ -->
+    <link rel="shortcut icon" type="image/x-icon" href="css/innercss/img/favicon.ico">
+    <!-- Google Fonts
+		============================================ -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
+    <!-- Bootstrap CSS
+		============================================ -->
+    <link rel="stylesheet" href="/css/innercss/css/bootstrap.min.css">
+    <!-- font awesome CSS
+		============================================ -->
+    <link rel="stylesheet" href="/css/innercss/css/font-awesome.min.css">
+    <!-- owl.carousel CSS
+		============================================ -->
+    <link rel="stylesheet" href="/css/innercss/css/owl.carousel.css">
+    <link rel="stylesheet" href="/css/innercss/css/owl.theme.css">
+    <link rel="stylesheet" href="/css/innercss/css/owl.transitions.css">
+    <!-- meanmenu CSS
+		============================================ -->
+    <link rel="stylesheet" href="/css/innercss/css/meanmenu/meanmenu.min.css">
+    <!-- animate CSS
+		============================================ -->
+    <link rel="stylesheet" href="/css/innercss/css/animate.css">
+    <!-- normalize CSS
+		============================================ -->
+    <link rel="stylesheet" href="/css/innercss/css/normalize.css">
+    <!-- mCustomScrollbar CSS
+		============================================ -->
+    <link rel="stylesheet" href="/css/innercss/css/scrollbar/jquery.mCustomScrollbar.min.css">
+    <!-- Notika icon CSS
+		============================================ -->
+    <link rel="stylesheet" href="/css/innercss/css/notika-custom-icon.css">
+    <!-- wave CSS
+		============================================ -->
+    <link rel="stylesheet" href="/css/innercss/css/wave/waves.min.css">
+    <link rel="stylesheet" href="/css/innercss/css/wave/button.css">
+    <!-- main CSS
+		============================================ -->
+    <link rel="stylesheet" href="/css/innercss/css/main.css">
+    <!-- style CSS
+		============================================ -->
+    <link rel="stylesheet" href="/css/innercss/style.css">
+    <!-- responsive CSS
+		============================================ -->
+    <link rel="stylesheet" href="/css/innercss/css/responsive.css">
+    <!-- modernizr JS
+		============================================ -->
+    <script src="/css/innercss/js/vendor/modernizr-2.8.3.min.js"></script>
+</head>
+
+<body>
+
+    <div class="main-menu-area mg-tb-40">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <ul class="nav nav-tabs notika-menu-wrap menu-it-icon-pro">
+                        <li class="active"><a data-toggle="tab" href="#Home"><i class="notika-icon notika-house"></i> Home</a>
+                        </li>
+                        
+                    </ul>
+                    <div class="tab-content custom-menu-content">
+                        <div id="Home" class="tab-pane in active notika-tab-menu-bg animated flipInX">
+                            <ul class="notika-main-menu-dropdown">
+                                <li><a href="/admin">Website Stats</a></li>
+                                        <li><a href="/admin/accounts">Account Stats</a></li>
+                                        <li><a href="/admin/posts">Post Stats</a></li>
+                              
+                            </ul>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="notika-email-post-area">
+        <div class="container">
+            <div class="row" style="
+            display: flex; justify-content: center;
+        ">
+                <div class="col-1">
+                    <div class="recent-post-wrapper notika-shadow sm-res-mg-t-30 tb-res-ds-n dk-res-ds">
+                        <div class="recent-post-ctn">
+                            <div class="recent-post-title">
+                                <h2>Posts</h2>
+                            </div>
+                        </div>
+                        <div class="recent-post-items">
+                            <% doc2.forEach(post => { %>
+                                <div class="recent-post-signle rct-pt-mg-wp">
+                                    <a href="/postpage/<%= post._id%>">
+                                        <div class="recent-post-flex">
+                                            <div class="recent-post-img">
+                                                <img src="/images/PostImages/<%=post.Picture%>" alt="" />
+                                            </div>
+                                            <div class="recent-post-it-ctn">
+                                                <h2><%= post.dusername%></h2>
+                                                <p><%= post._id%></p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a href="/home/remove/<%= post._id%>">🗑️</a>    
+                                </div>
+                                
+                           <% }); %>
+
+
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <!-- End Realtime sts area-->
+    <!-- Start Footer area-->
+    <div class="footer-copyright-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="footer-copy-right">
+                        <p>Copyright © 2018 
+. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- jquery
+		============================================ -->
+    <script src="/css/innercss/js/vendor/jquery-1.12.4.min.js"></script>
+    <!-- bootstrap JS
+		============================================ -->
+    <script src="/css/innercss/js/bootstrap.min.js"></script>
+    <!-- wow JS
+		============================================ -->
+    <script src="/css/innercss/js/wow.min.js"></script>
+    <!-- price-slider JS
+		============================================ -->
+    <script src="/css/innercss/js/jquery-price-slider.js"></script>
+    <!-- owl.carousel JS
+		============================================ -->
+    <script src="/css/innercss/js/owl.carousel.min.js"></script>
+    <!-- scrollUp JS
+		============================================ -->
+    <script src="/css/innercss/js/jquery.scrollUp.min.js"></script>
+    <!-- meanmenu JS
+		============================================ -->
+    <script src="/css/innercss/js/meanmenu/jquery.meanmenu.js"></script>
+    <!-- counterup JS
+		============================================ -->
+    <script src="/css/innercss/js/counterup/jquery.counterup.min.js"></script>
+    <script src="/css/innercss/js/counterup/waypoints.min.js"></script>
+    <script src="/css/innercss/js/counterup/counterup-active.js"></script>
+    <!-- mCustomScrollbar JS
+		============================================ -->
+    <script src="/css/innercss/js/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+    <!-- sparkline JS
+		============================================ -->
+    <script src="/css/innercss/js/sparkline/jquery.sparkline.min.js"></script>
+    <script src="/css/innercss/js/sparkline/sparkline-active.js"></script>
+    <!-- flot JS
+		============================================ -->
+    <script src="/css/innercss/js/flot/jquery.flot.js"></script>
+    <script src="/css/innercss/js/flot/jquery.flot.resize.js"></script>
+    <script src="/css/innercss/js/flot/flot-active.js"></script>
+    <!-- knob JS
+		============================================ -->
+    <script src="/css/innercss/js/knob/jquery.knob.js"></script>
+    <script src="/css/innercss/js/knob/jquery.appear.js"></script>
+    <script src="/css/innercss/js/knob/knob-active.js"></script>
+    <!--  wave JS
+		============================================ -->
+    <script src="/css/innercss/js/wave/waves.min.js"></script>
+    <script src="/css/innercss/js/wave/wave-active.js"></script>
+    <!-- icheck JS
+		============================================ -->
+    <script src="/css/innercss/js/icheck/icheck.min.js"></script>
+    <script src="/css/innercss/js/icheck/icheck-active.js"></script>
+    <!--  Chat JS
+		============================================ -->
+    <script src="/css/innercss/js/chat/jquery.chat.js"></script>
+    <!--  todo JS
+		============================================ -->
+    <script src="/css/innercss/js/todo/jquery.todo.js"></script>
+    <!-- plugins JS
+		============================================ -->
+    <script src="/css/innercss/js/plugins.js"></script>
+    <!-- main JS
+		============================================ -->
+    <script src="/css/innercss/js/main.js"></script>
+	<!-- tawk chat JS
+		============================================ -->
+    <script src="/css/innercss/js/tawk-chat.js"></script>
+</body>
+
+</html>
