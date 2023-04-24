@@ -1,0 +1,33 @@
+@media (max-width:952px) {
+    .leftsidebar{
+        display: none;
+    }
+    .bottomnavbar{
+        display: flex;
+    }
+}
+    @media (min-width:953px) {
+        .leftsidebar{
+            display: block;
+        }
+        .bottomnavbar{
+            display: none;
+        }
+    }
+.bottomnavbar{
+    z-index: 5;
+    position: fixed;
+    bottom: 0;
+    flex-direction: row;
+    border-top: 1px solid #112D4E;
+    background-color:#DBE2EF;
+    width: 100vw;
+    height: 7vh;
+}
+
+.implinks.bottom{
+    display: flex;
+    width: inherit;
+    flex-direction: row;
+    justify-content: space-around;
+}

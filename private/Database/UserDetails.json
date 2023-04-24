@@ -1,0 +1,230 @@
+[{
+  "_id": {
+    "$oid": "64403a83bcbd8ad254540252"
+  },
+  "duserId": 1,
+  "dusername": "poojyanthreddy",
+  "dprofilename": "Poojyanth Reddy",
+  "demail": "poojyanth2004@gmail.com",
+  "dmobilenumber": "1192873490",
+  "dDOB": "2023-04-11",
+  "dprofilepic": "poojyanth.png",
+  "dcoverphoto": "1682075464137basketball_court-1.jpg",
+  "dfollowers_count": 1,
+  "following": [
+    "SAIPAVAN",
+    "sanjeev",
+    "sravan",
+    "Sivasanath1503",
+    "betaacc"
+  ],
+  "followers": [
+    "Arjit"
+  ]
+},{
+  "_id": {
+    "$oid": "64403ca6bcbd8ad25454027a"
+  },
+  "duserId": 3,
+  "dusername": "sravan",
+  "dprofilename": "Sravan Gatram",
+  "demail": "beta2@gmail.com",
+  "dmobilenumber": "1234567890",
+  "dDOB": "2023-04-02",
+  "dprofilepic": "",
+  "dcoverphoto": "",
+  "dfollowers_count": 2,
+  "followers": [
+    "Arjit",
+    "poojyanthreddy"
+  ],
+  "following": [
+    "betaacc",
+    "Sivasanath1503"
+  ]
+},{
+  "_id": {
+    "$oid": "64416962c7160c4d2a75e6f3"
+  },
+  "duserId": 4,
+  "dusername": "pavan",
+  "dprofilename": "sai",
+  "demail": "saipavan.l21@iiits.in",
+  "dmobilenumber": "7893660040",
+  "dDOB": "2023-04-05",
+  "dprofilepic": "",
+  "dcoverphoto": "",
+  "dfollowers_count": 0
+},{
+  "_id": {
+    "$oid": "6442d2a9ad92b594efa3ab1f"
+  },
+  "duserId": 5,
+  "dusername": "Arjit",
+  "dprofilename": "arjit15",
+  "demail": "avadhanamarjit15@gmail.com",
+  "dmobilenumber": "9618825172",
+  "dDOB": "2003-12-15",
+  "dprofilepic": "",
+  "dcoverphoto": "",
+  "dfollowers_count": 0,
+  "following": [
+    "SAIPAVAN",
+    "poojyanthreddy",
+    "sanjeev",
+    "Sivasanath1503",
+    "sravan"
+  ]
+},{
+  "_id": {
+    "$oid": "6443bd4c3ca887dd2c331e9f"
+  },
+  "duserId": 7,
+  "dusername": "abhiram_145",
+  "dprofilename": "Abhiram",
+  "demail": "abhirambhavanam14@gmail.com",
+  "dmobilenumber": "9701808915",
+  "dDOB": "2004-05-14",
+  "dprofilepic": "Abhi.jpg",
+  "dcoverphoto": "",
+  "dfollowers_count": 0,
+  "following": [
+    "SAIPAVAN"
+  ]
+},{
+  "_id": {
+    "$oid": "6443bd503ca887dd2c331ea6"
+  },
+  "duserId": 8,
+  "dusername": "Sivasanath1503",
+  "dprofilename": "SIvasanath Kumar",
+  "demail": "msivasanathkumar@gmail.com",
+  "dmobilenumber": "9346300669",
+  "dDOB": "2003-07-15",
+  "dprofilepic": "",
+  "dcoverphoto": "",
+  "dfollowers_count": 3,
+  "followers": [
+    "Arjit",
+    "poojyanthreddy",
+    "sravan"
+  ]
+},{
+  "_id": {
+    "$oid": "6443bd943ca887dd2c331ee2"
+  },
+  "duserId": 9,
+  "dusername": "ufd",
+  "dprofilename": "iuys",
+  "demail": "vvv@w.f",
+  "dmobilenumber": "123",
+  "dDOB": "2023-04-04",
+  "dprofilepic": "",
+  "dcoverphoto": "",
+  "dfollowers_count": 0
+},{
+  "_id": {
+    "$oid": "6443bfef3ca887dd2c331fd4"
+  },
+  "duserId": 10,
+  "dusername": "sanjeev",
+  "dprofilename": "sanjeev",
+  "demail": "sanjeev@gmail.com",
+  "dmobilenumber": "1234567890",
+  "dDOB": "2023-04-22",
+  "dprofilepic": "",
+  "dcoverphoto": "",
+  "dfollowers_count": 2,
+  "followers": [
+    "Arjit",
+    "poojyanthreddy"
+  ]
+},{
+  "_id": {
+    "$oid": "6443c342303ef172774f8f51"
+  },
+  "duserId": 11,
+  "dusername": "thanushsetty",
+  "dprofilename": "THANUSH SETTY",
+  "demail": "thanushsetty293@gmail.com",
+  "dmobilenumber": "5464164",
+  "dDOB": "2023-03-29",
+  "dprofilepic": "",
+  "dcoverphoto": "",
+  "dfollowers_count": 0
+},{
+  "_id": {
+    "$oid": "6443c371cf1eb2d5018f732a"
+  },
+  "duserId": 12,
+  "dusername": "thanushsetty293@gmail.com",
+  "dprofilename": "THANUSH SETTY",
+  "demail": "thanushsetty293@gmail.com",
+  "dmobilenumber": "5464164",
+  "dDOB": "2023-03-26",
+  "dprofilepic": "",
+  "dcoverphoto": "",
+  "dfollowers_count": 0
+},{
+  "_id": {
+    "$oid": "6443fc4bcf1eb2d5018f7448"
+  },
+  "duserId": 13,
+  "dusername": "alphaaccount",
+  "dprofilename": "Alpha Account",
+  "demail": null,
+  "dmobilenumber": "718191919",
+  "dDOB": "2023-04-06",
+  "dprofilepic": "",
+  "dcoverphoto": "",
+  "dfollowers_count": 0,
+  "followers": []
+},{
+  "_id": {
+    "$oid": "64442cd4ebf99dad327c10ad"
+  },
+  "duserId": 14,
+  "dusername": "betaacc",
+  "dprofilename": "Beta Account",
+  "demail": null,
+  "dmobilenumber": "7228929291",
+  "dDOB": "2023-04-05",
+  "dprofilepic": "",
+  "dcoverphoto": "",
+  "dfollowers_count": 2,
+  "followers": [
+    "sravan",
+    "poojyanthreddy"
+  ]
+},{
+  "_id": {
+    "$oid": "6444cf66c205c8818767b598"
+  },
+  "duserId": 15,
+  "dusername": "SAIPAVAN",
+  "dprofilename": "saipavan",
+  "demail": "saipavan.l21@iiits.in",
+  "dmobilenumber": "7893660040",
+  "dDOB": "2003-06-20",
+  "dprofilepic": "",
+  "dcoverphoto": "",
+  "dfollowers_count": 3,
+  "followers": [
+    "Arjit",
+    "poojyanthreddy",
+    "abhiram_145"
+  ]
+},{
+  "_id": {
+    "$oid": "64452d6523bf1ebdd14ed493"
+  },
+  "duserId": 16,
+  "dusername": "gautam_suresh",
+  "dprofilename": "gautam_suresh",
+  "demail": "gautam.s21@iiits.in",
+  "dmobilenumber": "9591381174",
+  "dDOB": "2003-08-23",
+  "dprofilepic": "",
+  "dcoverphoto": "",
+  "dfollowers_count": 0
+}]

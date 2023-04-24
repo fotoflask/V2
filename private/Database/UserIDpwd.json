@@ -1,0 +1,110 @@
+[{
+  "_id": {
+    "$oid": "64403a83bcbd8ad254540250"
+  },
+  "duserId": 1,
+  "dusername": "poojyanthreddy",
+  "dpassword": "Poojyanth1!",
+  "dprofilepic": "poojyanth.png"
+},{
+  "_id": {
+    "$oid": "64403ca6bcbd8ad254540278"
+  },
+  "duserId": 3,
+  "dusername": "sravan",
+  "dpassword": "Sravan1@"
+},{
+  "_id": {
+    "$oid": "64416962c7160c4d2a75e6f1"
+  },
+  "duserId": 4,
+  "dusername": "pavan",
+  "dpassword": "Saipavan##55"
+},{
+  "_id": {
+    "$oid": "6442d2a9ad92b594efa3ab1d"
+  },
+  "duserId": 5,
+  "dusername": "Arjit",
+  "dpassword": "Arjit1512*"
+},{
+  "_id": {
+    "$oid": "6443bd4c3ca887dd2c331e9d"
+  },
+  "duserId": 7,
+  "dusername": "abhiram_145",
+  "dpassword": "Abhiram@14",
+  "dprofilepic": "Abhi.jpg"
+},{
+  "_id": {
+    "$oid": "6443bd503ca887dd2c331ea4"
+  },
+  "duserId": 8,
+  "dusername": "Sivasanath1503",
+  "dpassword": "Sanath@15",
+  "dprofilepic": ""
+},{
+  "_id": {
+    "$oid": "6443bd943ca887dd2c331ee0"
+  },
+  "duserId": 9,
+  "dusername": "ufd",
+  "dpassword": "pooja@123",
+  "dprofilepic": ""
+},{
+  "_id": {
+    "$oid": "6443bfef3ca887dd2c331fd2"
+  },
+  "duserId": 10,
+  "dusername": "sanjeev",
+  "dpassword": "Sanjeev1!",
+  "dprofilepic": ""
+},{
+  "_id": {
+    "$oid": "6443c342303ef172774f8f4f"
+  },
+  "duserId": 11,
+  "dusername": "thanushsetty",
+  "dpassword": "Flask12@",
+  "dprofilepic": ""
+},{
+  "_id": {
+    "$oid": "6443c371cf1eb2d5018f7328"
+  },
+  "duserId": 12,
+  "dusername": "thanushsetty293@gmail.com",
+  "dpassword": "Floto12@",
+  "dprofilepic": ""
+},{
+  "_id": {
+    "$oid": "6443fc4acf1eb2d5018f7446"
+  },
+  "duserId": 13,
+  "dusername": "alphaaccount",
+  "dpassword": "Alpha12@",
+  "dprofilepic": ""
+},{
+  "_id": {
+    "$oid": "64442cd4ebf99dad327c10ab"
+  },
+  "duserId": 14,
+  "dusername": "betaacc",
+  "dpassword": "Beta12@",
+  "dprofilepic": ""
+},{
+  "_id": {
+    "$oid": "6444cf66c205c8818767b596"
+  },
+  "duserId": 15,
+  "dusername": "SAIPAVAN",
+  "dpassword": "Saipavan##55",
+  "dprofilepic": ""
+},{
+  "_id": {
+    "$oid": "64452d6523bf1ebdd14ed491"
+  },
+  "duserId": 16,
+  "dusername": "gautam_suresh",
+  "dpassword": "Poongodi123",
+  "dprofilepic": ""
+}]

@@ -1,22 +1,39 @@
+// template engine ejs
 const express = require('express')
 const multer = require("multer")
 const mongoose = require('mongoose')
+// 
+const bcrypt = require('bcrypt')
 const fs = require('fs')
 const bodyparser = require("body-parser")
+
 const path = require('path')
 const { ObjectId } = require('mongodb')
 const { stringify } = require('querystring')
-const url = 'mongodb://0.0.0.0/Fotoflask'
+const url = 'mongodb://0.0.0.0/Fotoflask' 
+const saltRounds = 10;
 
 const app = express()
 app.set('view engine', 'ejs');
 app.use(express.static("public")); 
-app.use(express.static("private"));
+app.use(express.static("private")); 
 app.use(bodyparser.urlencoded({extended: true}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
  
+function verify(password, hashedPassword) {
+    return new Promise((resolve, reject) => {
+      bcrypt.compare(password, hashedPassword, (error, isMatch) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(isMatch);
+        }
+      });
+    });
+  }
+
 mongoose.connect(url)
 const con = mongoose.connection
 
@@ -48,10 +65,34 @@ let myschema =  new mongoose.Schema({
     Shares : Number
 });
 
+let userdetailsschema = new mongoose.Schema({
+    duserId : Number,
+    dusername : String,
+    dprofilename : String,
+    dprofilepic : String,
+    demail : String,
+    dmobilenumber : Number,
+    dDOB : Date,
+    dcoverphoto : String,
+    dfollowers_count : Number,
+    following   : [String],
+    followers   : [String]
+})
+
+
+let userdetails = mongoose.model('UserDetails',userdetailsschema);
 
 let mymodel = mongoose.model('table',myschema);
+
 let storage = multer.diskStorage({
     destination:'./private/images/postimages',
+     filename:(req,file,cb)=>{
+        cb(null,Date.now()+file.originalname)
+     }
+})
+
+let storage2 = multer.diskStorage({
+    destination:'./private/images/Profilephotos',
      filename:(req,file,cb)=>{
         cb(null,Date.now()+file.originalname)
      }
@@ -60,6 +101,27 @@ let storage = multer.diskStorage({
 
 let upload =multer({
     storage:storage,
+    fileFilter:(req,file,cb)=>{
+        if(
+            file.mimetype == 'image/jpeg' ||
+            file.mimetype == 'image/jpg' ||
+            file.mimetype == 'image/png' ||
+            file.mimetype == 'image/gif'
+        ){
+               cb(null,true);
+        }else{
+            cb(null,false);
+            cb(new Error('ONLY IMAGES ARE ALLOWED TO BE UPLOADED'));
+        }
+
+        // q: what is cb in the above code
+
+    }
+})
+
+
+let upload2 =multer({
+    storage:storage2,
     fileFilter:(req,file,cb)=>{
         if(
             file.mimetype == 'image/jpeg' ||
@@ -99,13 +161,6 @@ app.get("/", (req,res)=>{
         })
 })
 
-app.get("/homepage", (req,res)=>{
-        console.log(req.query.username+"BBBB")    
-        if(req.query.result == 1)
-        res.status(200).render("homepage",{profilepic: profilepic,likes: likes, imagesrc : imagesrc, post_username: post_username,postnumber: postnumber,log_username: req.query.username,result: req.query.result})
-        else 
-        res.redirect('signin-signup')
-})
 
 app.get("/home", (req,res)=>{
     let doc4
@@ -115,8 +170,9 @@ app.get("/home", (req,res)=>{
                 con.collection('UserDetails').findOne({duserId : user_logged.duserId}).then(result=>{
                     doc4 = result
                     console.log("homehere") 
+                    const homepage_following = result.following
                     //console.log(doc4)
-                    mymodel.find({})
+                    mymodel.find({$or:[{dusername: {$in:homepage_following}},{dusername:user_logged.dusername}]}).limit(50)
                     .sort({ Date: -1 })
                     .then(doc2=>{
                         console.log("inside") 
@@ -138,6 +194,53 @@ app.get("/home", (req,res)=>{
         }) 
     
 })
+
+app.get("/home/remove/:postid",(req,res)=>{
+    console.log(req.params.postid)
+    const postid = req.params.postid
+    con.collection('session').findOne({dipaddress : req.socket.remoteAddress})
+        .then(user_logged=>{
+            if(user_logged){
+                mymodel.deleteOne({_id : postid})
+                .then(()=>{
+                    console.log("Deleted")
+                    res.redirect("/")
+                    
+                })
+                .catch(err=>{
+                    console.log(err)
+                })
+            }
+            else
+            res.status(200).render("signin-signup")
+        })
+    
+})
+
+
+app.get("/home/remove/user/:username",(req,res)=>{
+    console.log(req.params.username)
+    const username = req.params.username
+    con.collection('session').findOne({dipaddress : req.socket.remoteAddress})
+        .then(user_logged=>{
+            if(user_logged){
+                console.log("inside remove username")
+                userdetails.deleteOne({dusername : username})
+                .then(()=>{
+                    console.log("Deleted")
+                    res.redirect("/admin/accounts")    
+                })
+                .catch(err=>{
+                    console.log(err)
+                })
+            }
+            else
+            res.status(200).render("signin-signup")
+        })  
+    
+}) 
+ 
+
 
 app.post("/home", (req,res)=>{
 
@@ -232,10 +335,11 @@ app.post("/postpage/comment", (req,res)=>{
     })
     .catch(err=>{  console.error(err)  })
 })
-
+ 
 
 app.post("/search", (req,res)=>{ 
     let doc4
+    let searchinp = req.body.searchinput
     console.log("Tag"+req.body.searchinput)
     con.collection('session').findOne({dipaddress : req.socket.remoteAddress})
         .then(user_logged=>{
@@ -243,20 +347,23 @@ app.post("/search", (req,res)=>{
                 con.collection('UserDetails').findOne({duserId : user_logged.duserId}).then(result=>{
                     doc4 = result
                     console.log("homehere") 
-                    console.log(doc4)
-                    mymodel.find({$or :[ {Tag : { $regex: new RegExp(req.body.searchinput, 'i') } },{ dusername : { $regex: new RegExp(req.body.searchinput, 'i') }},{ dprofilename : { $regex: new RegExp(req.body.searchinput, 'i') }}]})
+                    //console.log(doc4)
+                    mymodel.find({$or :[ {Tag : { $regex: new RegExp(req.body.searchinput, 'i') } },{ dusername : { $regex: new RegExp(req.body.searchinput, 'i') }},{ dprofilename : { $regex: new RegExp(req.body.searchinput, 'i') }},{ Description_of_post : { $regex: new RegExp(req.body.searchinput, 'i') }}]})
                     .sort({ Date: -1 })
-                    .then(doc2=>{
+                    .then(posts=>{
                         console.log("inside") 
-                        console.log(doc2) 
-                        if(doc2){
+                        //console.log(posts) 
+                        if(posts){
                             console.log("insd")  
-                            res.render("homepage_s",{user_logged,doc2,doc4})
+                            res.render("explorepage",{user_logged,posts,doc4,searchinp})
                         }                         
                         else
                         res.render("homepage_s",{userId : user_logged.duserId})
                     })
-                })
+                    .catch(err=>{
+                        console.error(err)
+                    })
+                }) 
             }
             else{
                 res.redirect("/")
@@ -266,8 +373,22 @@ app.post("/search", (req,res)=>{
 
 app.get("/createpost", (req,res)=>{
     console.log("createPost")
-    res.render("create_post")
+    // res.render("create_post")
+    con.collection('session').findOne({dipaddress : req.socket.remoteAddress})
+    .then(user_logged=>{
+        if(user_logged){
+            con.collection("UserDetails").findOne({duserId : user_logged.duserId}).then(usr=>{
+                console.log(usr)
+                res.render("addnewpost",{user_logged,usr})
+            })
+        }
+        else
+        res.status(200).render("signin-signup")
+    })
+   
 })  
+
+
   
 app.post('/singlepost',upload.single('single_input'),(req,res)=>{
     if(!req.file)res.redirect("/createpost")
@@ -323,7 +444,7 @@ app.get('/contact/:username',(req,res)=>{
         user_id_res = user_id[i]
         imagesrc_res.push(imagesrc[i])
         like_res.push(likes[i])
-        accountfound = 1}
+        accountfound = 1} 
     } 
     if(accountfound==1)
     res.render("contact",{profilepic: profilepic_res, user_id: user_id_res, postnumber: postnumber_res,user_name:post_username_received})
@@ -356,31 +477,112 @@ app.get('/postpage/:postid',(req,res)=>{
     
 })
 
-app.get('/settingspage/:username', (req,res)=>{
-    const post_username_received = req.params.username
-    console.log("K"+post_username_received+"B")
-    console.log("H")    
-    let postnumber_res = 0;
-    let imagesrc_res = []    ;
-    let like_res =[]
-    let profilepic_res
-    let coverphoto_res
-    let accountfound = 0
-    for(let i = 0; i < post_username.length; i++){
-        if(post_username[i] == post_username_received)
-        {postnumber_res = postnumber_res + 1
-        profilepic_res = profilepic[i]
-        coverphoto_res = coverphoto[i]
-        user_id_res = user_id[i]
-        imagesrc_res.push(imagesrc[i]) 
-        like_res.push(likes[i])
-        accountfound = 1}
-    }
-    if(accountfound==1)
-    res.render("settingspage",{profilepic: profilepic_res, user_id: user_id_res, postnumber: postnumber_res,user_name:post_username_received})
-    else res.redirect("/homepage?username=" + req.body.log_username + "&result=" + 1);
+app.get('/settingspage', (req,res)=>{
+    console.log("settingspage")
+    con.collection('session').findOne({dipaddress : req.socket.remoteAddress})
+        .then(user_logged=>{
+            if(user_logged){
+                con.collection("UserDetails").findOne({duserId : user_logged.duserId}).then(userdetails=>{
+                    con.collection("UserIDpwd").findOne({duserId : user_logged.duserId}).then(user=>{
+                        console.log(user)
+                        res.render("settingspage",{user_logged,user,userdetails})
+                    })
+                })
+            }
+            else
+            res.status(200).render("signin-signup")
+        })
+    
 })
 
+app.post('/settings/changepassword',upload.single('single_input'),(req,res)=>{
+    console.log("changepassword")
+    con.collection('session').findOne({dipaddress : req.socket.remoteAddress})
+        .then(user_logged=>{
+            if(user_logged){
+                console.log(req.body)
+                con.collection("UserIDpwd").findOne({duserId : user_logged.duserId}).then(user=>{
+                    if(user.dpassword == req.body.fpassword){
+                        con.collection("UserIDpwd").findOneAndUpdate(
+                            { duserId: user_logged.duserId },
+                            {
+                            $set: {
+                                dpassword : req.body.fconfirmpassword
+                            }
+                            }
+                        )
+                        res.redirect("/settingspage")    
+                   }       
+                   else{
+                    res.redirect("/settingspage")
+                   }
+                })  
+            }
+            else
+            res.status(200).render("signin-signup")
+        })
+})
+
+app.post('/settings/editprofile',upload.single('fprofilepic'),(req,res)=>{
+    console.log("editprofile")
+    con.collection('session').findOne({dipaddress : req.socket.remoteAddress})
+        .then(user_logged=>{
+            if(user_logged){
+                console.log(req.body)
+                con.collection("UserDetails").findOneAndUpdate(
+                    { duserId: user_logged.duserId },
+                    {
+                      $set: {
+                        dusername: req.body.fusername,
+                        dprofilename: req.body.fprofilename,
+                        dprofilepic: req.file.filename,
+                        demail: req.body.femail,
+                        dmobile: req.body.fmobile
+                      }
+                    }
+                  )
+                  con.collection("UserIDpwd").findOneAndUpdate(
+                    { duserId: user_logged.duserId },
+                    {
+                      $set: {
+                        dusername: req.body.fusername,
+                        dprofilepic: req.file.filename
+                      }
+                    }
+                  )
+                res.redirect("/settingspage")      
+            }
+            else
+            res.status(200).render("signin-signup")
+        })
+})
+
+ 
+app.post('/settings/changecoverphoto',upload.single('fcoverphoto'),(req,res)=>{
+    console.log("change coverphoto")
+    con.collection('session').findOne({dipaddress : req.socket.remoteAddress})
+        .then(user_logged=>{
+            if(user_logged){
+                console.log(req.body)
+                con.collection("UserDetails").findOneAndUpdate(
+                    { duserId: user_logged.duserId },
+                    {
+                     
+                     
+                     
+                        $set: {
+                        dcoverphoto: req.file.filename,
+                      }
+                    }
+                  )
+                res.redirect("/settingspage")      
+            }
+            else
+            res.status(200).render("signin-signup")
+        })
+})
+
+ 
 app.post("/signin-signup/signin", (req,res)=>{
     console.log(req.socket.remoteAddress)
     console.log(req.body.username+" AAAA "+req.body.password)
@@ -437,7 +639,7 @@ app.post("/buypost",(req,res)=>{
         paidcardholdername : req.body.cardholdername,
         paidcardmonth : req.body.month,
         paidcardyear : req.body.year,
-        paidcvvnumber : req.body.cvvnumber
+        paidcvvnumber : req.body.cvvnumber 
     }
     con.collection('Payments').insertOne(payment)
     .then(()=>{
@@ -448,39 +650,215 @@ app.post("/buypost",(req,res)=>{
         const fileStream = fs.createReadStream(file);
         fileStream.pipe(res)
     })
-    
 })
 
 app.get("/explore",(req,res)=>{
-    res.render("explorepage")
+    let searchinp = '^'
+    console.log("Explore")
+    con.collection('session').findOne({dipaddress : req.socket.remoteAddress})
+        .then(user_logged=>{
+            const userl = user_logged.duserId
+            console.log(userl)
+
+            con.collection("UserDetails").findOne({duserId : userl}).then(following=>{
+                console.log(following.following)
+            
+                const foll = following.following
+                if(user_logged){
+                    mymodel.find({dusername : {$nin : foll},duserId : {$ne : userl}}).limit(100).then(postrand=>{
+                        const posts = postrand.sort(() => Math.random() - Math.random()).slice(0,30)
+                        res.render("explorepage",{user_logged,posts,searchinp})
+                        
+                    }) 
+                } 
+                else
+                res.status(200).render("signin-signup")
+            })
+        })
 })
 
-app.get("/follow",(req,res)=>{
-    res.render("layout/follow")
+
+app.get("/friends", (req,res)=>{
+    let doc4
+    con.collection('session').findOne({dipaddress : req.socket.remoteAddress})
+        .then(user_logged=>{
+            if(user_logged){
+                con.collection('UserDetails').findOne({duserId : user_logged.duserId}).then(result=>{
+                    doc4 = result
+                    console.log("homehere 1212") 
+                    const homepage_following = result.following
+                    //console.log(doc4)
+                    userdetails.find()
+                    .then(doc2=>{
+                        console.log("inside") 
+                        console.log(doc2) 
+                        if(doc2) 
+                        {
+                            let doc2_ = doc2
+                            console.log("insidefindfriendsdoc2")  
+                            res.render("findfriends",{user_logged,doc2,doc2_,doc4})
+                        } 
+                        
+                        else{
+                            console.log("insidefindfriendsdoc2else")
+                            res.render("homepage_s",{userId : user_logged.duserId})
+                        }
+                    })
+                })
+            }
+            else{
+                console.log("else 2")
+                res.redirect("/")
+            }
+        }) 
+    
+})
+
+app.get("/friends/following", (req,res)=>{
+    let doc4
+    con.collection('session').findOne({dipaddress : req.socket.remoteAddress})
+        .then(user_logged=>{
+            if(user_logged){
+                con.collection('UserDetails').findOne({duserId : user_logged.duserId}).then(result=>{
+                    doc4 = result
+                    console.log("homehere 1212") 
+                    const homepage_following = result.following
+                    //console.log(doc4)
+                    userdetails.find({dusername : {$in : doc4.following}})
+                    .then(doc2=>{
+                        console.log("inside") 
+                        console.log(doc2) 
+                        if(doc2) 
+                        {
+                            let doc2_ = doc2
+                            console.log("insidefindfriendsdoc2")  
+                            res.render("findfriends",{user_logged,doc2,doc2_,doc4})
+                        } 
+                        
+                        else{
+                            console.log("insidefindfriendsdoc2else")
+                            res.render("homepage_s",{userId : user_logged.duserId})
+                        }
+                    })
+                })
+            }
+            else{
+                console.log("else 2")
+                res.redirect("/")
+            }
+        }) 
+    
+})
+
+
+app.get("/friends/followers", (req,res)=>{
+    let doc4
+    con.collection('session').findOne({dipaddress : req.socket.remoteAddress})
+        .then(user_logged=>{
+            if(user_logged){
+                con.collection('UserDetails').findOne({duserId : user_logged.duserId}).then(result=>{
+                    doc4 = result
+                    console.log("homehere 1212") 
+                    const homepage_following = result.following
+                    //console.log(doc4)
+                    userdetails.find({dusername : {$in : doc4.followers}})
+                    .then(doc2=>{
+                        console.log("inside") 
+                        console.log(doc2) 
+                        if(doc2) 
+                        {
+                            let doc2_ = doc2
+                            console.log("insidefindfriendsdoc2")  
+                            res.render("findfriends",{user_logged,doc2,doc2_,doc4})
+                        } 
+                        
+                        else{
+                            console.log("insidefindfriendsdoc2else")
+                            res.render("homepage_s",{userId : user_logged.duserId})
+                        }
+                    })
+                })
+            }
+            else{
+                console.log("else 2")
+                res.redirect("/")
+            }
+        }) 
+    
+})
+
+
+app.get("/findfriends",(req,res)=>{
+    console.log("Friends")
+    // nodejs mongodb code to get users from userdetails collection
+    con.collection('session').findOne({dipaddress : req.socket.remoteAddress})
+        .then(user_logged=>{
+            if(user_logged){
+                console.log(user_logged)
+                // find function in mongo db to get all followers of an user in userdetails
+                con.collection("UserDetails").findOne({duserId : user_logged.duserId}).then(following=>{
+                    console.log(following)
+                    const foll = following.following
+                    console.log("HSF")
+                    console.log(foll)
+                    userdetails.find({dusername : {$in : foll}}).then(followers=>{
+                        console.log(followers)
+                        // res.render("friendspage",{user_logged,followers})
+                    })
+                })
+            }
+            else
+            res.status(200).render("signin-signup")
+        })
 })
 
 
 app.post('/follow', async (req, res) => {
-    console.log(req.body)
+    let urlredir = "/profilepage/"+req.body.followingusername
+    console.log("JK")
+    console.log(req.url)
     
-    try {
+    try { 
         con.collection('session').findOne({dipaddress : req.socket.remoteAddress})
         .then(user_logged=>{
             if(user_logged){
                 console.log("follower:"+user_logged.dusername)
-                con.collection("UserDetails").findOneAndUpdate({duserId : user_logged.duserId},
-                    {$push:{following : req.body.followingusername}})
-                .then(()=>{
-                    con.collection("UserDetails").findOneAndUpdate({dusername : req.body.followingusername},
-                        {$push:{followers : user_logged.dusername},$inc : {dfollowers_count : +1}})
-                        .then((foll)=>{
-                            console.log(foll)
+                con.collection("UserDetails").findOne({duserId : user_logged.duserId, following : req.body.followingusername})
+                .then((finduser)=>{
+                    if(finduser){
+                        con.collection("UserDetails").findOneAndUpdate({duserId : user_logged.duserId},
+                            {$pull:{following : req.body.followingusername}})
+                        .then(()=>{
+                            con.collection("UserDetails").findOneAndUpdate({dusername : req.body.followingusername},
+                                {$pull:{followers : user_logged.dusername},$inc : {dfollowers_count : -1}})
+                                .then((foll)=>{
+                                    console.log(foll)
+                                })
                         })
+                        .then(()=>{
+                            // res.status(200).redirect("/profilepage/"+encodeURIComponent(req.followingusername))
+                            
+                            res.status(200).redirect(urlredir)
+                        })
+                    }
+                    else{
+                        con.collection("UserDetails").findOneAndUpdate({duserId : user_logged.duserId},
+                            {$push:{following : req.body.followingusername}})
+                        .then(()=>{
+                            con.collection("UserDetails").findOneAndUpdate({dusername : req.body.followingusername},
+                                {$push:{followers : user_logged.dusername},$inc : {dfollowers_count : +1}})
+                                .then((foll)=>{
+                                    console.log(foll)
+                                })
+                        })
+                        .then(()=>{
+                            // res.status(200).redirect("/profilepage/"+encodeURIComponent(req.followingusername))
+                            
+                            res.status(200).redirect(urlredir)
+                        })
+                    }
                 })
-                .then(()=>{
-                    res.status(200).json({ message: 'Followed successfully!' });
-                })
-            }
+            }  
             else
             res.status(200).render("signin-signup")
         })
@@ -501,7 +879,7 @@ app.post("/logout", (req,res)=>{
         .then(()=>{
             console.log("loggedout"+req.socket.remoteAddress)
             res.redirect("/")
-        })
+        }) 
 
 })
 
@@ -514,17 +892,107 @@ app.get("/profilepage/:username_clicked", (req, res) => {
                     console.log("A"+username_clicked+"A")
                     console.log("AAAAA"+(doc4.dusername === username_clicked))
                     mymodel.find({dusername : username_clicked}).then(doc5=>{
-                        console.log(doc4)
+                        console.log(doc4) 
                         console.log(doc5)
                         res.render("profilepage",{user_logged,doc5,doc4})
                     })
-                }) 
+                })  
             }  
             else  
             res.render("signin-signup")
         }) 
  })
 
+ app.get("/admin",(req,res)=>{
+    con.collection('session').findOne({dipaddress : req.socket.remoteAddress})
+        .then(user_logged=>{
+            if(user_logged){
+                var users_count 
+                var likes_count 
+                var posts_count = 0
+                con.collection("UserIDpwd").countDocuments({}, function(err, count) {
+                    users_count = count
+                    console.log(users_count)
+                    mymodel.countDocuments({}).then((count)=> {             
+                        mymodel.aggregate([
+                            {
+                              $group: {
+                                _id: null,
+                                totalLikes: { $sum: '$likes_number' }
+                              }
+                            }
+                          ])
+                          .then(result => {
+                            likes_count = result[0] ? result[0].totalLikes : 0;
+                            posts_count = count
+                            console.log(users_count+ " " + likes_count + " " + posts_count)
+                            res.render("admin1",{user_logged,users_count,likes_count,posts_count}) 
+                          })
+                          .catch(err => {
+                            console.error(err);
+                          });
+                        
+                      })
+
+                
+                  })
+                
+                
+                
+            }
+            else
+            res.status(200).render("signin-signup")
+        })
+ })
+
+ app.get("/admin/posts",(req,res)=>{
+    console.log(req.body)
+    con.collection('session').findOne({dipaddress : req.socket.remoteAddress})
+        .then(user_logged=>{
+            if(user_logged){
+                mymodel.find().limit(50)
+                    .sort({ Date: -1 })
+                    .then(doc2=>{
+                         console.log(doc2)
+
+                        res.render("admin2", {user_logged,doc2})
+                    })
+
+            }
+            else
+            res.status(200).render("signin-signup")
+        })
+ }) 
+
+ app.get("/admin/accounts",(req,res)=>{
+    console.log(req.body)
+    con.collection('session').findOne({dipaddress : req.socket.remoteAddress})
+        .then(user_logged=>{
+            if(user_logged){ 
+                console.log("ASD")
+                userdetails.find().then(( data) => {
+                    console.log("BBG")
+                    res.render("admin3", {user_logged,users : data})
+                  });
+            }
+            else
+            res.status(200).render("signin-signup")
+        })
+ }) 
+
+ app.get("/aboutfotoflask",(req,res)=>{
+    res.render("Contact")
+ })
+ 
+ app.get("/users",(req,res)=>{
+    res.render("users")
+ })
+ app.get("/ourteam",(req,res)=>{
+    res.render("ourteam")
+ })
+ app.get("/future",(req,res)=>{
+    res.render("future")
+ })
 
 function checkpassword(ipaddress,username,password,callback){
     console.log("HELLO")
@@ -532,7 +1000,10 @@ function checkpassword(ipaddress,username,password,callback){
         .findOne({dusername: username})
         .then(doc =>{
             console.log(doc);
-            if(doc.dpassword === password){
+            verify(password, doc.dpassword
+                )
+            .then(isMatch => {
+                if (isMatch) {
                 nsession = {
                     dipaddress : ipaddress,
                     duserId : doc.duserId,
@@ -556,9 +1027,10 @@ function checkpassword(ipaddress,username,password,callback){
             })
                 callback(1);
             }               
-            
+       
             else callback(0)
         })
+    })
         .catch((err)=>{
             console.error(err);
             callback(0);
@@ -569,54 +1041,70 @@ function checkpassword(ipaddress,username,password,callback){
 
 function adduseraccount(username,profilename,email,password,mobilenumber,DOB, callback){
     let lastuserID = 0;
-    con.collection("UserIDpwd").findOne({dusername : username}).then(doc =>{
-        if(doc) {console.log("docempty");callback(0);}
-        else{
-            con.collection("UserIDpwd")
-                .findOne({}, {sort: {duserId: -1}})
-                .then( doc => {
-                lastuserID = doc ? doc.duserId : 0;
-                console.log(doc)
-                lastuserID +=1;
-                console.log(lastuserID)
-                console.log(username,email,password,mobilenumber,DOB)
-            
-                newUserpwd = {
-                duserId : lastuserID,
-                dusername : username,
-                dpassword : password,
-                dprofilepic : ""
+
+    
+    bcrypt.hash(password, saltRounds)
+    .then(hash => {
+        password = hash;
+        console.log(password)
+        console.log(hash)
+        console.log("LLL"+password)
+    
+        con.collection("UserIDpwd").findOne({dusername : username}).then(doc =>{
+            if(doc) {console.log("docempty");callback(0);}
+            else{
+                con.collection("UserIDpwd")
+                    .findOne({}, {sort: {duserId: -1}})
+                    .then( doc => {
+                    lastuserID = doc ? doc.duserId : 0;
+                    console.log(doc)
+                    lastuserID +=1;
+                    console.log(lastuserID)
+                    console.log(username,email,password,mobilenumber,DOB)
+                
+                    newUserpwd = {
+                    duserId : lastuserID,
+                    dusername : username,
+                    dpassword : password,
+                    dprofilepic : ""
+                    };
+                    newUserDetails = {
+                    duserId : lastuserID,
+                    dusername : username, 
+                    dprofilename : profilename,
+                    demail : email,
+                    dmobilenumber : mobilenumber,
+                    dDOB : DOB,
+                    dprofilepic : "",
+                    dcoverphoto : "",
+                    followers : ["admin"],
+                    following : ["admin"],
+                    dfollowers_count : 0
                 };
-                newUserDetails = {
-                duserId : lastuserID,
-                dusername : username, 
-                dprofilename : profilename,
-                demail : email,
-                dmobilenumber : mobilenumber,
-                dDOB : DOB,
-                dprofilepic : "",
-                dcoverphoto : "",
-                dfollowers_count : 0
-            };
-            con.collection('UserIDpwd')
-                .insertOne(newUserpwd)                
-                .then(()=>{
-                    con.collection('UserDetails')
-                    .insertOne(newUserDetails)        
+                con.collection('UserIDpwd')
+                    .insertOne(newUserpwd)                
+                    .then(()=>{
+                        con.collection('UserDetails')
+                        .insertOne(newUserDetails)        
+                        .catch((err)=>{
+                            console.error(err);
+                            callback(0);
+                        })
+                    })
+                    .then(()=>{
+                        callback(1);
+                    })
                     .catch((err)=>{
                         console.error(err);
                         callback(0);
-                    })
-                })
-                .then(()=>{
-                    callback(1);
-                })
-                .catch((err)=>{
-                    console.error(err);
-                    callback(0);
-                }) 
-                
-                }) 
-        }
+                    }) 
+                    
+                    }) 
+            }
+        })
     })
+    .catch(error => {
+        // Handle error
+        console.error('Error hashing data:', error);
+    });
 }

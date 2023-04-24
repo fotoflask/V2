@@ -457,7 +457,7 @@ nav{
 }
 
 /* preloader */
-.spinner-wrapper {
+.spinner-wrapper_a {
 	user-select: none;
 	position: fixed;
 	top: 0;
@@ -467,8 +467,9 @@ nav{
 	background-color: #DBE2EF;
 	z-index: 999999;
 	}
+	
 
-svg text {
+	.spinner-wrapper_a  svg text {
 	font-family: Livvic;
 	letter-spacing: 5px;
 	stroke: #112D4E;
@@ -479,7 +480,7 @@ svg text {
   }
 
   @media (max-width:700px) {
-	svg text{
+	.spinner-wrapper_a  svg text{
 		font-size: 11vw;
 		stroke-width: 0.35vw;
 	}

@@ -1,29 +1,30 @@
-1. Problem in Signup page on mobile (Carousel-form problem)
-2. 
-
-
-
 To DO:
+1. Image to mongodb
+2. Right Click menu change
+3. Navbar dropdown wont open in other pages
 
 1. settings page
-2. Follow system - profile page, Home page  **
-3. chats page 
+2. Follow system - profile page, Home page  done
+3. chats page
 4. payments page                            CSS
-5. explore page - with search               ** 
+5. explore page - with search               done 
 6. followers page, search global accounts   **
-7. admin page                               **
+7. admin page                               done --
 8. add event page                           **
 9. download through payments                done
 10. notifications                           **
-11. password encryption                     **
-12. theme change                            **
-13. navbar                                  **
+11. password encryption                     **-
+12. theme change                            **-
+13. navbar                                  **-
 14. about Fotoflask
 15. landing page
 16. developers
 17. Contact us
-18. Create post page
-19. premium account
+18. Create post page                        done
+19. premium account                         
+20. Delete Post                             Done
+21. Report Post
+22. Report User
 
 
 
@@ -40,3 +41,26 @@ Admin Page
 8. Recent Posts
 9. Recent Account Login
 10. Recent Account Registrations
+
+
+
+
+Pages
+1. Signin/ signup               +S
+2. homepage following           +S
+3. explore page                 +A
+4. Chat page                    -S
+5. Post payment page            +SP
+6. Premium payment page         -SP
+7. Search explore               +P
+8. Find followers and your following Page   +P
+9. add event page               -P
+10. Create post Page            -SP
+11. Admin page                  +P
+12. Settings page               +SP
+13. Profile page                +P
+14. Post page                   +P
+        15. About Fotoflask             -A
+16. developers                  -G
+17. Landing page                -A
+        18. Future Upgrades             -G

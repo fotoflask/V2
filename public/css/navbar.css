@@ -91,15 +91,14 @@
     padding: 10px;
     
   }
-  .navb a:not(:hover){
+  .navb .logo-homepage-link:not(:hover){
     /* background: #a4bbe7; */
-    font-size: 17px;
+    font-size: 22px;
     transition: .5s;
   }
 
-  .navb a:hover{
-    background: #f39d34;
-    font-size: 17.5px;
+  .navb .logo-homepage-link{
+    font-size: 23px;
     transition: .5s;
   }
   
@@ -212,6 +211,22 @@
       min-height: 50px;
       min-width: 165px;
     }
+
+    .spinner-wrapper1{
+      text-align: left;
+      height: 10vh;
+      user-select: none;
+      position: absolute;
+      left:0;
+      top:0;
+      vertical-align: middle;
+      /* background-color: #DBE2EF; */
+      }
+    
+      .spinner-wrapper1 svg{
+        min-height: 50px;
+        min-width: 165px;
+      }
   
     svg text .logo-homepage-link{
     padding-left: 0;
@@ -329,11 +344,11 @@
     }
 
 
-    .searchinput {
+    #searchinput {
       float: right;
       height: 6vh;
       border: none;
-      
+      margin-right: 5vw;
       font-size: inherit;
     }
     

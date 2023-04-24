@@ -2,16 +2,11 @@
 
 * {
   box-sizing: border-box;
+  font-family: "Livvic";
 }
-
-body {
-  font-family: 'Roboto', sans-serif;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  margin: 0;
+body{
+    margin: 0 0.5vw;
+    background-color: #DBE2EF;
 }
 
 .title {
@@ -19,17 +14,150 @@ body {
   text-align: center;
 }
 
+@media (min-width:991px) {
+    .hover-img img{
+        width: 20vw;
+        height: 20vw;
+    }
+}
+
+@media (max-width:991px) {
+    .hover-img img{
+        width: 40vw;
+        height: 40vw;
+    }
+}
+
+@media (max-width:700px) {
+    .hover-img img{
+        width: 90vw;
+        height: 90vw;
+    }
+}
+
 .container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  max-width: 1000px;
+  user-select: none;
+    margin: 0;
+    display: flex;
+    flex-basis: 95%;
+    align-items: center;
+    padding: 0;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
 
 .container img {
   object-fit: cover;
-  margin: 10px;
-  height: 20vw;
-  width: 20vw;
+  /* margin: 10px; */
+
+}
+
+
+
+
+.hover-img {
+    /* height:40vw; 
+     width: 40vw; */
+     background-color: #000;
+     color: #fff;
+     display: inline-block;
+     /* margin: 1px; */
+     /* max-width: 320px;
+     min-width: 100px; */
+     
+     overflow: hidden;
+     position: relative;
+     text-align: center;
+     align-items: center;
+     width: inherit;
+     padding: 0%;
+   }
+   
+   .hover-img * {
+    object-fit: cover;
+     box-sizing: border-box;
+     align-items: center;
+     vertical-align: middle;
+     transition: all 0.45s ease;
+     padding: 0%;
+   }
+   
+   .hover-img::before,
+   .hover-img::after {
+     background-color: rgba(0, 0, 0, 0.5);
+     position: absolute;
+     top: 0;
+     bottom: 0;
+     left: 0;
+     right: 0;
+     content: '';
+     transition: all 0.3s ease;
+     z-index: 1;
+     opacity: 0;
+     transform: scaleY(2);
+   }
+   
+   .hover-img img {
+     vertical-align: middle;
+    
+     /* max-width: 100%; */
+     object-fit:cover;
+     /* backface-visibility: hidden; */
+   }
+   
+   .hover-img figcaption {
+     position: absolute;
+     top: 0;
+     bottom: 0;
+     left: 0;
+     right: 0;
+     align-items: center;
+     z-index: 1;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     line-height: 1.1em;
+     opacity: 0;
+     z-index: 2;
+     transition-delay: 0.1s;
+     font-size: 24px;
+     font-family: sans-serif;
+     font-weight: 400;
+     letter-spacing: 1px;
+     text-transform: uppercase;
+   }
+   
+   .hover-img:hover::before,
+   .hover-img:hover::after {
+     transform: scale(1);
+     opacity: 1;
+   }
+   
+   .hover-img:hover > img {
+     opacity: 0.9;
+   }
+   
+   .hover-img:hover figcaption {
+     opacity: 1;
+   }
+
+   
+  img.disable-hover {
+    opacity: 1;
+  }
+    figcaption.disable-hover {
+    opacity: 0;
+  }
+ 
+   figcaption h5{
+     user-select: none;
+   }
+ 
+figure{
+    margin: 1vw;
+}
+
+
+.explorepage>.leftsidebar{
+  flex-basis: 25%;
 }

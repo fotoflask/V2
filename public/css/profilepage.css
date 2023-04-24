@@ -55,10 +55,15 @@ body{
     .cover-photo img{
       height: 30vh;
     }
+    .maincontent{
+      margin-bottom: 5vh;
+    }
+}
 
-    /* .profile-photo{
-        height: 25vw;
-    } */
+@media (min-width : 991px){
+  .maincontent{
+    flex-basis: 98%;
+  }
 }
  .profile-section{
     margin: 0 6%;

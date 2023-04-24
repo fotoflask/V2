@@ -43,20 +43,26 @@ body{
         width: 100%;
     }
     .media-section{
+      height: max-content;
+      margin-bottom: 5vh;
         flex-direction: column;
         display: block;
     }
     .usercomments{
       overflow-y: scroll;
-      height: 37.5vh;      
+      height: 47.5vh;      
     }
     .comments-section{
-      height: 49vh;
+      height: 70vh;
     }
+
 
  }
  @media(min-width:991px)
  {
+  #follow-button{
+    width: 80px;
+  }
     .post-details{
       width:30%;
     }
@@ -69,14 +75,50 @@ body{
       width:70%;
     }
     .usercomments{
-      height: 57.5vh;
+      overflow-y: scroll;
+      height: 49.5vh;
     }
     .comments-section{
       height: 69vh;
     }
+    .desc-comments{
+      height: 63.5vh;
+    }
 
  }
 
+
+ .tabvisiblebtn{
+  padding: 1% 3%;
+}
+
+.tabvisiblebtn-b{
+  border: none;
+  background-color: inherit;
+}
+
+.tabvisiblebtn-b:hover{
+  cursor: pointer;
+
+}
+
+
+.posttags{
+  flex-wrap: wrap;
+  padding: 1% 3%;
+  display: none;
+}
+
+
+ .homepage-profile-link{
+  text-decoration: none;
+  color: inherit;
+}
+
+.homepage-profile-link:hover{
+  text-decoration: underline;
+  color: inherit;
+}
 
  .post{
     /* border: 2px solid #a4bbe7; */
@@ -111,6 +153,10 @@ body{
     justify-content: center;
   }
 
+  .post-details{
+    background-color: white;
+  }
+
   .post-details hr{
     margin: 1% 1%;
   }
@@ -118,6 +164,12 @@ body{
   .vertical-line{
     border-left: 1px solid #112D4E;
     margin: 1%;
+  }
+
+  .username-pic{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
   }
 
   .user-details{
@@ -128,8 +180,10 @@ body{
     width: 100%;
     height: 9.5vh;
     position: relative;
+    background-color: white;
+    justify-content: space-between;
     /* text-align: left; */
-    padding: 1%;
+    padding: 3%;
   }
 
   .user-details {
@@ -324,4 +378,26 @@ body{
 .postactions .likebtn{
   border: none;
   background-color: inherit;
+}
+
+
+.tagbutton{
+  color: rgb(61, 61, 223);
+  border: none;
+  background-color: inherit;
+}
+.tagbutton:hover{
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.max-chars{
+  width: inherit;
+  height: 4ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.desc-comments{
+  overflow-y: scroll;
 }

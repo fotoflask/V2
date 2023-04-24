@@ -53,11 +53,10 @@ let doc4
 let userid_delete = 0;
 
 
-  con.collection("UserDetails").deleteMany({duserId : userid_delete}).then(()=>{console.log("deleted"+userid_delete)})
-  con.collection("UserIDpwd").deleteMany({duserId : userid_delete})
-  con.collection("session").deleteMany({duserId : userid_delete})
-  con.collection("tables").deleteMany({duserId : userid_delete})
 
+con.collection("tables").findOne({duserId : 1}).then(result=>{
+  doc4 = result
+  console.log(doc4)})
 
  
 

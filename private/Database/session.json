@@ -1,0 +1,133 @@
+[{
+  "_id": {
+    "$oid": "6443bffd3ca887dd2c331fd9"
+  },
+  "dipaddress": "::ffff:10.0.50.137",
+  "duserId": 10,
+  "dusername": "sanjeev",
+  "dprofilepic": "",
+  "dtime": {
+    "$date": "2023-04-22T11:07:41.201Z"
+  }
+},{
+  "_id": {
+    "$oid": "6443c04a3ca887dd2c331ff5"
+  },
+  "dipaddress": "::ffff:10.0.6.247",
+  "duserId": 5,
+  "dusername": "Arjit",
+  "dprofilepic": null,
+  "dtime": {
+    "$date": "2023-04-22T11:08:58.194Z"
+  }
+},{
+  "_id": {
+    "$oid": "6443c393cf1eb2d5018f732f"
+  },
+  "dipaddress": "::ffff:10.0.6.141",
+  "duserId": 12,
+  "dusername": "thanushsetty293@gmail.com",
+  "dprofilepic": "",
+  "dtime": {
+    "$date": "2023-04-22T11:22:59.620Z"
+  }
+},{
+  "_id": {
+    "$oid": "6443c54ccf1eb2d5018f737b"
+  },
+  "dipaddress": "::ffff:10.0.5.24",
+  "duserId": 8,
+  "dusername": "Sivasanath1503",
+  "dprofilepic": "",
+  "dtime": {
+    "$date": "2023-04-22T11:30:20.462Z"
+  }
+},{
+  "_id": {
+    "$oid": "6444cf78c205c8818767b5a0"
+  },
+  "dipaddress": "::ffff:10.0.10.107",
+  "duserId": 15,
+  "dusername": "SAIPAVAN",
+  "dprofilepic": "",
+  "dtime": {
+    "$date": "2023-04-23T06:26:00.449Z"
+  }
+},{
+  "_id": {
+    "$oid": "6444d153c205c8818767b5f0"
+  },
+  "dipaddress": "::ffff:10.0.12.213",
+  "duserId": 3,
+  "dusername": "sravan",
+  "dprofilepic": null,
+  "dtime": {
+    "$date": "2023-04-23T06:33:55.021Z"
+  }
+},{
+  "_id": {
+    "$oid": "6444d2536e8793a36eee048c"
+  },
+  "dipaddress": "::ffff:10.0.11.212",
+  "duserId": 3,
+  "dusername": "sravan",
+  "dprofilepic": null,
+  "dtime": {
+    "$date": "2023-04-23T06:38:11.381Z"
+  }
+},{
+  "_id": {
+    "$oid": "64452d7323bf1ebdd14ed498"
+  },
+  "dipaddress": "::ffff:10.0.12.68",
+  "duserId": 16,
+  "dusername": "gautam_suresh",
+  "dprofilepic": "",
+  "dtime": {
+    "$date": "2023-04-23T13:06:59.100Z"
+  }
+},{
+  "_id": {
+    "$oid": "64457d8b712adfac1fa38e12"
+  },
+  "dipaddress": "::ffff:10.0.7.66",
+  "duserId": 3,
+  "dusername": "sravan",
+  "dprofilepic": null,
+  "dtime": {
+    "$date": "2023-04-23T18:48:43.647Z"
+  }
+},{
+  "_id": {
+    "$oid": "64465c623b1b54e9de790566"
+  },
+  "dipaddress": "::ffff:10.0.9.87",
+  "duserId": 7,
+  "dusername": "abhiram_145",
+  "dprofilepic": "Abhi.jpg",
+  "dtime": {
+    "$date": "2023-04-24T10:39:30.231Z"
+  }
+},{
+  "_id": {
+    "$oid": "6446a24d4cb2effedfb7e898"
+  },
+  "dipaddress": "::1",
+  "duserId": 1,
+  "dusername": "poojyanthreddy",
+  "dprofilepic": "poojyanth.png",
+  "dtime": {
+    "$date": "2023-04-24T15:37:49.051Z"
+  }
+},{
+  "_id": {
+    "$oid": "6446ba9269c180f52493a00d"
+  },
+  "dipaddress": "::ffff:10.0.15.90",
+  "duserId": 15,
+  "dusername": "SAIPAVAN",
+  "dprofilepic": "",
+  "dtime": {
+    "$date": "2023-04-24T17:21:22.549Z"
+  }
+}]

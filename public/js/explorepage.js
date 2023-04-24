@@ -1,18 +1,23 @@
-const container = document.querySelector('.container')
-const unsplashURL = 'images/postimages'
-const rows = 5
+            // console.log("HH");
+            var modal = document.getElementById("myModal");
 
-for(let i = 0; i < rows * 4; i++) {
-    const img = document.createElement('img')
-    img.src = `${unsplashURL}${getRandomSize()}`
-    console.log(img.src)
-    container.appendChild(img)
-}
+            // Get the image and insert it inside the modal - use its "alt" text as a caption
+            var img_d = document.getElementById("profilepic");
+            var modalImg_d = document.getElementById("img01");
+           
 
-function getRandomSize() {
-    return `${getRandomNr()}x${getRandomNr()}`
-}
+            img_d.onclick = function(){
+                console.log("clicked pic"+img_d.src)
+                modalImg_d.src = img_d.src;
+                console.log(modalImg_d.src+"");
+            modal.style.display = "block";
+            // captionText.innerHTML = this.alt;
+            }
 
-function getRandomNr() {
-    return Math.floor(Math.random() * 10) + 300
-}
+            // Get the <span> element that closes the modal
+            var span = document.getElementsByClassName("close")[0];
+
+            // When the user clicks on <span> (x), close the modal
+            span.onclick = function() {
+            modal.style.display = "none";
+            }

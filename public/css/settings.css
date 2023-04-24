@@ -1,8 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;1,600&family=Roboto:ital@1&family=Source+Sans+Pro&display=swap');
+
 
 body{
   padding: 0;
-  margin: 0;
+  margin: 0 0.5vw;
+  font-family: "Livvic";
+  background-color: #DBE2EF;
+
+}
+
+.navbarhr{
+  display: none;
 }
 
 .scontainer{
@@ -159,7 +166,7 @@ body{
     border-radius: 25px;
     border: 2px solid rgb(12, 6, 14);
     padding: 15px; 
-    width: 200px;
+    width: 25vw;
     height: 15px;    
 }
 
